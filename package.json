@@ -1,0 +1,17 @@
+{
+  "name": "du-an-1",
+  "version": "1.0.0",
+  "description": "## Lưu ý: * Trang dành cho người dùng và trang dành cho admin được chia rõ ràng, được tách làm 2 thư mục độc lập. * Cả người dùng và admin sẽ dùng chung các thành phần:",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./tailwind.css -o ./public/css/style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
+  }
+}
