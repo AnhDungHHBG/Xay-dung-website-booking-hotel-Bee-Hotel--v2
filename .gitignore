@@ -6,7 +6,7 @@ Thumbs.db
 *.log
 
 node_modules/
-
+/commons/env.php
 /public/css/tailwind.css
 /public/css/tailwind.min.css
 
