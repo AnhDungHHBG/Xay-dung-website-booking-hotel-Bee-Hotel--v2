@@ -36,44 +36,4 @@
         </div>
     </div>
 </div>
-<?php
-session_start();
-require 'database_connection.php'; // File kết nối cơ sở dữ liệu
-
-// Lấy dữ liệu từ form
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-if (empty($email) || empty($password)) {
-    echo "Vui lòng nhập đầy đủ thông tin!";
-    exit();
-}
-
-// Kiểm tra người dùng trong database
-$sql = "SELECT * FROM users WHERE email = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-
-    // Kiểm tra mật khẩu
-    if (password_verify($password, $user['password'])) {
-        // Lưu thông tin người dùng vào session
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['email'] = $user['email'];
-
-        echo "Đăng nhập thành công!";
-        // Chuyển hướng đến trang chính (dashboard)
-        header("Location: /");
-        exit();
-    } else {
-        echo "Mật khẩu không chính xác!";
-    }
-} else {
-    echo "Email không tồn tại!";
-}
-?>
 
