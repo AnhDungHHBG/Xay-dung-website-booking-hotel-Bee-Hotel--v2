@@ -10,7 +10,7 @@ class NotificationController extends BaseController {
     public function list() {
         $userId = 1;
         $notifications = $this->notificationModel->getAllNotifications($userId);
-        $this->viewApp->requestView('notification.list.index', ['notifications' => $notifications]);
+        $this->viewApp->requestView('notification.list.index', ['data' => $notifications]);
     }
    
 }

@@ -8,14 +8,27 @@ class Notification extends BaseModel {
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':content', $content, PDO::PARAM_STR);
-        return $stmt->execute();
+        
+        if (!$stmt->execute()) {
+            // Log or handle the error
+            error_log(print_r($stmt->errorInfo(), true));
+            return false;
+        }
+        return true;
     }
+
     public function getAllNotifications($userId) {
         $query = "SELECT * FROM {$this->tableName} WHERE user_id = :user_id ORDER BY created_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Debugging output
+        error_log(print_r($notifications, true)); // Log the notifications for debugging
+        
+        return $notifications;
     }
 }
 ?>

@@ -1,3 +1,7 @@
+<?php
+$notifications = $data;
+?>
+
 <div class="container mx-auto mt-5">
     <h1 class="text-2xl font-bold mb-4">Danh sách Thông Báo</h1>
     <table class="min-w-full bg-white border border-gray-300">

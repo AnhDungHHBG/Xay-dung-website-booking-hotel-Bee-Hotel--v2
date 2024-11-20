@@ -1,28 +1,28 @@
 <?php 
 $notifications = $data;
 ?>
-<div class="container p-0 m-0 mx-auto">
-    <h1 class="text-2xl font-bold mb-4">Danh sách Thông Báo</h1>
-    <table class=" bg-white border border-gray-300">
-        <thead>
-            <tr>
-                <th class="py-2 px-1  border-b">ID</th>
-                <th class="py-2 px-1  border-b">Tiêu đề</th>
-                <th class="py-2 px-1  border-b">Nội dung</th>
-                <th class="py-2 px-1  border-b">Ngày tạo</th>
-                <th class="py-2 px-1  border-b">Trạng thái</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-6">Danh sách Thông Báo</h1>
+    <div class="space-y-4">
+        <?php if (is_array($notifications) && count($notifications) > 0): ?>
             <?php foreach ($notifications as $notification): ?>
-                <tr>
-                    <td class="py-2 px-1 border-b"><?php echo $notification['notification_id']; ?></td>
-                    <td class="py-2 px-1 border-b"><?php echo htmlspecialchars($notification['title']); ?></td>
-                    <td class="py-2 px-1 border-b"><?php echo htmlspecialchars($notification['content']); ?></td>
-                    <td class="py-2 px-1 border-b"><?php echo date('d/m/Y H:i', strtotime($notification['created_at'])); ?></td>
-                    <td class="py-2 px-1 border-b"><?php echo $notification['is_read'] ? 'Đã đọc' : 'Chưa đọc'; ?></td>
-                </tr>
+                <div class="bg-white shadow-md rounded-lg p-4 flex flex-col">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-semibold"><?php echo htmlspecialchars($notification['title'] ?? 'N/A'); ?></h2>
+                        <span class="text-sm text-gray-500"><?php echo date('d/m/Y H:i', strtotime($notification['created_at'] ?? '')); ?></span>
+                    </div>
+                    <p class="mt-2 text-gray-700"><?php echo htmlspecialchars($notification['content'] ?? 'N/A'); ?></p>
+                    <div class="mt-2">
+                        <span class="text-sm <?php echo ($notification['is_read'] ?? false) ? 'text-green-500' : 'text-red-500'; ?>">
+                            <?php echo ($notification['is_read'] ?? false) ? 'Đã đọc' : 'Chưa đọc'; ?>
+                        </span>
+                    </div>
+                </div>
             <?php endforeach; ?>
-        </tbody>
-    </table>
+        <?php else: ?>
+            <div class="bg-gray-100 p-4 rounded-lg">
+                <p class="text-gray-600">Không có thông báo nào.</p>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>
