@@ -19,5 +19,10 @@ match ($route->getAct()) {
     'promotion-post-add' => (new PromotionController())-> promotion_post_add(),
     'promotion-post-edit' => (new PromotionController())-> promotion_post_edit(),
     
+    //support
+    'support-list' => (new SupportController())-> support_list(),
+    'support-detail' => (new SupportController())-> support_detail(),
+    'support-response-post' => (new SupportController())-> support_response_post(),
+    
 
 };
