@@ -24,5 +24,8 @@ match ($route->getAct()) {
     'support-detail' => (new SupportController())-> support_detail(),
     'support-response-post' => (new SupportController())-> support_response_post(),
     
+    // notification
+    'notification-list' => (new NotificationController())->list(),
+
 
 };

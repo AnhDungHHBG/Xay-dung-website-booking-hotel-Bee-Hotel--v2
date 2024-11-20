@@ -157,6 +157,21 @@
                 
             </ul>
         </li>
+         <!-- Quản lý thông báo -->
+         <li class="mb-1 group">
+            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'supportManagement', this)">
+                <i class="fas fa-tags mr-3 text-lg"></i>
+                <span class="text-sm">Thông báo</span>
+                <i class="fas fa-chevron-right ml-auto transition-transform"></i>
+            </a>
+            <ul id="supportManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                <li class="mb-4">
+                    <a href="<?= $route->getLocateAdmin('support-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                        <i class="fas fa-list mr-2"></i> Tạo thông báo
+                </li>
+                
+            </ul>
+        </li>
     </ul>
 </nav>
 

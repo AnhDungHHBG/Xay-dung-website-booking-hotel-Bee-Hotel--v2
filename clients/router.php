@@ -9,7 +9,8 @@ match ($route->getAct()) {
     'checkout' => (new CheckoutController())->index(),
     'room_detail' => (new RoomDetailController())->room_detail(),
     'login' => (new LoginController())->index(),
-
+    // support
     'support' => (new SupportController())->index(),
-
+    // notification
+    'notification-list' => (new NotificationController())->list(),
 };
