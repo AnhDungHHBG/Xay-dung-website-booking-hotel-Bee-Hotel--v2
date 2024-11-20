@@ -22,9 +22,23 @@
         <div class=" flex h-[75px]  justify-between  items-center container mx-auto">
                 <span class="text-3xl font-extrabold">Logo</span>
                 <?php $viewApp->requestComponents('components.navbar'); ?>
+
+                <div class="flex justify-center items-center gap-5">
+                <div class="relative mr-6">
+                    <a href="<?= $route->getLocateClient('notification-list') ?>" class="text-gray-700 hover:text-blue-500">
+                        <i class="fa-solid fa-bell fa-lg"></i>
+                        <?php $unreadCount = 5;?>
+                        <?php if ($unreadCount > 0): ?>
+                            <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1"><?= $unreadCount ?></span>
+                        <?php endif; ?>
+                    </a>
+                </div>
                 <div class="w-[100px] h-[48px] rounded-3xl bg-white flex items-center justify-center">
+                
                     <i class="fa-solid fa-bars"></i>
                     <img src="" alt="User">
                 </div>
-    </div>
+                </div>
+                
         </div>
+    </div>

@@ -1,15 +1,16 @@
 <?php 
 
 class NotificationController extends BaseController {
-    public $clientNotificationModel;
+    public $notificationModel;
 
     public function loadModels() {
-        $this->clientNotificationModel = new Notification();
+        $this->notificationModel = new Notification();
     }
 
-    public function list($userId) {
-        $notifications = $this->clientNotificationModel->getAllNotifications($userId);
-        $this->viewApp->requestView('client.notification.list', ['notifications' => $notifications]);
+    public function list() {
+        $userId = 1;
+        $notifications = $this->notificationModel->getAllNotifications($userId);
+        $this->viewApp->requestView('notification.list.index', ['notifications' => $notifications]);
     }
    
 }

@@ -9,7 +9,7 @@ class NotificationController extends BaseController {
 
     public function list() {
         $notifications = $this->notificationModel->getAllNotifications();
-        $this->viewApp->requestView('admin.notification.list', ['notifications' => $notifications]);
+        $this->viewApp->requestView('notification.list.index', ['notifications' => $notifications]);
     }
 
     public function create($title, $content) {

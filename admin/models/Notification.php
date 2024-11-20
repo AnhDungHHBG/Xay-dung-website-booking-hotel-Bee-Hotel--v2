@@ -1,9 +1,9 @@
 <?php 
-class AdminNotification extends BaseModel {
+class Notification extends BaseModel {
     public $tableName = 'notification';
 
     public function createNotification($title, $content) {
-        $query = "INSERT INTO {$this->tableName} (user_id, title, content, is_read, created_at) VALUES (1, :title, :content, false, NOW())"; // Giả sử user_id của admin là 1
+        $query = "INSERT INTO {$this->tableName} (user_id, title, content, is_read, created_at) VALUES (1, :title, :content, false, NOW())"; 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':content', $content, PDO::PARAM_STR);
