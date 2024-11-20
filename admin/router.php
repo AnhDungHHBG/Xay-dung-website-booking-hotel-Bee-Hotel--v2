@@ -13,5 +13,6 @@ match ($route->getAct()) {
 
     'promotion-post-add' => (new PromotionController())-> promotion_post_add(),
     'promotion-post-edit' => (new PromotionController())-> promotion_post_edit(),
+    
 
 };

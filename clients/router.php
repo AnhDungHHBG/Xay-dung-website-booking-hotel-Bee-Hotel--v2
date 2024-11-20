@@ -5,7 +5,10 @@
 match ($route->getAct()) {
     '/' => (new HomeController())->index(),
     'login' => (new LoginController())->index(),
-
+    'booking' => (new BookingController())->index(),
+    'checkout' => (new CheckoutController())->index(),
+    'room_detail' => (new RoomDetailController())->index(),
+    'login' => (new LoginController())->index(),
 
     'support' => (new SupportController())->index(),
 
