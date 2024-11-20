@@ -8,7 +8,7 @@ match ($route->getAct()) {
 
     // review 
     'review-list' => (new ReviewController())-> review_list(),
-    'review-list' => (new ReviewController())-> review_delete(),
+    'review-delete' => (new ReviewController())-> review_delete(),
     
     // promotions
     'promotion-list' => (new PromotionController())-> promotion_list(),

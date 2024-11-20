@@ -27,8 +27,7 @@ $reviews =  $data
                     <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($review['comment'] ?? 'Không có nhận xét'); ?></td>
                     <td class="py-2 px-4 border-b"><?php echo date('d/m/Y', strtotime($review['review_date'])); ?></td>
                     <td class="py-2 px-4 border-b">
-                        <form action="delete_review.php" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');">
-                            <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
+                        <form action="<?= $route->getLocateAdmin('review-delete', ['id' => $review['review_id']]) ?>" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');">
                             <button type="submit" class="text-red-500 hover:text-red-700">Xóa</button>
                         </form>
                     </td>
