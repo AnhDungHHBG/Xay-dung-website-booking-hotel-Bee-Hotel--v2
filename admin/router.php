@@ -4,6 +4,11 @@
 // kiểm tra act và điều hướng tới các controller phù hợp
 match ($route->getAct()) {
     '/' => (new DashboardController())->dashboard(),
+
+
+    // review 
+    'review-list' => (new ReviewController())-> review_list(),
+    'review-list' => (new ReviewController())-> review_delete(),
     
     // promotions
     'promotion-list' => (new PromotionController())-> promotion_list(),

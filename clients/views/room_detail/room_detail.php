@@ -1,21 +1,11 @@
+<?php 
+$reviews = $data['reviews'];
+// $room = $data['room'];
+$averageRating = $data['averageRating'];
+?>
 
 <div class="bg-gray-100">
-  <!-- Header -->
-  <header class="bg-white shadow-md">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-4">
-        <div class="text-2xl font-bold">LOGO</div>
-        <nav class="hidden md:flex space-x-6">
-          <a href="#" class="text-gray-600 hover:text-gray-800">Find a Property</a>
-          <a href="#" class="text-gray-600 hover:text-gray-800">Share Stories</a>
-          <a href="#" class="text-gray-600 hover:text-gray-800">Rental Guides</a>
-          <a href="#" class="text-gray-600 hover:text-gray-800">Download Mobile App</a>
-        </nav>
-      </div>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded-md">Reserve a Hotel</button>
-    </div>
-  </header>
-
+  
   <!-- Main Content -->
   <main class="container mx-auto px-6 py-8">
     <!-- Image Section -->
@@ -85,70 +75,52 @@
     <br><br><br>
 
     <hr class="border-t border-gray-300 my-8">
-        <!-- Reviews Section -->
-        <section class="mt-12">
-      <h2 class="text-2xl font-bold mb-6">Reviews <span class="text-yellow-500">★ 5.0</span></h2>
+    <!-- Reviews Section -->
+    <section class="mt-12"></section>
+      <h2 class="text-2xl font-bold mb-6">Reviews <span class="text-yellow-500">★ <?php echo number_format($averageRating, 1); ?></span></h2>
       
       <!-- Review Ratings -->
       <div class="grid grid-cols-2 gap-8">
         <div class="space-y-4">
           <div class="flex justify-between text-gray-600">
             <span>Amenities</span>
-            <span>5.0</span>
+            <span><?php echo number_format($ratings['amenities'] ?? 0, 1); ?></span>
           </div>
           <div class="flex justify-between text-gray-600">
             <span>Communication</span>
-            <span>5.0</span>
+            <span><?php echo number_format($ratings['communication'] ?? 0, 1); ?></span>
           </div>
           <div class="flex justify-between text-gray-600">
             <span>Value for Money</span>
-            <span>5.0</span>
+            <span><?php echo number_format($ratings['value_for_money'] ?? 0, 1); ?></span>
           </div>
         </div>
         <div class="space-y-4">
           <div class="flex justify-between text-gray-600">
             <span>Hygiene</span>
-            <span>5.0</span>
+            <span><?php echo number_format($ratings['hygiene'] ?? 0, 1); ?></span>
           </div>
           <div class="flex justify-between text-gray-600">
             <span>Location of Property</span>
-            <span>5.0</span>
+            <span><?php echo number_format($ratings['location'] ?? 0, 1); ?></span>
           </div>
         </div>
       </div>
 
       <!-- Individual Reviews -->
       <div class="mt-8 space-y-8">
-        <div class="flex space-x-4">
-          <div class="h-16 w-16 bg-gray-300 rounded-full"></div>
-          <div>
-            <h3 class="font-bold">John Doe</h3>
-            <p class="text-gray-600 text-sm">2 days ago</p>
-            <p class="mt-2 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eum consequatur fuga distinctio rem.
-            </p>
+        <?php foreach ($reviews as $row) { ?>
+          <div class="flex space-x-4">
+            <div class="h-16 w-16 bg-gray-300 rounded-full"></div>
+            <div>
+              <h3 class="font-bold"><?php echo htmlspecialchars($row['name']); ?></h3>
+              <p class="text-gray-600 text-sm"><?php echo htmlspecialchars($row['review_date']); ?></p>
+              <p class="mt-2 text-gray-600">
+                <?php echo htmlspecialchars($row['comment']); ?>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="flex space-x-4">
-          <div class="h-16 w-16 bg-gray-300 rounded-full"></div>
-          <div>
-            <h3 class="font-bold">Jane Smith</h3>
-            <p class="text-gray-600 text-sm">1 week ago</p>
-            <p class="mt-2 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, delectus quas!
-            </p>
-          </div>
-        </div>
-        <div class="flex space-x-4">
-          <div class="h-16 w-16 bg-gray-300 rounded-full"></div>
-          <div>
-            <h3 class="font-bold">Alex Johnson</h3>
-            <p class="text-gray-600 text-sm">2 weeks ago</p>
-            <p class="mt-2 text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi perspiciatis distinctio cumque!
-            </p>
-          </div>
-        </div>
+        <?php } ?>
       </div>
 
       <!-- Show All Reviews Button -->
