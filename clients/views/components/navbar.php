@@ -13,9 +13,7 @@
         <li class="text-body font-semibold">
             <a class="" href="<?= $route->getLocateClient() ?>">Contact</a>
         </li>
-        <li class="text-body font-semibold">
-            <a class="" href="<?= $route->getLocateClient('login') ?>">Login</a>
-        </li>
+
     </ul>
     <!-- <button class="bg-zinc-600 text-white text-[14px] h-[46px] rounded-3xl px-[45px] ml-7">
             Become A Host
