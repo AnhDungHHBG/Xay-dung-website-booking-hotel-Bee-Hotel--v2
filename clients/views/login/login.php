@@ -29,6 +29,12 @@
                 Đăng nhập
             </button>
         </form>
+        <?php if (isset($success)): ?>
+            <div class="mt-4 text-green-500 text-sm text-center"><?= htmlspecialchars($success) ?></div>
+        <?php endif; ?>
+        <?php if (isset($error)): ?>
+            <div class="mt-4 text-red-500 text-sm text-center"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
         <div class="mt-4 text-sm text-center text-gray-600">
             <a href="#" class="text-blue-500 hover:underline">Quên mật khẩu?</a>
             <span class="mx-2">|</span>

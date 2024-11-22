@@ -10,8 +10,13 @@ $coreApp = new CoreApp();
 // khởi tạo global đối tượng view
 $viewApp = new BaseView();
 
+// khởi tạo global đối tượng route
 $route = new Route();
 
+// Khởi tạo global đối tượng auth
+$auth = new Auth();
+
+// Kiểm tra xem có phải là trang admin không
 if ($route->isAdminPage) {
     $coreApp->initApp('admin');
 } else {
