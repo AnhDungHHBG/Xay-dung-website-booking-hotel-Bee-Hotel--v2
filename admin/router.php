@@ -27,4 +27,7 @@ match ($route->getAct()) {
     // notification
     'notification-list' => (new NotificationController())->list(),
 
+    //user
+    'user-list' => (new NotificationController())->list(),
+
 };
