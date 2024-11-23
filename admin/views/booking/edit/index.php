@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sửa Đơn Đặt Phòng</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
+
+<div class="bg-gray-100">
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Sửa Đơn Đặt Phòng</h1>
 
     <!-- Form Sửa Booking -->
-    <form action="/booking-post-edit?id=<?php echo $data['id']; ?>" method="POST" class="bg-white p-6 rounded-lg shadow-md">
+    <form action="<?= $route->getLocateAdmin('booking-post-edit', ['id' => $data['booking_id']]) ?>" method method="POST" class="bg-white p-6 rounded-lg shadow-md">
         <div class="mb-4">
-            <label for="customer_name" class="block text-sm font-medium text-gray-700">Tên Khách Hàng</label>
-            <input type="text" name="customer_name" id="customer_name" class="w-full p-2 border rounded" value="<?php echo $data['customer_name']; ?>" required>
+            <label for="user_id" class="block text-sm font-medium text-gray-700">ID Khách Hàng</label>
+            <input type="text" name="user_id" id="user_id" class="w-full p-2 border rounded" value="<?php echo $data['user_id']; ?>" required>
         </div>
         <div class="mb-4">
             <label for="room_id" class="block text-sm font-medium text-gray-700">Mã Phòng</label>
@@ -44,5 +37,16 @@
         <a href="/booking-list" class="ml-4 text-gray-700 hover:underline">Quay lại danh sách</a>
     </form>
 </div>
-</body>
-</html>
+</div>
+
+<script>
+    // Khởi tạo Flatpickr cho các trường ngày
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr('.date-picker', {
+            dateFormat: 'Y-m-d',
+            altInput: true,
+            altFormat: 'F j, Y',
+            minDate: 'today'
+        });
+    });
+</script>

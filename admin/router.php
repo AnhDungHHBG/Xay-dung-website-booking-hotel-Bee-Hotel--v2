@@ -11,7 +11,15 @@ match ($route->getAct()) {
     'review-delete' => (new ReviewController())-> review_delete(),
 
     // Booking
-    'bookings/list' => (new BookingController())->booking_list(),
+    'bookings-list' => (new BookingController())->booking_list(),
+    'bookings-add' => (new BookingController())->booking_add(),
+    'bookings-edit' => (new BookingController())->booking_edit(),
+    'bookings-delete' => (new BookingController())->booking_delete(),
+
+    'bookings-post-add' => (new BookingController())->booking_post_add(),
+    'bookings-post-edit' => (new BookingController())-> booking_post_edit(),
+
+
     // 'bookings/add' => (new BookingController())->addBookings(),
     
 

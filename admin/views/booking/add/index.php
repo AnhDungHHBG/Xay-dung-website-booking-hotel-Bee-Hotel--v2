@@ -11,10 +11,10 @@
     <h1 class="text-2xl font-bold mb-4">Thêm Đơn Đặt Phòng</h1>
 
     <!-- Form Thêm Booking -->
-    <form action="/booking-post-add" method="POST" class="bg-white p-6 rounded-lg shadow-md">
+    <form action="<?= $route->getLocateAdmin('booking-post-add') ?>" method="POST" class="bg-white p-6 rounded-lg shadow-md">
         <div class="mb-4">
-            <label for="customer_name" class="block text-sm font-medium text-gray-700">Tên Khách Hàng</label>
-            <input type="text" name="customer_name" id="customer_name" class="w-full p-2 border rounded" required>
+            <label for="user_id" class="block text-sm font-medium text-gray-700">ID Khách Hàng</label>
+            <input type="text" name="user_id" id="user_id" class="w-full p-2 border rounded" required>
         </div>
         <div class="mb-4">
             <label for="room_id" class="block text-sm font-medium text-gray-700">Mã Phòng</label>
