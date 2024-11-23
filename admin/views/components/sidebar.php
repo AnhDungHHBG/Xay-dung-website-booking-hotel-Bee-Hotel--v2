@@ -72,12 +72,12 @@
             </a>
             <ul id="bookingManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('bookings/list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('bookings-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Đặt Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('bookings/add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('bookings-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Đặt Phòng
                     </a>
                 </li>
