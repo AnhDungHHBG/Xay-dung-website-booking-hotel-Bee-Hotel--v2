@@ -11,13 +11,13 @@ match ($route->getAct()) {
     'review-delete' => (new ReviewController())-> review_delete(),
 
     // Booking
-    'bookings-list' => (new BookingController())->booking_list(),
-    'bookings-add' => (new BookingController())->booking_add(),
-    'bookings-edit' => (new BookingController())->booking_edit(),
-    'bookings-delete' => (new BookingController())->booking_delete(),
+    'booking-list' => (new BookingController())->booking_list(),
+    'booking-add' => (new BookingController())->booking_add(),
+    'booking-edit' => (new BookingController())->booking_edit(),
+    'booking-delete' => (new BookingController())->booking_delete(),
 
-    'bookings-post-add' => (new BookingController())->booking_post_add(),
-    'bookings-post-edit' => (new BookingController())-> booking_post_edit(),
+    'booking-post-add' => (new BookingController())->booking_post_add(),
+    'booking-post-edit' => (new BookingController())-> booking_post_edit(),
 
 
     // 'bookings/add' => (new BookingController())->addBookings(),

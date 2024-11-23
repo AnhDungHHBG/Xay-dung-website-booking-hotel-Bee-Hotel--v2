@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Đơn Đặt Phòng</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
+
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Thêm Đơn Đặt Phòng</h1>
 
@@ -44,5 +36,3 @@
         <a href="/booking-list" class="ml-4 text-gray-700 hover:underline">Quay lại danh sách</a>
     </form>
 </div>
-</body>
-</html>

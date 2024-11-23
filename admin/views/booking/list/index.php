@@ -31,8 +31,8 @@
                                 </td>
                                 <td class="px-4 py-2 border"><?php echo number_format($booking['total_price'], 2) . ' VND'; ?></td>
                                 <td class="py-3 px-4 text-sm flex gap-4  items-start">
-                                    <a href="<?= $route->getLocateAdmin('bookings-edit', ['id' => $booking['booking_id']]) ?>?>" class="text-blue-500 hover:text-blue-700 hover:underline">Chỉnh sửa</a>
-                                    <form action="<?= $route->getLocateAdmin('bookings-delete', ['id' => $booking['booking_id']]) ?>" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đơn đặt phòng này?');">
+                                    <a href="<?= $route->getLocateAdmin('booking-edit', ['id' => $booking['booking_id']]) ?>?>" class="text-blue-500 hover:text-blue-700 hover:underline">Chỉnh sửa</a>
+                                    <form action="<?= $route->getLocateAdmin('booking-delete', ['id' => $booking['booking_id']]) ?>" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đơn đặt phòng này?');">
                                         <button type="submit" class="ml-2 text-red-500 hover:text-red-700 hover:underline">Xóa</button>
                                     </form>
                                 </td>

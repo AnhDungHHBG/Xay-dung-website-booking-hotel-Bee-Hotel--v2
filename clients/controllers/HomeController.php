@@ -15,10 +15,6 @@ class HomeController extends BaseController
             "lastest"=> $lastest,
             "top"=> $top,
         ];
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
-        die();
         $this->viewApp->requestView('home_page.home_page' , ['data' => $data]);
     }
 }

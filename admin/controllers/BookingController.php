@@ -18,12 +18,12 @@ class BookingController extends BaseController
     public function booking_delete(){
         $id = $_GET['id'];
         $this->bookingModel->removeIdTable($id);
-        $this->route->redirectAdmin('bookings-list');
+        $this->route->redirectAdmin('booking-list');
     }
     public function booking_post_add(){
         $data = $this->route->form;
         $this->bookingModel->insertTable($data);
-        $this->route->redirectAdmin('bookings-list');
+        $this->route->redirectAdmin('booking-list');
     }
 
     public function booking_edit(){
@@ -36,7 +36,7 @@ class BookingController extends BaseController
         $id = $_GET['id'];
         $data = $this->route->form;
         $this->bookingModel->updateIdTable($data, $id);
-        $this->route->redirectAdmin('bookings/list');
+        $this->route->redirectAdmin('booking-list');
 
     }
 }
