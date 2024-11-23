@@ -9,6 +9,9 @@ match ($route->getAct()) {
     // review 
     'review-list' => (new ReviewController())-> review_list(),
     'review-delete' => (new ReviewController())-> review_delete(),
+
+    // Booking
+    'bookings/list' => (new BookingController())->listBookings(),
     
     // promotions
     'promotion-list' => (new PromotionController())-> promotion_list(),
