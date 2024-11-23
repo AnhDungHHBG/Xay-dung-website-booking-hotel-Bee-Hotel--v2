@@ -1,10 +1,7 @@
 <?php 
 class LoginController extends BaseController
 {
-    public $userModel;
-
     public function loadModels() {
-        $this->userModel = new User();
     }
 
     public function index() {
@@ -12,29 +9,21 @@ class LoginController extends BaseController
     }
 
     public function login_post() {
-        $data = $this->route->form;
-
-        $email = $data['email'] ?? null;
-        echo $email;
-        die();
-        $password = $data['password'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
 
         if (!$email || !$password) {
             return ['error' => 'Email and password are required'];
         }
 
         try {
-            $user = (array)$this->userModel->findUserByEmail($email);
-
-            if ($user && password_verify($password, $user['password'])) {
-                unset($user['password']);
-                return ['success' => true, 'user' => $user];
+            if ($this->auth->login($email, $password)) {
+            $this->route->redirectClient('/');
             } else {
                 return ['error' => 'Invalid email or password'];
             }
         } catch (Exception $e) {
-            return ['error' => 'An error occurred'];
+            return ['error' => 'An error occurred: ' . $e->getMessage()];
         }
-        $this->route->redirectClient('/');
     }
 }
