@@ -3,53 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách đặt phòng</title>
+    <title>Danh Sách Đơn Đặt Phòng</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-
 <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Danh sách đơn đặt phòng</h1>
+    <h1 class="text-2xl font-bold mb-4">Danh Sách Đơn Đặt Phòng</h1>
+    <a href="/booking-add" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Thêm Đơn Đặt Phòng</a>
 
-    <!-- Kiểm tra nếu có thông báo lỗi -->
-    <?php if (isset($data['message'])): ?>
-        <div class="bg-red-500 text-white p-4 rounded mb-4">
-            <?php echo $data['message']; ?>
-        </div>
-    <?php endif; ?>
-
-    <!-- Kiểm tra nếu có dữ liệu -->
-    <?php if (isset($data['data']) && count($data['data']) > 0): ?>
-        <table class="min-w-full bg-white shadow-md rounded-lg">
-            <thead class="bg-gray-200">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="table-auto w-full border-collapse border border-gray-200">
+            <thead class="bg-gray-100">
                 <tr>
-                    <th class="py-2 px-4 border-b">Mã Đơn</th>
-                    <th class="py-2 px-4 border-b">Tên Khách</th>
-                    <th class="py-2 px-4 border-b">Phòng</th>
-                    <th class="py-2 px-4 border-b">Ngày Đặt</th>
-                    <th class="py-2 px-4 border-b">Trạng Thái</th>
-                    <th class="py-2 px-4 border-b">Tổng Tiền</th>
+                    <th class="px-4 py-2 border text-left">#</th>
+                    <th class="px-4 py-2 border text-left">Tên Khách Hàng</th>
+                    <th class="px-4 py-2 border text-left">Mã Phòng</th>
+                    <th class="px-4 py-2 border text-left">Ngày Check-in</th>
+                    <th class="px-4 py-2 border text-left">Ngày Check-out</th>
+                    <th class="px-4 py-2 border text-left">Trạng Thái</th>
+                    <th class="px-4 py-2 border text-left">Tổng Tiền</th>
+                    <th class="px-4 py-2 border text-left">Hành Động</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data['data'] as $booking): ?>
+                <?php if (!empty($data)) : ?>
+                    <?php foreach ($data as $index => $booking) : ?>
+                        <tr class="<?php echo $index % 2 === 0 ? 'bg-gray-50' : ''; ?>">
+                            <td class="px-4 py-2 border"><?php echo $index + 1; ?></td>
+                            <td class="px-4 py-2 border"><?php echo htmlspecialchars($booking['customer_name']); ?></td>
+                            <td class="px-4 py-2 border"><?php echo htmlspecialchars($booking['room_id']); ?></td>
+                            <td class="px-4 py-2 border"><?php echo htmlspecialchars($booking['check_in']); ?></td>
+                            <td class="px-4 py-2 border"><?php echo htmlspecialchars($booking['check_out']); ?></td>
+                            <td class="px-4 py-2 border">
+                                <span class="<?php echo $booking['status'] === 'Confirmed' ? 'text-green-500' : ($booking['status'] === 'Cancelled' ? 'text-red-500' : 'text-yellow-500'); ?>">
+                                    <?php echo htmlspecialchars($booking['status']); ?>
+                                </span>
+                            </td>
+                            <td class="px-4 py-2 border"><?php echo number_format($booking['total_price'], 2) . ' VND'; ?></td>
+                            <td class="px-4 py-2 border">
+                                <a href="/booking-edit?id=<?php echo $booking['id']; ?>" class="text-blue-500 hover:underline">Sửa</a> |
+                                <a href="/booking-delete?id=<?php echo $booking['id']; ?>" class="text-red-500 hover:underline" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
                     <tr>
-                        <td class="py-2 px-4 border-b"><?php echo $booking['booking_id']; ?></td>
-                        <td class="py-2 px-4 border-b"><?php echo $booking['customer_name']; ?></td>
-                        <td class="py-2 px-4 border-b"><?php echo $booking['room_id']; ?></td>
-                        <td class="py-2 px-4 border-b"><?php echo date('d-m-Y', strtotime($booking['check_in'])); ?></td>
-                        <td class="py-2 px-4 border-b"><?php echo $booking['status']; ?></td>
-                        <td class="py-2 px-4 border-b"><?php echo number_format($booking['total_price'], 2); ?> VNĐ</td>
+                        <td colspan="8" class="text-center py-4 text-gray-500">Không có đơn đặt phòng nào.</td>
                     </tr>
-                <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
-    <?php else: ?>
-        <div class="bg-yellow-500 text-white p-4 rounded mt-4">
-            Không có đơn đặt phòng nào.
-        </div>
-    <?php endif; ?>
+    </div>
 </div>
-
 </body>
 </html>

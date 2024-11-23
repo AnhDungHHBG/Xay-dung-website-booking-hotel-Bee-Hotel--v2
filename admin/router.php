@@ -11,7 +11,10 @@ match ($route->getAct()) {
     'review-delete' => (new ReviewController())-> review_delete(),
 
     // Booking
-    'bookings/list' => (new BookingController())->listBookings(),
+    'bookings/list' => (new BookingController())->booking_list(),
+    // 'bookings/add' => (new BookingController())->addBookings(),
+    
+
     
     // promotions
     'promotion-list' => (new PromotionController())-> promotion_list(),

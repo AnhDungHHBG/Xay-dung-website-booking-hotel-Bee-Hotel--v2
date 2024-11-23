@@ -1,63 +1,42 @@
-<?php
+<?php 
 
-// Giả sử BaseController đã được định nghĩa ở một nơi khác và cung cấp các phương thức như `viewApp` (ví dụ: load view).
-class BookingController extends BaseController {
+class BookingController extends BaseController
+{
     public $bookingModel;
-    public $userModel;
-    public $roomModel;
 
-    // Phương thức load model
     public function loadModels() {
-        // Khởi tạo các model liên quan đến booking, user, room
         $this->bookingModel = new Booking();
-        $this->userModel = new User();
-        $this->roomModel = new Room();
     }
 
-    // Phương thức hiển thị danh sách tất cả đơn đặt phòng
-    public function listBookings() {
-        // Lấy tất cả các đơn đặt phòng từ model
-        $bookings = $this->bookingModel->getAllBookings();
-        
-        // Gọi view để hiển thị danh sách các đơn đặt phòng, truyền dữ liệu vào view
-        $this->viewApp->requestView('booking.list.index', ['data' => $bookings]);
+    public function booking_list() {
+        $data = $this->bookingModel->allTable();
+        $this->viewApp->requestView('booking.list.index', ['data' => $data]);
+    }
+    public function booking_add(){
+        $this->viewApp->requestView('booking.add.index');
+    }
+    public function booking_delete(){
+        $id = $_GET['id'];
+        $this->bookingModel->removeIdTable($id);
+        $this->route->redirectAdmin('booking-list');
+    }
+    public function booking_post_add(){
+        $data = $this->route->form;
+        $this->bookingModel->insertTable($data);
+        $this->route->redirectAdmin('booking-list');
     }
 
-    // Phương thức tạo đơn đặt phòng mới
-    public function create($userId, $roomId, $checkIn, $checkOut, $status, $totalPrice, $numberOfGuests, $specialRequests) {
-        // Kiểm tra xem phòng có khả dụng hay không
-        $room = $this->roomModel->getRoomById($roomId);
-        
-        if ($room && $room['availability_status']) {
-            // Gọi model để tạo đơn đặt phòng mới
-            $this->bookingModel->createBooking($userId, $roomId, $checkIn, $checkOut, $status, $totalPrice, $numberOfGuests, $specialRequests);
-            // Chuyển hướng về danh sách booking sau khi tạo thành công
-            header('Location: /bookings');
-            exit;
-        } else {
-            // Nếu phòng không có sẵn, hiển thị thông báo lỗi
-            $this->viewApp->requestView('booking.create.error', ['message' => 'Phòng không còn trống.']);
-        }
-    }
+    public function booking_edit(){
+        $id = $_GET['id'];
+        $data = $this->bookingModel->findIdTable($id);
+        $this->viewApp->requestView('booking.edit.index', ['data' => $data]);
 
-    // Phương thức cập nhật trạng thái đơn đặt phòng
-    public function update($bookingId, $status) {
-        // Gọi model để cập nhật trạng thái đơn đặt phòng
-        $this->bookingModel->updateBookingStatus($bookingId, $status);
-        
-        // Chuyển hướng về danh sách booking sau khi cập nhật
-        header('Location: /bookings');
-        exit;
-    }
+    } 
+    public function booking_post_edit(){
+        $id = $_GET['id'];
+        $data = $this->route->form;
+        $this->bookingModel->updateIdTable($data, $id);
+        $this->route->redirectAdmin('booking-list');
 
-    // Phương thức xóa đơn đặt phòng
-    public function delete($bookingId) {
-        // Gọi model để xóa đơn đặt phòng
-        $this->bookingModel->deleteBooking($bookingId);
-        
-        // Chuyển hướng về danh sách booking sau khi xóa
-        header('Location: /bookings');
-        exit;
     }
 }
-?>
