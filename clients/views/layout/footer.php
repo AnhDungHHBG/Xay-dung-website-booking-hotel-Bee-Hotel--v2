@@ -50,7 +50,6 @@
     </div>
 </div>
 <?php
-// ... existing code ...
 ?>
 </div>
 </body>

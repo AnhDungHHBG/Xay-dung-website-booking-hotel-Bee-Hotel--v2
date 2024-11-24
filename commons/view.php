@@ -5,6 +5,7 @@ class BaseView {
         global $route;
         global $viewApp;
         
+        
         extract($data);
         
         $path = str_replace('.', DIRECTORY_SEPARATOR, $name);

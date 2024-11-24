@@ -10,15 +10,11 @@
         'title' => 'Featured Properties on our Listing',
         'rooms' => $tops
     ]
-
-   
-
-
 ?>
 <div>
     <!-- banner -->
     <div class="w-full flex justify-center items-center h-[600px] bg-[#F5F5F5]">
-        <span class="text-center">Banner</span>
+        <img class="w-full h-full object-cover" src="uploads/banner/banner.png" alt="">
     </div>
     <div>
         <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_lastest, ['key' => 'carousel1'])]); ?>
