@@ -14,14 +14,24 @@ class UserController extends BaseController
     }
 
     public function delete_user() {
-        $id=$this->route->getId();
+        $id = $_GET['user_id'];
         $this->userModel->removeIdTable($id);
         $this->route->redirectAdmin('users-list');
     }
 
     public function update_user() {
-        $id=$this->route->getId();
-        $this->userModel->removeIdTable($id);
+        $id = $_GET['user_id'];
+        $data = $this->userModel->findIdTable($id);
+        $this->viewApp->requestView('User.edit.edit', ['users' => $data]);
+        $this->route->redirectAdmin('users-list');
+    }
+
+    public function post_update_user() {
+        $id = $_GET['user_id'];
+        $data = $this->route->form;
+        echo $data;
+        die();
+        $this->userModel->updateIdTable($data, $id);
         $this->route->redirectAdmin('users-list');
     }
 

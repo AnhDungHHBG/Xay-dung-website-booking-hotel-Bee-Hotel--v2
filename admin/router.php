@@ -78,6 +78,7 @@ match ($route->getAct()) {
 
     //update
     'update-user' => (new UserController())->update_user(),
+    'post-update-user' => (new UserController())->post_update_user(),
 
     //create
     'create-user' => (new UserController())->create_user(),

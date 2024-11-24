@@ -42,7 +42,8 @@
                     placeholder="Nhập mật khẩu" 
                     required>
             </div>
-            <button 
+            <input type="text" name="role" hidden value="User">
+            <button
                 type="submit" 
                 class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200">
                 Submit
