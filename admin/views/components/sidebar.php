@@ -20,22 +20,22 @@
             </a>
             <ul id="roomManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('room_types/list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('room-type-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Loại Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('room_types/add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('room-type-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Loại Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('rooms/list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('room-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('rooms/add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('room-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Phòng
                     </a>
                 </li>
@@ -72,12 +72,12 @@
             </a>
             <ul id="bookingManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('bookings/list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('booking-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Đặt Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('bookings/add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('booking-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Đặt Phòng
                     </a>
                 </li>
@@ -94,15 +94,28 @@
             <ul id="amenityManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
                     <a href="<?= $route->getLocateAdmin('hotel_amenities/list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
-                        <i class="fas fa-list mr-2"></i> Danh Sách Tiện Nghi
+                        <i class="fas fa-list mr-2"></i> Danh Sách Tiện Nghi Khách sạn
                     </a>
                 </li>
                 <li class="mb-4">
                     <a href="<?= $route->getLocateAdmin('hotel_amenities/add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
-                        <i class="fas fa-plus mr-2"></i> Thêm Tiện Nghi
+                        <i class="fas fa-plus mr-2"></i> Thêm Tiện Nghi Khách Sạn
+                    </a>
+                </li>
+
+                <li class="mb-4">
+                    <a href="<?= $route->getLocateAdmin('feature-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                        <i class="fas fa-list mr-2"></i> Danh Sách Tiện Nghi Phòng
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="<?= $route->getLocateAdmin('feature-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                        <i class="fas fa-plus mr-2"></i> Thêm Tiện Nghi Phòng
                     </a>
                 </li>
             </ul>
+
+            
         </li>
         
         <!-- Quản lý Khuyến Mãi -->

@@ -1,187 +1,14 @@
 <?php
-     $room_tops = [
-        [
-            'image' => './public/images/default-property.jpg',
-            'title' => 'Modern Apartment with Sea View',
-            'address' => '123 Ocean Drive, Miami, FL',
-            'bedrooms' => 2,
-            'bathrooms' => 2,
-            'area' => '1,100',
-            'price' => 2500
-        ],
-        [
-            'image' => './public/images/default-property.jpg',
-            'title' => 'Luxury Penthouse Downtown',
-            'address' => '456 City Center, New York, NY',
-            'bedrooms' => 3,
-            'bathrooms' => 3,
-            'area' => '2,200',
-            'price' => 4500
-        ],
-        [
-            'image' => './public/images/default-property.jpg',
-            'title' => 'Cozy Studio in Historic District',
-            'address' => '789 Heritage St, Boston, MA',
-            'bedrooms' => 1,
-            'bathrooms' => 1,
-            'area' => '650',
-            'price' => 1800
-        ],
-        [
-            'image' => './public/images/default-property.jpg',
-            'title' => 'Family Home with Garden',
-            'address' => '321 Suburban Ave, LA, CA',
-            'bedrooms' => 4,
-            'bathrooms' => 3,
-            'area' => '2,800',
-            'price' => 3500
-        ],
-        [
-            'image' => './public/images/default-property.jpg',
-            'title' => 'Mountain View Cottage',
-            'address' => '159 Highland Road, Denver, CO',
-            'bedrooms' => 2,
-            'bathrooms' => 2,
-            'area' => '1,400',
-            'price' => 2200
-        ],
-        [
-            'image' => './public/images/default-property.jpg',
-            'title' => 'Urban Loft Space',
-            'address' => '753 Downtown Blvd, Chicago, IL',
-            'bedrooms' => 1,
-            'bathrooms' => 2,
-            'area' => '1,000',
-            'price' => 2800
-        ],
-        [
-            'image' => './public/images/default-property.jpg',
-            'title' => 'Beachfront Villa',
-            'address' => '951 Coastal Way, San Diego, CA',
-            'bedrooms' => 5,
-            'bathrooms' => 4,
-            'area' => '3,500',
-            'price' => 6000
-        ],
-        [
-            'image' => './public/images/default-property.jpg',
-            'title' => 'Contemporary Townhouse',
-            'address' => '357 Modern Lane, Seattle, WA',
-            'bedrooms' => 3,
-            'bathrooms' => 2,
-            'area' => '1,800',
-            'price' => 3200
-        ]
-    ];
-    $rooms = [
-        [
-            'type_name' => 'Well Furnished Apartment',
-            'price' => '1000 - 5000 USD',
-            'address' => '100 Smart Street, LA, USA',
-            'features' => [
-                'bed' => 3,
-                'bath' => 1,
-                'car' => 2,
-                'pet' => 0
-            ],
-            'image_url' => 'path/to/image.jpg'
-        ],
-        [
-            'type_name' => 'Well Furnished Apartment',
-            'price' => '1000 - 5000 USD',
-            'address' => '100 Smart Street, LA, USA',
-            'features' => [
-                'bed' => 3,
-                'bath' => 1,
-                'car' => 2,
-                'pet' => 0
-            ],
-            'image_url' => 'path/to/image.jpg'
-        ],
-        [
-            'type_name' => 'Well Furnished Apartment',
-            'price' => '1000 - 5000 USD',
-            'address' => '100 Smart Street, LA, USA',
-            'features' => [
-                'bed' => 3,
-                'bath' => 1,
-                'car' => 2,
-                'pet' => 0
-            ],
-            'image_url' => 'path/to/image.jpg'
-        ],
-        [
-            'type_name' => 'Well Furnished Apartment',
-            'price' => '1000 - 5000 USD',
-            'address' => '100 Smart Street, LA, USA',
-            'features' => [
-                'bed' => 3,
-                'bath' => 1,
-                'car' => 2,
-                'pet' => 0
-            ],
-            'image_url' => 'path/to/image.jpg'
-        ],
-        [
-            'type_name' => 'Well Furnished Apartment',
-            'price' => '1000 - 5000 USD',
-            'address' => '100 Smart Street, LA, USA',
-            'features' => [
-                'bed' => 3,
-                'bath' => 1,
-                'car' => 2,
-                'pet' => 0
-            ],
-            'image_url' => 'path/to/image.jpg'
-        ],
-        [
-            'type_name' => 'Well Furnished Apartment',
-            'price' => '1000 - 5000 USD',
-            'address' => '100 Smart Street, LA, USA',
-            'features' => [
-                'bed' => 3,
-                'bath' => 1,
-                'car' => 2,
-                'pet' => 0
-            ],
-            'image_url' => 'path/to/image.jpg'
-        ],
-        [
-            'type_name' => 'Well Furnished Apartment',
-            'price' => '1000 - 5000 USD',
-            'address' => '100 Smart Street, LA, USA',
-            'features' => [
-                'bed' => 3,
-                'bath' => 1,
-                'car' => 2,
-                'pet' => 0
-            ],
-            'image_url' => 'path/to/image.jpg'
-        ],
-        [
-            'type_name' => 'Well Furnished Apartment',
-            'price' => '1000 - 5000 USD',
-            'address' => '100 Smart Street, LA, USA',
-            'features' => [
-                'bed' => 3,
-                'bath' => 1,
-                'car' => 2,
-                'pet' => 0
-            ],
-            'image_url' => 'path/to/image.jpg'
-        ]
-    ];
-
-
-    // Mảng dữ liệu giả (fake data)
-    $fakeDataTop = [
+    $tops = $data['top'];
+    $lastest = $data['lastest'] ;
+    $room_lastest = [
         'title' => 'Latest on the Property Listing',
-        'rooms' => $room_tops
+        'rooms' => $lastest
     ];
 
-    $fakeDataProperty = [
+    $room_top = [
         'title' => 'Featured Properties on our Listing',
-        'rooms' => $rooms
+        'rooms' => $tops
     ]
 
    
@@ -194,19 +21,19 @@
         <span class="text-center">Banner</span>
     </div>
     <div>
-        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($fakeDataTop, ['key' => 'carousel1'])]); ?>
+        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_lastest, ['key' => 'carousel1'])]); ?>
     </div>
     <div>
-        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($fakeDataTop, ['key' => 'carousel2'])]); ?>
+        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_lastest, ['key' => 'carousel2'])]); ?>
     </div>
     <div>
-        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($fakeDataTop, ['key' => 'carousel3'])]); ?>
+        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_lastest, ['key' => 'carousel3'])]); ?>
     </div>
     <div>
         <?php $viewApp->requestComponents('home_page.components.banner_section') ?>
     </div>
     <div>
-        <?php $viewApp->requestComponents('home_page.components.list_property', ['data' => $fakeDataProperty ]); ?>
+        <?php $viewApp->requestComponents('home_page.components.list_property', ['data' => $room_top ]); ?>
     </div>
     <div>
         <?php $viewApp->requestComponents('home_page.components.banner_section') ?>

@@ -5,10 +5,53 @@
 match ($route->getAct()) {
     '/' => (new DashboardController())->dashboard(),
 
+    // room
+    'room-list' => (new RoomController())->room_list(),
+    'room-add' => (new RoomController())->room_add(),
+    'room-edit' => (new RoomController())->room_edit(),
+    'room-delete' => (new RoomController())->room_delete(),
 
+    'room-post-add' => (new RoomController())->room_post_add(),
+    'room-post-edit' => (new RoomController())-> room_post_edit(),
+
+
+    // feature 
+    'feature-list' => (new FeatureController())-> feature_list(),
+    'feature-add' => (new FeatureController())-> feature_add(),
+    'feature-edit' => (new FeatureController())-> feature_edit(),
+    'feature-delete' => (new FeatureController())-> feature_delete(),
+    
+    'feature-post-add' => (new FeatureController())-> feature_post_add(),
+    'feature-post-edit' => (new FeatureController())-> feature_post_edit(),
+        
+    // room-type
+
+    'room-type-list' => (new RoomTypeController())->room_type_list(),
+    'room-type-add' => (new RoomTypeController())->room_type_add(),
+    'room-type-edit' => (new RoomTypeController())->room_type_edit(),
+    'room-type-delete' => (new RoomTypeController())->room_type_delete(),
+
+    'room-type-post-add' => (new RoomTypeController())->room_type_post_add(),
+    'room-type-post-edit' => (new RoomTypeController())-> room_type_post_edit(),
+
+    
     // review 
     'review-list' => (new ReviewController())-> review_list(),
     'review-delete' => (new ReviewController())-> review_delete(),
+
+    // Booking
+    'booking-list' => (new BookingController())->booking_list(),
+    'booking-add' => (new BookingController())->booking_add(),
+    'booking-edit' => (new BookingController())->booking_edit(),
+    'booking-delete' => (new BookingController())->booking_delete(),
+
+    'booking-post-add' => (new BookingController())->booking_post_add(),
+    'booking-post-edit' => (new BookingController())-> booking_post_edit(),
+
+
+    // 'bookings/add' => (new BookingController())->addBookings(),
+    
+
     
     // promotions
     'promotion-list' => (new PromotionController())-> promotion_list(),
