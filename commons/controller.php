@@ -1,5 +1,4 @@
 <?php
-// Các thành phần mặc định của 1 controller phải có. Tất cả các controller đều phải kế thừa lớp này
 
 abstract class BaseController {
     public $route;
@@ -22,6 +21,36 @@ abstract class BaseController {
             exit();
         }
     }
+    public function upload_images($files) {
+        $uploaded_files = [];
+        $errors = [];
+    
+        foreach ($files['name'] as $key => $file_name) {
+            $tmp_name = $files['tmp_name'][$key];
+            $file_size = $files['size'][$key];
+            $file_error = $files['error'][$key];
+    
+            if ($file_error === UPLOAD_ERR_OK) {
+                $upload_dir = 'uploads/room_images/';
+                $upload_file = $upload_dir . basename($file_name);
+    
+                if (move_uploaded_file($tmp_name, $upload_file)) {
+                    $uploaded_files[] = ['image_url' => $upload_file]; 
+                } else {
+                    $errors[] = "Lỗi khi tải ảnh $file_name lên.";
+                }
+            } else {
+                $errors[] = "Có lỗi xảy ra khi tải ảnh $file_name lên.";
+            }
+        }
+    
+        return [
+            'uploaded_files' => $uploaded_files,
+            'errors' => $errors
+        ];
+    }
+    
+    
 
     abstract public function loadModels();
 }
