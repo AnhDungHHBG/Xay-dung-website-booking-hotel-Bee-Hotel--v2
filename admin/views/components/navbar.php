@@ -142,19 +142,40 @@
                 </script>
 
                 <li class="dropdown ml-3">
-                    <button type="button" class="dropdown-toggle flex items-center">
-                        <div class="flex-shrink-0 w-10 h-10 relative">
-                            <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-                                <img class="w-8 h-8 rounded-full" src="https://laravelui.spruko.com/tailwind/ynex/build/assets/images/faces/9.jpg" alt=""/>
-                                <div class="top-0 left-7 absolute w-3 h-3 bg-lime-400 border-2 border-white rounded-full animate-ping"></div>
-                                <div class="top-0 left-7 absolute w-3 h-3 bg-lime-500 border-2 border-white rounded-full"></div>
-                            </div>
+                <?php
+                if (isset($_SESSION['user'])) {
+                    ?>
+                    <div class="relative">
+                        <div class="flex items-center gap-4">
+                            <div class="userMenu" onclick="toggleUserMenu()"><i class="fa-regular fa-user"></i></div>
                         </div>
-                        <div class="p-2 md:block text-left">
-                            <h2 class="text-sm font-semibold text-gray-800">John Doe</h2>
-                            <p class="text-xs text-gray-500">Administrator</p>
-                        </div>                
-                    </button>
+                        <!-- User Dropdown -->
+                        <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                            <a href="<?= $route->getLocateClient('signup') ?>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
+                            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('profile') ?>">Profile</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
+                            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('logout') ?> ">Logout</a>
+
+                        </div>
+                    </div>
+                    <?php
+                    
+                } else {
+                    ?>
+                    <div class="relative">
+                        <div class="flex items-center gap-4">
+                            <button class="userMenu" onclick="toggleUserMenu()"><i class="fa-solid fa-bars"></i></button>
+                            <div class="userMenu" onclick="toggleUserMenu()"><i class="fa-regular fa-user"></i></div>
+                        </div>
+                        <!-- User Dropdown -->
+                        <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                            <a href="<?= $route->getLocateClient('signup') ?>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
+                            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('login') ?>">Login</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
+                        </div>
+                    <?php
+                }
+                ?>
                     <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
                             <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
@@ -175,4 +196,17 @@
                 </li>
             </ul>
         </div>
+        <script>
+        function toggleUserMenu() {
+            const menu = document.getElementById("userMenu");
+            menu.classList.toggle("hidden");
+        }
+
+        window.onclick = function (event) {
+            const menu = document.getElementById("userMenu");
+            if (!event.target.closest('.relative')) {
+                menu.classList.add("hidden");
+            }
+        };
+    </script>
         <!-- end navbar -->
