@@ -6,7 +6,10 @@ match ($route->getAct()) {
     '/' => (new HomeController())->index(),
     'booking' => (new BookingController())->index(),
     'checkout' => (new CheckoutController())->index(),
-    'room_detail' => (new RoomDetailController())->room_detail(),
+
+    // room
+    'room-detail' => (new RoomDetailController())->room_detail(),
+    'room' => (new RoomController())->room_list(),
     // support
     'support' => (new SupportController())->index(),
     // notification

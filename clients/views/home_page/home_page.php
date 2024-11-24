@@ -18,18 +18,16 @@
     </div>
     <div>
         <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_lastest, ['key' => 'carousel1'])]); ?>
+      
     </div>
     <div>
-        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_lastest, ['key' => 'carousel2'])]); ?>
-    </div>
-    <div>
-        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_lastest, ['key' => 'carousel3'])]); ?>
+        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_top, ['key' => 'carousel2'])]); ?>
     </div>
     <div>
         <?php $viewApp->requestComponents('home_page.components.banner_section') ?>
     </div>
     <div>
-        <?php $viewApp->requestComponents('home_page.components.list_property', ['data' => $room_top ]); ?>
+        <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_top, ['key' => 'carousel2'])]); ?>
     </div>
     <div>
         <?php $viewApp->requestComponents('home_page.components.banner_section') ?>

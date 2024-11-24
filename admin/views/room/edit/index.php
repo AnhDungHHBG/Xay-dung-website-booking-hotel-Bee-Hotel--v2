@@ -70,39 +70,37 @@ $room_features = $data['room_features'];
                 <label class="block text-sm font-medium text-gray-700">Tiện Ích</label>
                 <div class="space-y-2">
                 <?php 
-// Kiểm tra xem $room_features có phải là mảng không
-if (is_array($room_features)) :
-    // Chuyển đổi chuỗi feature_ids thành mảng
-    $feature_ids = explode(',', $room['feature_ids']);
-    foreach ($room_features as $feature):
-?>
+                    // Kiểm tra xem $room_features có phải là mảng không
+                    if (is_array($room_features)) :
+                        // Chuyển đổi chuỗi feature_ids thành mảng
+                        $feature_ids = explode(',', $room['feature_ids']);
+                        foreach ($room_features as $feature):
+                    ?>
 
-    <div class="flex items-center">
-        <input 
-            type="checkbox" 
-            id="feature_<?= $feature['feature_id'] ?>" 
-            name="features[]" 
-            value="<?= $feature['feature_id'] ?>"
-            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-500"
-            <?php 
-                // Kiểm tra xem feature_id có trong mảng feature_ids không
-                if (in_array($feature['feature_id'], $feature_ids)) {
-                    echo 'checked';
-                }
-            ?>>
-        <label for="feature_<?= $feature['feature_id'] ?>" class="ml-2 text-sm text-gray-700">
-            <?= htmlspecialchars($feature['feature_name']) ?>
-        </label>
-    </div>
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="feature_<?= $feature['feature_id'] ?>" 
+                                name="features[]" 
+                                value="<?= $feature['feature_id'] ?>"
+                                class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-500"
+                                <?php 
+                                    // Kiểm tra xem feature_id có trong mảng feature_ids không
+                                    if (in_array($feature['feature_id'], $feature_ids)) {
+                                        echo 'checked';
+                                    }
+                                ?>>
+                            <label for="feature_<?= $feature['feature_id'] ?>" class="ml-2 text-sm text-gray-700">
+                                <?= htmlspecialchars($feature['feature_name']) ?>
+                            </label>
+                        </div>
 
-<?php 
-    endforeach;
-else:
-    echo 'Không có tiện ích nào để hiển thị.';
-endif;
-?>
-
-
+                    <?php 
+                        endforeach;
+                    else:
+                        echo 'Không có tiện ích nào để hiển thị.';
+                    endif;
+                    ?>
             </div>
             <div class="flex justify-center">
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">Cập Nhật</button>
