@@ -38,7 +38,7 @@
                     <a href="<?= $route->getLocateAdmin('room-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Phòng
                     </a>
-                </li>
+                </li>   
             </ul>
         </li>
         

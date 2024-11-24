@@ -1,7 +1,7 @@
 <div class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="bg-white p-6 rounded-lg shadow-lg w-80">
         <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Sửa đổi tài khoản</h1>
-        <form method="POST" action="<?= $route->getLocateAdmin('post-create-user') ?>" enctype="multipart/form-data">
+        <form method="POST" action="<?= $route->getLocateAdmin('post-update-user', ['user_id' => $users['user_id']]) ?>" enctype="multipart/form-data">
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray-600 mb-2">Tên</label>
                 <input

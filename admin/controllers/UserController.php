@@ -22,15 +22,13 @@ class UserController extends BaseController
     public function update_user() {
         $id = $_GET['user_id'];
         $data = $this->userModel->findIdTable($id);
-        $this->viewApp->requestView('User.edit.edit', ['users' => $data]);
+        $this->viewApp->requestView('user.edit.edit', ['users' => $data]);
         $this->route->redirectAdmin('users-list');
     }
 
     public function post_update_user() {
         $id = $_GET['user_id'];
         $data = $this->route->form;
-        echo $data;
-        die();
         $this->userModel->updateIdTable($data, $id);
         $this->route->redirectAdmin('users-list');
     }

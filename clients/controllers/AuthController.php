@@ -11,7 +11,6 @@ class AuthController extends BaseController
     public function login_post() {
         $email = $_POST['email'] ?? null;
         $password = $_POST['password'] ?? null;
-
         if (!$email || !$password) {
             return ['error' => 'Email and password are required'];
         }
