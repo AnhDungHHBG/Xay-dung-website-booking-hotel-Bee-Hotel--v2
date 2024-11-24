@@ -12,8 +12,13 @@ match ($route->getAct()) {
     // notification
     'notification-list' => (new NotificationController())->list(),
     // login
-    'login' => (new LoginController())->index(),
-    'login-post' => (new LoginController())->login_post(),
+    'login' => (new AuthController())->index(),
+    'login-post' => (new AuthController())->login_post(),
     'signup' => (new SignupController())->index(),
-    'signup-post' => (new SignupController())->signup_post()
+    'signup-post' => (new SignupController())->signup_post(),
+    //profile
+    'profile' => (new ProfileController())->index(),
+    //logout
+    'logout' => (new AuthController())->logout(),
+
 };

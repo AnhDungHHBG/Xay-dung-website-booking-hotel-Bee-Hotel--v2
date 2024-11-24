@@ -29,12 +29,17 @@ class Auth {
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $createdAt =  $user['created_at'];
+        $formattedDate = (new DateTime($createdAt))->format('d/m/Y H:i');
 
         if ($user['password'] == $password) {
             $_SESSION['user'] = [
+                'name' => $user['name'],
                 'user_id' => $user['id'],
                 'email' => $user['email'],
+                'created_at' => $formattedDate,
             ];
+           
             $this->isLogin = true;
             return true;
         } else {

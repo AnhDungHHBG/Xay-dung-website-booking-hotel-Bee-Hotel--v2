@@ -18,7 +18,8 @@
             <!-- Logo -->
             <span class="text-3xl font-bold text-gray-800">Logo</span>
             <!-- Navbar -->
-            <?php $viewApp->requestComponents('components.navbar'); ?>
+            <?php $viewApp->requestComponents('components.navbar');
+            ?>
             <div class="relative mr-6">
                     <a href="<?= $route->getLocateClient('notification-list') ?>" class="text-gray-700 hover:text-blue-500">
                         <i class="fa-solid fa-bell fa-lg"></i>
@@ -29,18 +30,42 @@
                     </a>
                 </div>
             <!-- User Section -->
-            <div class="relative">
-                <div class="flex items-center gap-4">
-                    <button class="userMenu" onclick="toggleUserMenu()"><i class="fa-solid fa-bars"></i></button>
-                    <div class="userMenu" onclick="toggleUserMenu()"><i class="fa-regular fa-user"></i></div>
-                </div>
-                <!-- User Dropdown -->
-                <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                    <a href="<?= $route->getLocateClient('signup') ?>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
-                    <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('login') ?>">Login</a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
-                </div>
-                </div>
+            
+                            <?php
+                if (isset($_SESSION['user'])) {
+                    ?>
+                    <div class="relative">
+                        <div class="flex items-center gap-4">
+                            <div class="userMenu" onclick="toggleUserMenu()"><i class="fa-regular fa-user"></i></div>
+                        </div>
+                        <!-- User Dropdown -->
+                        <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                            <a href="<?= $route->getLocateClient('signup') ?>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
+                            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('profile') ?>">Profile</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
+                            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('logout') ?> ">Logout</a>
+
+                        </div>
+                    </div>
+                    <?php
+                    
+                } else {
+                    ?>
+                    <div class="relative">
+                        <div class="flex items-center gap-4">
+                            <button class="userMenu" onclick="toggleUserMenu()"><i class="fa-solid fa-bars"></i></button>
+                            <div class="userMenu" onclick="toggleUserMenu()"><i class="fa-regular fa-user"></i></div>
+                        </div>
+                        <!-- User Dropdown -->
+                        <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                            <a href="<?= $route->getLocateClient('signup') ?>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
+                            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('login') ?>">Login</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
+                        </div>
+                    <?php
+                }
+                ?>
+
                 
         </div>
     </div>

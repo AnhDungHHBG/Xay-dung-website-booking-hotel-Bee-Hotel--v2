@@ -28,6 +28,16 @@ match ($route->getAct()) {
     'notification-list' => (new NotificationController())->list(),
 
     //user
-    'user-list' => (new NotificationController())->list(),
+    'users-list' => (new UserController())->user_list(),
+
+    //delete
+    'delete-user' => (new UserController())->delete_user(),
+
+    //update
+    'update-user' => (new UserController())->update_user(),
+
+    //create
+    'create-user' => (new UserController())->create_user(),
+    'post-create-user' => (new UserController())->post_create_user(),
 
 };

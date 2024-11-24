@@ -1,5 +1,5 @@
 <?php 
-class LoginController extends BaseController
+class AuthController extends BaseController
 {
     public function loadModels() {
     }
@@ -25,5 +25,10 @@ class LoginController extends BaseController
         } catch (Exception $e) {
             return ['error' => 'An error occurred: ' . $e->getMessage()];
         }
+    }
+    public function logout(){
+        $this->auth->logout();
+        $this->route->redirectClient('/');
+
     }
 }
