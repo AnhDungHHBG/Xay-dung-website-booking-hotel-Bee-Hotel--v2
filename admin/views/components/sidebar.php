@@ -51,12 +51,12 @@
             </a>
             <ul id="userManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('users/list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('users-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Người Dùng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('users/add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('create-user') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-user-plus mr-2"></i> Thêm Người Dùng
                     </a>
                 </li>

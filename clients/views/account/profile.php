@@ -1,15 +1,21 @@
 <?php
-include "header";
-include "footer";
+ $name = $_SESSION['user']['name'];
+ $email = $_SESSION['user']['email'];
+ if (isset($_SESSION['user']['created_at'])) {
+  $createdAt = $_SESSION['user']['created_at'];
+} else {
+  // echo "Key 'created_at' không tồn tại trong session.";
+}
 ?>
+
 <!-- Profile Section -->
-<main class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8">
   <div class="bg-white shadow rounded-lg p-6">
     <div class="flex gap-8">
       <!-- Left Section -->
       <div class="w-1/3 text-center">
         <div class="bg-gray-200 h-32 w-32 mx-auto rounded-full flex items-center justify-center">
-          <span class="text-gray-500">Upload a Photo</span>
+          
         </div>
         <div class="mt-4 text-gray-600">
           <p class="text-lg font-semibold">Identity Verification</p>
@@ -28,15 +34,23 @@ include "footer";
       </div>
 
       <!-- Right Section -->
-      <div class="flex-1">
-        <h1 class="text-2xl font-semibold">Hello <?php $user['name'] ?></h1>
-        <p class="text-gray-500 mt-1">Joined in <?php $user['created_at'] ?></p>
-        <button onsubmit="" class="mt-4 px-4 py-2 border border-gray-300 rounded text-gray-700">Edit Profile</button>
+       <?php
+      if (isset($_SESSION['user'])) {
+        ?>
+          <div class="flex-1">
+        <h1 class="text-2xl font-semibold">Hello <?php echo $name ?></h1>
+        <!-- <p class="text-gray-500 mt-1">Joined in <?php echo $createdAt ?></p> -->
+        <button class="mt-4 px-4 py-2 border border-gray-300 rounded text-gray-700" href="<?= $route->getLocateClient('editprofile') ?> ">Edit Profile</button>
         <div class="mt-6 text-gray-600">
           <p class="text-lg">0 Reviews</p>
           <p class="mt-2 text-sm">Reviewed by You</p>
         </div>
+        <?php
+      }else{
+        $this->route->redirectClient('login');
+      }
+      ?>
       </div>
     </div>
   </div>
-</main>
+</div>

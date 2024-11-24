@@ -9,7 +9,7 @@ class Support extends BaseModel{
         
         $stmt = $this->conn->prepare($query);
         if ($stmt->execute()) {
-            return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
             return [];   
         }
@@ -26,7 +26,7 @@ class Support extends BaseModel{
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);  
         } catch(Exception $e) {
-            $coreApp->debug($e);  
+            $coreApp->debug($e); 
         }
     }
     public function getResponsesByTicketId($ticketId) {
