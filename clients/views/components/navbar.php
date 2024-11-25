@@ -5,7 +5,7 @@
             <a class="" href="<?= $route->getLocateClient() ?>">Home</a>
         </li>
         <li class="text-body font-semibold">
-            <a class="" href="<?= $route->getLocateClient() ?>">Rooms</a>
+            <a class="" href="<?= $route->getLocateClient('room-list') ?>">Rooms</a>
         </li>
         <li class="text-body font-semibold">
             <a class="" href="<?= $route->getLocateClient() ?>">About</a>

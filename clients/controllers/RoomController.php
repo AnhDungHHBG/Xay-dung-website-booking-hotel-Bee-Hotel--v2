@@ -9,7 +9,7 @@ class RoomController extends BaseController
 
     public function room_list() {
         $data = $this->roomModel->getRooms();
-        $this->viewApp->requestView('room.index', ['data' => $data]);
+        $this->viewApp->requestView('room_page.index', ['data' => $data]);
     }
    
 }
