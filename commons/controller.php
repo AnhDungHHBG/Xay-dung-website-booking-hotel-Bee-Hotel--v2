@@ -15,10 +15,16 @@ abstract class BaseController {
         $this->loadModels();
     }
 
+
+    
     public function checkAccess() {
         if (!$this->auth->isLogin) {
-            header("Location: /login.php");
-            exit();
+            $this->route->redirectClient('login');
+        }
+        
+        $user = $_SESSION['user'];
+        if ($user['role'] !== 'Admin') {
+            $this->route->redirectClient('');
         }
     }
     public function upload_images($files) {

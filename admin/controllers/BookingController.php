@@ -2,6 +2,7 @@
 
 class BookingController extends BaseController
 {
+   
     public $bookingModel;
 
     public function loadModels() {

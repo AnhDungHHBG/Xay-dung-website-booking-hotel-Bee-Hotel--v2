@@ -1,7 +1,8 @@
 <?php 
 $ticket = $data["ticket"];
 $responses = $data["responses"];
-$currentUserId = 1
+$user_id = $_SESSION['user']['user_id'];
+$currentUserId = $user_id;
 ;?>
 <div class="bg-gray-100">
     <div class="container mx-auto p-6">
