@@ -19,6 +19,9 @@ match ($route->getAct()) {
     'booking' => (new BookingController())->index(),
     'checkout' => (new CheckoutController())->index(),
 
+    // checkin 
+    'checkin' => (new CheckinController())->index(),
+
     // room
     'room-detail' => (new RoomDetailController())->room_detail(),
     'room-list' => (new RoomController())->room_list(),
