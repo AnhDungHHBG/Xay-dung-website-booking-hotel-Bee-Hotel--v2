@@ -37,6 +37,7 @@ class Auth {
                 'name' => $user['name'],
                 'user_id' => $user['id'],
                 'email' => $user['email'],
+                'role' => $user['role'],
                 'created_at' => $formattedDate,
             ];
            

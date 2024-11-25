@@ -8,18 +8,13 @@ class HomeController extends BaseController
         $this->roomModel = new Room();
     }
     public function index() {
-     
         $lastest = $this->roomModel->getRoomLastest();
         $top = $this->roomModel->getRoomtop();
         $data = [
             "lastest"=> $lastest,
             "top"=> $top,
         ];
-        // echo "<pre>";
-        // print_r($top);
-        // print_r($lastest);
-        // echo "</pre>";
-        // die();
+      
         $this->viewApp->requestView('home_page.home_page' , ['data' => $data]);
     }
 }

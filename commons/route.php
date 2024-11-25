@@ -14,6 +14,7 @@ class Route {
         $this->form = (object)$_POST;
 
         $this->isAdminPage = $this->isAdmin();
+        
     }
 
     public function hasQuery($name): bool {
@@ -66,6 +67,7 @@ class Route {
     }
 
     public function isAdmin() {
+       
         return $this->hasQuery('mode') && $this->query->mode === 'admin';
     }
 }
