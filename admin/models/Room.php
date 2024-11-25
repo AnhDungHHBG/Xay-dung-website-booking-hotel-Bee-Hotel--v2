@@ -266,6 +266,15 @@ class Room extends BaseModel{
             ];
         }
     } 
+    public function get_all_rooms_count(){
+        $query = 'SELECT COUNT(*) AS room_count FROM room;';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['room_count'];   
+    }
+    
+    
 }
 
 

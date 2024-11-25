@@ -1,49 +1,78 @@
-<div class="max-w-7xl mx-auto px-4">
-    <div class="flex justify-center">
-        <h1 class="text-3xl font-bold ">Trang Tổng Quan</h1>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-xl font-semibold">Tổng số phòng</h2>
-            <p class="text-2xl">120</p>
+<?php 
+$users = $data['users'];
+$bookings = $data['bookings'];
+$rooms = $data['rooms'];
+
+?>
+<body class="bg-gray-100">
+
+<div class="container mx-auto p-6">
+    <h1 class="text-4xl font-bold mb-6">Admin Dashboard</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Thống kê phòng -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold">Rooms</h2>
+            <p class="text-2xl"><?= $rooms ?></p>
         </div>
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-xl font-semibold">Số đặt phòng hôm nay</h2>
-            <p class="text-2xl">15</p>
+
+        <!-- Thống kê đặt phòng -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold">Bookings</h2>
+            <p class="text-2xl"><?= $bookings ?></p>
+
         </div>
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-xl font-semibold">Doanh thu hôm nay</h2>
-            <p class="text-2xl">$1,200</p>
+
+        <!-- Thống kê doanh thu -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold">Revenue</h2>
+            <p class="text-2xl">0</p>
+        </div>
+
+        <!-- Thống kê người dùng -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold">Users</h2>
+            <p class="text-2xl"><?= $users ?></p>
+
         </div>
     </div>
 
-    <!-- Biểu đồ thống kê đặt phòng theo tháng -->
-    <div class="mt-8">
-        <h2 class="text-xl font-semibold">Thống kê đặt phòng theo tháng</h2>
-        <canvas id="bookingChart"></canvas>
+    <!-- Biểu đồ thống kê -->
+    <div class="bg-white p-6 mt-6 rounded-lg shadow">
+        <h2 class="text-2xl font-semibold mb-4">Bookings and Revenue Over Time</h2>
+        <canvas id="chart"></canvas>
     </div>
 </div>
 
 <script>
-    const ctx = document.getElementById('bookingChart').getContext('2d');
-    const bookingChart = new Chart(ctx, {
-        type: 'bar', // Loại biểu đồ
+    // Biểu đồ Chart.js
+    var ctx = document.getElementById('chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
         data: {
-            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6'], // Nhãn cho các tháng
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
             datasets: [{
-                label: 'Số lượng đặt phòng',
-                data: [12, 19, 3, 5, 2, 3], // Dữ liệu mẫu, bạn có thể thay thế bằng dữ liệu thực tế từ cơ sở dữ liệu
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
+                label: 'Bookings',
+                data: [5, 10, 15, 20, 25, 30], 
+                borderColor: 'rgb(75, 192, 192)',
+                fill: false,
+            }, {
+                label: 'Revenue',
+                data: [1000, 2000, 2500, 3000, 4000, 5000], 
+                borderColor: 'rgb(255, 99, 132)',
+                fill: false,
             }]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+            },
         }
     });
 </script>
+
+</body>
+</html>

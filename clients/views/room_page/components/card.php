@@ -1,0 +1,43 @@
+<?php
+$room = $data;
+?>
+<a href="<?= $route->getLocateClient('room-detail', ['id' => $room['room_id']]) ?>">
+    <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
+        <!-- Hình ảnh phòng -->
+        <?php 
+        $images = explode(',', $room['images']);
+        $firstImage = trim($images[0]); 
+        ?>
+        <div class="h-64 bg-gray-200 rounded-lg mb-4 relative" style="background-image: url('<?= htmlspecialchars($firstImage) ?>'); background-size: cover; background-position: center;">
+            <button class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </button>
+            <!-- Đánh dấu trang trống ở dưới cùng bên phải hình ảnh -->
+            <div class="absolute bottom-2 right-2 flex space-x-1">
+                <span class="h-2 w-2 bg-gray-400 rounded-full"></span>
+                <span class="h-2 w-2 bg-gray-400 rounded-full"></span>
+                <span class="h-2 w-2 bg-gray-400 rounded-full"></span>
+                <span class="h-2 w-2 bg-gray-400 rounded-full"></span>
+            </div>
+        </div>
+
+        <!-- Giá phòng -->
+        <div class="text-gray-600 mb-2 text-base">$<?= htmlspecialchars(number_format($room['price'], 2)) ?> USD</div>
+
+        <!-- Loại phòng -->
+        <p class="text-gray-900 font-semibold text-lg"><?= htmlspecialchars($room['room_type']) ?></p>
+        
+        <!-- Mô tả phòng -->
+        <p class="text-gray-700 font-medium text-sm"><?= htmlspecialchars($room['description']) ?></p>
+
+        <!-- Tiện ích phòng -->
+        <?php 
+        $features = explode(',', $room['feature_names']);
+        ?>
+        <div class="mt-2 text-gray-600 text-sm">
+            <span>Tiện ích: <?= implode(', ', array_map('htmlspecialchars', $features)) ?></span>
+        </div>
+    </div>
+</a>

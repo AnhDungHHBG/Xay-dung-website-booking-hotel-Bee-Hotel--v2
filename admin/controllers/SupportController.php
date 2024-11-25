@@ -25,7 +25,6 @@ class SupportController extends BaseController
 
     public function support_response_post() {
         $data = $this->route->form;
-
         if (is_object($data)) {
             $data = (array) $data;
         }

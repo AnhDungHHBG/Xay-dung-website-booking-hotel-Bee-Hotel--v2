@@ -33,9 +33,10 @@ class Auth {
         $formattedDate = (new DateTime($createdAt))->format('d/m/Y H:i');
 
         if ($user['password'] == $password) {
+           
             $_SESSION['user'] = [
                 'name' => $user['name'],
-                'user_id' => $user['id'],
+                'user_id' => $user['user_id'],
                 'email' => $user['email'],
                 'role' => isset($user['role']) ? $user['role'] : null,
             ];

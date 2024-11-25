@@ -1,6 +1,6 @@
 <?php 
 $reviews = $data['reviews'];
-// $room = $data['room'];
+$room = $data['room'];
 $averageRating = $data['averageRating'];
 ?>
 
@@ -10,67 +10,82 @@ $averageRating = $data['averageRating'];
   <main class="container mx-auto px-6 py-8">
     <!-- Image Section -->
     <div class="grid grid-cols-3 gap-4">
-      <div class="col-span-2 space-y-4">
-        <div class="h-64 bg-gray-300"></div>
-        <div class="flex space-x-4">
-          <div class="h-32 w-1/2 bg-gray-300"></div>
-          <div class="h-32 w-1/2 bg-gray-300"></div>
+        <div class="col-span-2 space-y-4">
+          <?php 
+                $images = explode(", ", $room['images']);
+          ?>
+            <!-- Room Main Image -->
+            <div class="h-64 bg-gray-300" style="background-image: url('<?= htmlspecialchars($images[0]) ?>'); background-size: cover; background-position: center;"></div>
+            
+            <!-- Thumbnail Images -->
+            <div class="flex space-x-4">
+                <?php
+                foreach ($images as $image) {
+                    echo '<div class="h-32 w-1/2 bg-gray-300" style="background-image: url(\'' . htmlspecialchars($image) . '\'); background-size: cover; background-position: center;"></div>';
+                }
+                ?>
+            </div>
         </div>
+
+       <!-- "More Photos" Section -->
+      <div class="h-64 bg-gray-300 flex justify-center items-center text-gray-500" style="background-image: url('<?= htmlspecialchars($images[count($images) - 1]) ?>')">
+          <?php
+          if (count($images) > 4) {
+              echo '+' . (count($images) - 4);
+          }
+          ?>
       </div>
-      <div class="h-64 bg-gray-300 flex justify-center items-center text-gray-500">+2 More Photos</div>
+
     </div>
 
     <!-- Property Info -->
     <section class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="md:col-span-2">
-        <h1 class="text-2xl font-bold">Well Furnished Apartment</h1>
-        <p class="text-gray-600">100 Street Example, LA, USA</p>
-        <div class="flex items-center space-x-6 mt-4">
-          <div class="text-gray-600 flex items-center space-x-2">
-            <span class="text-lg font-semibold">3 Bedrooms</span>
-          </div>
-          <div class="text-gray-600 flex items-center space-x-2">
-            <span class="text-lg font-semibold">2 Bathrooms</span>
-          </div>
-          <div class="text-gray-600 flex items-center space-x-2">
-            <span class="text-lg font-semibold">5 Car/Bike Spaces</span>
-          </div>
-          <div class="text-gray-600 flex items-center space-x-2">
-            <span class="text-lg font-semibold">No Pets Allowed</span>
-          </div>
-        </div>
-        <p class="mt-4 text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe inventore fugiat voluptates, optio distinctio similique a cumque.
-        </p>
+        <div class="md:col-span-2">
+            <!-- Room Title and Description -->
+            <h1 class="text-2xl font-bold"><?= htmlspecialchars($room['room_type']) ?></h1>
+            <p class="text-gray-600"><?= htmlspecialchars($room['description']) ?></p>
 
-        <!-- Amenities -->
-        <div class="mt-6">
-          <h2 class="text-lg font-semibold">Offered Amenities</h2>
-          <div class="grid grid-cols-2 gap-4 mt-4 text-gray-600">
-            <span>Kitchen</span>
-            <span>Air Conditioner</span>
-            <span>Television with Netflix</span>
-            <span>Free Wireless Internet</span>
-          </div>
-        </div>
-      </div>
+            <!-- Room Details -->
+            <div class="flex items-center space-x-6 mt-4">
+                <div class="text-gray-600 flex items-center space-x-2">
+                    <span class="text-lg font-semibold"><?= htmlspecialchars($room['capacity']) ?> Guests</span>
+                </div>
+                <div class="text-gray-600 flex items-center space-x-2">
+                    <span class="text-lg font-semibold">Price: $<?= number_format($room['price'], 2) ?></span>
+                </div>
+            </div>
 
-      <!-- Price Section -->
-      <div>
-        <div class="p-6 bg-white rounded-lg shadow-md">
-          <h2 class="text-xl font-semibold text-gray-800">$1000 - $2000</h2>
-          <ul class="text-gray-600 mt-4 space-y-2">
-            <li>Short Period: $1000</li>
-            <li>Medium Period: $1500</li>
-            <li>Long Period: $2000</li>
-          </ul>
-          <button class="bg-blue-600 text-white w-full py-2 mt-4 rounded-md">Reserve Now</button>
-          <div class="mt-4 flex space-x-4">
-            <a href="#" class="text-blue-500 hover:underline">Property Inquiry</a>
-            <a href="#" class="text-blue-500 hover:underline">Contact Host</a>
-          </div>
+            <div class="mt-6">
+            <h2 class="text-lg font-semibold">Offered Amenities</h2>
+            <ul class="list-disc pl-6 mt-4 text-gray-600">
+                <?php
+                // Giả sử $room['feature_names'] chứa chuỗi tên các tính năng được phân cách bằng dấu phẩy
+                $feature_names = explode(", ", $room['feature_names']);
+                
+                // Duyệt qua từng tên tính năng và hiển thị chúng dưới dạng danh sách với biểu tượng tích
+                foreach ($feature_names as $feature_name) {
+                    echo '<li><i class="fas fa-check mr-2"></i>' . htmlspecialchars($feature_name) . '</li>';
+                }
+                ?>
+            </ul>
         </div>
-      </div>
+        </div>
+
+        <div>
+            <div class="p-6 bg-white rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-gray-800">$<?= number_format($room['price'], 2) ?> per night</h2>
+                <ul class="text-gray-600 mt-4 space-y-2">
+                    <li>Short Period: $<?= number_format($room['price'], 2) ?></li>
+                    <li>Medium Period: $<?= number_format($room['price'] * 1.5, 2) ?></li>
+                    <li>Long Period: $<?= number_format($room['price'] * 2, 2) ?></li>
+                </ul>
+                <button class="bg-blue-600 text-white w-full py-2 mt-4 rounded-md">Reserve Now</button>
+                <div class="mt-4 flex space-x-4">
+                    <a href="#" class="text-blue-500 hover:underline">Property Inquiry</a>
+                    <a href="#" class="text-blue-500 hover:underline">Contact Host</a>
+                </div>
+            </div>
+        </div>
     </section>
     <br><br><br>
 

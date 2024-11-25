@@ -4,11 +4,28 @@
 // kiểm tra act và điều hướng tới các controller phù hợp
 match ($route->getAct()) {
     '/' => (new HomeController())->index(),
-    'booking' => (new BookingController())->index(),
-    'checkout' => (new CheckoutController())->index(),
-    'room_detail' => (new RoomDetailController())->room_detail(),
     // support
     'support' => (new SupportController())->index(),
+
+    // about
+    'about' => (new AboutController())->about_us(),
+    // contact
+
+    'contact' => (new ContactController())->contact(),
+    'contact-post' => (new ContactController())-> contact_post(),
+
+
+
+    // booking 
+    'booking-list' => (new BookingController())->booking_list(),
+    'booking-history'=> (new BookingController())->booking_history(),
+    'check-in' => (new BookingController())->check_in(),
+
+    // room
+    'room-detail' => (new RoomDetailController())->room_detail(),
+    'room-list' => (new RoomController())->room_list(),
+
+
     // notification
     'notification-list' => (new NotificationController())->list(),
     // login
@@ -16,8 +33,10 @@ match ($route->getAct()) {
     'login-post' => (new AuthController())->login_post(),
     'signup' => (new SignupController())->index(),
     'signup-post' => (new SignupController())->signup_post(),
+
     //profile
     'profile' => (new ProfileController())->index(),
+
     //logout
     'logout' => (new AuthController())->logout(),
     //admin
