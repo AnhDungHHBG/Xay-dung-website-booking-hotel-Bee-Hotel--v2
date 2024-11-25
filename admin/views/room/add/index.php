@@ -30,8 +30,8 @@ $features = $data['features'];
             <div class="mb-4">
                 <label for="availability_status" class="block text-sm font-medium text-gray-700">Tình Trạng</label>
                 <select id="availability_status" name="availability_status" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
-                    <option value="1">Trống</option>
-                    <option value="0">Đã Đặt</option>
+                    <option value="Available">Available</option>
+                    <option value="Booked">Booked</option>
                 </select>
             </div>
 

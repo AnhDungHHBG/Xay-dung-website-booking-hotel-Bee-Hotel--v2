@@ -70,9 +70,7 @@ $room_features = $data['room_features'];
                 <label class="block text-sm font-medium text-gray-700">Tiện Ích</label>
                 <div class="space-y-2">
                 <?php 
-                    // Kiểm tra xem $room_features có phải là mảng không
                     if (is_array($room_features)) :
-                        // Chuyển đổi chuỗi feature_ids thành mảng
                         $feature_ids = explode(',', $room['feature_ids']);
                         foreach ($room_features as $feature):
                     ?>
@@ -85,7 +83,6 @@ $room_features = $data['room_features'];
                                 value="<?= $feature['feature_id'] ?>"
                                 class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-500"
                                 <?php 
-                                    // Kiểm tra xem feature_id có trong mảng feature_ids không
                                     if (in_array($feature['feature_id'], $feature_ids)) {
                                         echo 'checked';
                                     }

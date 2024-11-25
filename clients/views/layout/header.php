@@ -30,27 +30,26 @@
                             <?php endif; ?>
                         </a>
                     </div>
-            <!-- User Section -->
+                <!-- User Section -->
                 <?php
-                if (isset($_SESSION['user'])) {
+                    if (isset($_SESSION['user'])) {
                     $user = $_SESSION['user'];
-                    ?>
-                    <div class="relative">
-                        <div class="flex items-center gap-4">
-                            <div class="userMenu" onclick="toggleUserMenu()"><i class="fa-regular fa-user"></i></div>
-                        </div>
-                        <!-- User Dropdown -->
-                        <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                        ?>
+                        <div class="relative">
+                            <div class="flex items-center gap-4">
+                                <div class="userMenu" onclick="toggleUserMenu()"><i class="fa-regular fa-user"></i></div>
+                            </div>
+                            <!-- User Dropdown -->
+                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                         <?php if ($user['role'] === 'Admin'): ?>
-                            <a href="http://localhost/duan1/Xay-dung-website-booking-hotel-Bee-Hotel--v2/?mode=admin" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Admin Panel</a>
+                            <a href="<?= $route->getLocateAdmin('') ?> " class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Admin Panel</a>
                         <?php endif; ?>
-                            <a href="<?= $route->getLocateClient('signup') ?>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
-                            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('profile') ?>">Profile</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
-                            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('logout') ?> ">Logout</a>
+                                <a href="<?= $route->getLocateClient('signup') ?>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
+                                <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('profile') ?>">Profile</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
+                                <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('logout') ?> ">Logout</a>
                         </div>
                         <?php
-                        
                     } else {
                         ?>
                         <div class="relative">
