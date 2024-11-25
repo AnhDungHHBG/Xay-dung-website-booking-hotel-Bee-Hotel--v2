@@ -15,12 +15,11 @@ match ($route->getAct()) {
     'contact-post' => (new ContactController())-> contact_post(),
 
 
-    // 
-    'booking' => (new BookingController())->index(),
-    'checkout' => (new CheckoutController())->index(),
 
-    // checkin 
-    'checkin' => (new CheckinController())->index(),
+    // booking 
+    'booking-list' => (new BookingController())->booking_list(),
+    'booking-history'=> (new BookingController())->booking_history(),
+    'check-in' => (new BookingController())->check_in(),
 
     // room
     'room-detail' => (new RoomDetailController())->room_detail(),

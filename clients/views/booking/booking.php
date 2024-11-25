@@ -89,28 +89,5 @@
 </div>
 
 <?php
-// Nếu form được submit
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $checkin_date = $_POST['checkin_date'];
-    $checkout_date = $_POST['checkout_date'];
-    $room_id = $_POST['room_id'];
-    $number_of_guests = $_POST['number_of_guests'];
-    $special_requests = $_POST['special_requests'];
 
-    // Tạo booking mới
-    $stmt = $conn->prepare("INSERT INTO booking (user_id, room_id, check_in, check_out, status, total_price, number_of_guests, special_requests) 
-                            VALUES (:user_id, :room_id, :check_in, :check_out, 'Đang xử lý', 0, :number_of_guests, :special_requests)");
-    $stmt->execute([
-        'user_id' => 1, // Tạm thời là user ID cố định
-        'room_id' => $room_id,
-        'check_in' => $checkin_date,
-        'check_out' => $checkout_date,
-        'number_of_guests' => $number_of_guests,
-        'special_requests' => $special_requests
-    ]);
-
-    // Redirect sau khi đặt phòng thành công
-    header("Location: /success.php");
-    exit;
-}
 ?>

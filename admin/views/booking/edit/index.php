@@ -1,4 +1,7 @@
-
+<?php
+// print_r($data);
+// die();
+?>
 <div class="bg-gray-100">
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Sửa Đơn Đặt Phòng</h1>
@@ -15,17 +18,18 @@
         </div>
         <div class="mb-4">
             <label for="check_in" class="block text-lg font-medium text-gray-700 mb-2">Ngày Check-in</label>
-            <input type="text" name="check_in" id="check_in" class="date-picker w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg p-3 transition duration-200 ease-in-out" value="<?= htmlspecialchars($data['check_in']) ?>" required>
-        </div>
+            <input type="text" name="check_in" id="check_in" class="date-picker w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg p-3 transition duration-200 ease-in-out" value="<?= htmlspecialchars(date('Y-m-d', strtotime($data['check_in']))) ?>" required>
+            </div>
         <div class="mb-4">
             <label for="check_out" class="block text-lg font-medium text-gray-700 mb-2">Ngày Check-out</label>
-            <input type="text" name="check_out" id="check_out" class="date-picker w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg p-3 transition duration-200 ease-in-out" value="<?= htmlspecialchars($data['check_out']) ?>" required>
-        </div>
+            <input type="text" name="check_out" id="check_out" class="date-picker w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg p-3 transition duration-200 ease-in-out" value="<?= htmlspecialchars(date('Y-m-d', strtotime($data['check_out']))) ?>" required>
+            </div>
         <div class="mb-4">
             <label for="status" class="block text-lg font-medium text-gray-700 mb-2">Trạng Thái</label>
             <select name="status" id="status" class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg p-3 transition duration-200 ease-in-out">
                 <option value="Confirmed" <?= $data['status'] === 'Confirmed' ? 'selected' : '' ?>>Confirmed</option>
                 <option value="Cancelled" <?= $data['status'] === 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                <option value="Checked-in" <?= $data['status'] === 'Checked-in' ? 'selected' : '' ?>>Checked-in</option>
                 <option value="Pending" <?= $data['status'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
             </select>
         </div>

@@ -26,7 +26,7 @@ $rooms = $data['rooms'];
         <!-- Thống kê doanh thu -->
         <div class="bg-white p-4 rounded-lg shadow">
             <h2 class="text-xl font-semibold">Revenue</h2>
-            <p class="text-2xl">${{ number_format($revenueStats, 2) }}</p>
+            <p class="text-2xl">0</p>
         </div>
 
         <!-- Thống kê người dùng -->
