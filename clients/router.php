@@ -20,5 +20,6 @@ match ($route->getAct()) {
     'profile' => (new ProfileController())->index(),
     //logout
     'logout' => (new AuthController())->logout(),
-
+    //admin
+    'admin-manager' => (new AuthController())->admin_page(),
 };

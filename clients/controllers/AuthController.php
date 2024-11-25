@@ -28,6 +28,9 @@ class AuthController extends BaseController
     public function logout(){
         $this->auth->logout();
         $this->route->redirectClient('/');
+    }
 
+    public function admin_page(){
+        $this->viewApp->requestView('admin.views.layout.index');
     }
 }
