@@ -8,10 +8,10 @@
             <a class="" href="<?= $route->getLocateClient('room-list') ?>">Rooms</a>
         </li>
         <li class="text-body font-semibold">
-            <a class="" href="<?= $route->getLocateClient() ?>">About</a>
+            <a class="" href="<?= $route->getLocateClient('about') ?>">About</a>
         </li>
         <li class="text-body font-semibold">
-            <a class="" href="<?= $route->getLocateClient() ?>">Contact</a>
+            <a class="" href="<?= $route->getLocateClient('contact') ?>">Contact</a>
         </li>
 
     </ul>

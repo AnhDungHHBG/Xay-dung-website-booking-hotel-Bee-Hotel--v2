@@ -9,6 +9,10 @@ match ($route->getAct()) {
 
     // about
     'about' => (new AboutController())->about_us(),
+    // contact
+
+    'contact' => (new ContactController())->contact(),
+    'contact-post' => (new ContactController())-> contact_post(),
 
 
     // 
