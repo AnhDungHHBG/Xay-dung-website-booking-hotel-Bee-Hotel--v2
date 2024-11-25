@@ -20,19 +20,18 @@
             <!-- Navbar -->
             <?php $viewApp->requestComponents('components.navbar');
             ?>
-<<<<<<< HEAD
-            <div class="relative mr-6">
-                    <a href="<?= $route->getLocateClient('notification-list') ?>" class="text-gray-700 hover:text-blue-500">
-                        <i class="fa-solid fa-bell fa-lg"></i>
-                        <?php $unreadCount = 5;?>
-                        <?php if ($unreadCount > 0): ?>
-                            <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1"><?= $unreadCount ?></span>
-                        <?php endif; ?>
-                    </a>
-                </div>
+<div class="flex gap-5">
+                <div class="relative mr-6">
+                        <a href="<?= $route->getLocateClient('notification-list') ?>" class="text-gray-700 hover:text-blue-500">
+                            <i class="fa-solid fa-bell fa-lg"></i>
+                            <?php $unreadCount = 5;?>
+                            <?php if ($unreadCount > 0): ?>
+                                <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1"><?= $unreadCount ?></span>
+                            <?php endif; ?>
+                        </a>
+                    </div>
             <!-- User Section -->
-            
-                            <?php
+                <?php
                 if (isset($_SESSION['user'])) {
                     $user = $_SESSION['user'];
                     ?>
@@ -49,36 +48,6 @@
                             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('profile') ?>">Profile</a>
                             <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
                             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('logout') ?> ">Logout</a>
-                        </div>
-=======
-               <div class="flex gap-5">
-                <div class="relative mr-6">
-                        <a href="<?= $route->getLocateClient('notification-list') ?>" class="text-gray-700 hover:text-blue-500">
-                            <i class="fa-solid fa-bell fa-lg"></i>
-                            <?php $unreadCount = 5;?>
-                            <?php if ($unreadCount > 0): ?>
-                                <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1"><?= $unreadCount ?></span>
-                            <?php endif; ?>
-                        </a>
->>>>>>> b42d5d34552c71640c2b905c120f0b230e3d414c
-                    </div>
-                <!-- User Section -->
-                
-                                <?php
-                    if (isset($_SESSION['user'])) {
-                        ?>
-                        <div class="relative">
-                            <div class="flex items-center gap-4">
-                                <div class="userMenu" onclick="toggleUserMenu()"><i class="fa-regular fa-user"></i></div>
-                            </div>
-                            <!-- User Dropdown -->
-                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                                <a href="<?= $route->getLocateClient('signup') ?>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
-                                <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('profile') ?>">Profile</a>
-                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Help Center</a>
-                                <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="<?= $route->getLocateClient('logout') ?> ">Logout</a>
-
-                            </div>
                         </div>
                         <?php
                         

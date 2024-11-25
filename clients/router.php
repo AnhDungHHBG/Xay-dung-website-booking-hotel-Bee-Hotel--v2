@@ -39,6 +39,4 @@ match ($route->getAct()) {
 
     //logout
     'logout' => (new AuthController())->logout(),
-    //admin
-    'admin-manager' => (new AuthController())->admin_page(),
 };
