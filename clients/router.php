@@ -4,7 +4,14 @@
 // kiểm tra act và điều hướng tới các controller phù hợp
 match ($route->getAct()) {
     '/' => (new HomeController())->index(),
-    
+    // support
+    'support' => (new SupportController())->index(),
+
+    // about
+    'about' => (new AboutController())->about_us(),
+
+
+    // 
     'booking' => (new BookingController())->index(),
     'checkout' => (new CheckoutController())->index(),
 
@@ -12,8 +19,6 @@ match ($route->getAct()) {
     'room-detail' => (new RoomDetailController())->room_detail(),
     'room-list' => (new RoomController())->room_list(),
 
-    // support
-    'support' => (new SupportController())->index(),
 
     // notification
     'notification-list' => (new NotificationController())->list(),
