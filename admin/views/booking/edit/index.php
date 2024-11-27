@@ -54,7 +54,6 @@
             dateFormat: 'Y-m-d',
             altInput: true,
             altFormat: 'F j, Y',
-            // minDate: 'today'
         });
     });
 </script>

@@ -68,14 +68,22 @@ $bookings = $data;
                     </p>
 
                     <!-- Nút Check-in -->
-                    <form method="POST" action="<?= $route->getLocateClient('check-in', ['booking_id' => $booking['booking_id']]) ?>" class="mt-6">
-                        <button type="submit" 
-                                class="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-300 
-                                <?php echo ($booking['status'] != 'Confirmed') ? 'opacity-50 cursor-not-allowed' : ''; ?>"
-                                <?php echo ($booking['status'] != 'Confirmed') ? 'disabled' : ''; ?>>
-                            Check-in
-                        </button>
-                    </form>
+                        <form method="POST" action="<?= $route->getLocateClient('check-in', ['booking_id' => $booking['booking_id']]) ?>" class="mt-6">
+                            <button type="submit" 
+                                    class="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-300 
+                                    <?php echo ($booking['status'] != 'Confirmed') ? 'opacity-50 cursor-not-allowed' : ''; ?>"
+                                    <?php echo ($booking['status'] != 'Confirmed') ? 'disabled' : ''; ?>>
+                                Check-in
+                            </button>
+                        </form>
+                        
+                        <form method="POST" action="<?= $route->getLocateClient('check-out', ['booking_id' => $booking['booking_id'], 'room_id' => $booking['room_id']]) ?>" class="mt-6">
+                            <button type="submit" 
+                                    class="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-300 
+                                    <?php echo ($booking['status'] != 'Check-in') ? 'opacity-50 cursor-not-allowed' : ''; ?>">
+                                Check-out
+                            </button>
+                        </form>
                 </div>
             </div>
            </div>

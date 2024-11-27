@@ -103,7 +103,18 @@ class Room extends BaseModel {
         }
     }
     
-    
+    public function updateStatus($id, $status) {
+       
+            $sql = "UPDATE room SET availability_status = :status WHERE room_id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+    }
 
     public function getRoomLastest() {
       $query = "SELECT 

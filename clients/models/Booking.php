@@ -26,10 +26,8 @@ class Booking extends BaseModel
             LEFT JOIN room_feature rf ON r.room_id = rf.room_id
             LEFT JOIN feature f ON rf.feature_id = f.feature_id
             WHERE b.user_id = :user_id
-            AND b.status = 'Confirmed'
-            OR b.status = 'Pending'
+            AND (b.status = 'Confirmed' OR b.status = 'Pending' OR b.status = 'Check-in')
             GROUP BY b.booking_id"; 
-        $query = $this->db->query($query);$query = $this->db->query($query);
     
         $stmt = $this->conn->prepare($query);
         
@@ -58,11 +56,11 @@ class Booking extends BaseModel
                     r.capacity, 
                     r.price, 
                     GROUP_CONCAT(DISTINCT ri.image_url) AS room_images 
-                  FROM booking b
-                  INNER JOIN room r ON b.room_id = r.room_id
-                  INNER JOIN room_type rt ON r.room_type_id = rt.room_type_id
-                  LEFT JOIN room_image ri ON r.room_id = ri.room_id
-                  WHERE b.booking_id = :booking_id
+                    FROM booking b
+                    INNER JOIN room r ON b.room_id = r.room_id
+                    INNER JOIN room_type rt ON r.room_type_id = rt.room_type_id
+                    LEFT JOIN room_image ri ON r.room_id = ri.room_id
+                    WHERE b.booking_id = :booking_id
                     AND b.status = 'Confirmed' 
                     AND r.availability_status = 'Booked'
                     AND DATE(NOW()) >= DATE(b.check_in)"; 
@@ -79,21 +77,37 @@ class Booking extends BaseModel
             }
     
             $updateQuery = "UPDATE booking 
-                            SET status = 'Checked-in' 
+                            SET status = 'Check-in' 
                             WHERE booking_id = :booking_id";
             $updateStmt = $this->conn->prepare($updateQuery);
             $updateStmt->bindParam(':booking_id', $booking_id, PDO::PARAM_INT);
             $updateStmt->execute();
     
-            $historyQuery = "INSERT INTO booking_history (booking_id, action, description, created_at)
-                             VALUES (:booking_id, 'Check-in', 'Người dùng đã check-in vào phòng.', NOW())";
-            $historyStmt = $this->conn->prepare($historyQuery);
-            $historyStmt->bindParam(':booking_id', $booking_id, PDO::PARAM_INT);
-            $historyStmt->execute();
     
             return "Check-in thành công!";
         } catch (PDOException $e) {
             return "Lỗi: " . $e->getMessage();
+        }
+    }
+    public function check_out($booking_id){
+        try{
+            
+            $historyQuery = "INSERT INTO booking_history (booking_id, action, description, created_at)
+                             VALUES (:booking_id, 'Check-out', 'Người dùng đã check-out .', NOW())";
+            $historyStmt = $this->conn->prepare($historyQuery);
+            $historyStmt->bindParam(':booking_id', $booking_id, PDO::PARAM_INT);
+            $historyStmt->execute();
+            // Cập nhạt trạng thái booking
+            $updateQuery = "UPDATE booking 
+            SET status = 'Check-out' 
+            WHERE booking_id = :booking_id";
+            $updateStmt = $this->conn->prepare($updateQuery);
+            $updateStmt->bindParam(':booking_id', $booking_id, PDO::PARAM_INT);
+            $updateStmt->execute();
+            
+            return "Check-out thành công!";
+        }catch (PDOException $e) {
+            return "". $e->getMessage();
         }
     }
     
