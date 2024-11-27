@@ -48,4 +48,5 @@ match ($route->getAct()) {
 
     // payment
     'payment-vnpay' =>  (new PaymentController())->payment_vnpay(),
+    'payment-onsite' =>  (new PaymentController())->payment_onsite(),
 };

@@ -5,87 +5,99 @@ $amenity = $data['amenity'];
 $roomId = isset($room['room_id']) ? $room['room_id'] : 'Not Room';
 $roomName = isset($room['room_type']) ? $room['room_type'] : 'Room not named';
 $roomType = isset($room['type']) ? $room['type'] : 'Not specified';
-$roomPrice = isset($room['price']) ? $room['price'] : 0; 
+$roomPrice = isset($room['price']) ? $room['price'] : 0;
 
 $amenityArray = is_array($amenity) ? $amenity : (array) $amenity;   
 
 $servicePrice = 10;
 ?>
-<div class="bg-gray-100 font-sans w-[1000px] mx-auto">
-    <div class="container mx-auto mt-10">
-        <h1 class="text-3xl font-bold mb-6">Room Booking Details</h1>
+<div class="bg-gray-100 font-sans w-full max-w-6xl mx-auto px-4 py-8">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-semibold text-center text-gray-800 mb-8">Room Booking Details</h1>
 
-        <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
-            <div class="flex items-start justify-start gap-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <!-- Room Details -->
+            <div>
+                <h2 class="text-2xl font-semibold mb-4">Room: <?php echo htmlspecialchars($roomId); ?></h2>
+                <p class="text-lg text-gray-700 mb-4">Type: <?php echo htmlspecialchars($roomName); ?></p>
+                <p class="text-md text-gray-600 mb-4">Price: <?php echo number_format($roomPrice, 2, '.', ',') . ' $ / night'; ?></p>
+
                 <div>
-                    <h2 class="text-2xl font-semibold mb-4">Room number: <?php echo htmlspecialchars($roomId); ?></h2>
-                    <p class="text-lg mb-4">Room Type: <?php echo htmlspecialchars($roomName); ?></p>
-                    <p class="text-md mb-4">Price: <?php echo number_format($roomPrice, 2, '.', ',') . ' $ / night'; ?></p>
-                </div>
-
-                <div class="mb-6">
                     <h3 class="text-xl font-semibold mb-2">Room Images:</h3>
-                    <div class="flex space-x-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-2">
                         <?php
                          $images = isset($room['images']) ? explode(', ', $room['images']) : [];
                          $maxImages = 8; 
                          $imagesToShow = array_slice($images, 0, $maxImages);  
      
                          foreach ($imagesToShow as $image) {
-                             echo '<img src="' . htmlspecialchars($image) . '" alt="Room Image" class="w-32 h-32 object-cover rounded-md">';
+                             echo '<img src="' . htmlspecialchars($image) . '" alt="Room Image" class="w-full h-40 object-cover rounded-md shadow">';
                          }
                          ?>
                     </div>
                 </div>
             </div>
 
-            <div class="mb-6">
-                <label for="checkin_date" class="block text-md font-medium mb-2">Check-in Date</label>
-                <input type="date" id="checkin_date" name="checkin_date" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+            <!-- Booking Form -->
+            <div>
+                <form method="POST" class="space-y-6">
+                    <div>
+                        <label for="checkin_date" class="block text-md font-medium text-gray-700">Check-in Date</label>
+                        <input type="date" id="checkin_date" name="checkin_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
 
-                <label for="checkout_date" class="block text-md font-medium mt-4 mb-2">Check-out Date</label>
-                <input type="date" id="checkout_date" name="checkout_date" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
-                <p id="date-error" class="text-red-500 mt-2 hidden">Check-out date must be later than Check-in date.</p>
-
-            </div>
-
-            <form method="POST" class="flex gap-20 justify-start items-start ">
-               <div>
-                <h3 class="text-xl font-semibold mb-2">Additional Amenities:</h3>
-                    <div class="space-y-4" id="amenities-list">
-                        <?php
-                        if (!empty($amenityArray) && is_array($amenityArray)) {
-                            foreach ($amenityArray as $item) {
-                                if (isset($item['amenity_id']) && isset($item['amenity_type'])) {
-                                    echo '<label class="flex items-center">';
-                                    echo '<input type="checkbox" name="services[]" value="' . htmlspecialchars($item['amenity_id']) . '" class="mr-2 amenity-checkbox"> ' . htmlspecialchars($item['amenity_type']) . ' (+ ' . $servicePrice . '$)';
-                                    echo '</label>';
-                                }
-                            }
-                        } else {
-                            echo '<p>No amenities available.</p>';
-                        }
-                        ?>
+                        <label for="checkout_date" class="block text-md font-medium text-gray-700 mt-4">Check-out Date</label>
+                        <input type="date" id="checkout_date" name="checkout_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                        <p id="date-error" class="text-red-500 mt-2 hidden">Check-out date must be later than Check-in date.</p>
                     </div>
-               </div>
 
-              <div>
-                <div class="mt-4">
-                        <p class="font-semibold">Number of nights: <span id="number-of-nights">0</span> nights</p>
-                        <p class="font-semibold">Room Total: <span id="room-price">0</span> $</p>
-                        <p class="font-semibold">Service Total: <span id="service-price">0</span> $</p>
-                        <p class="font-semibold">Total Payment: <span  id="total-price">0</span> $</p>
-                </div>
-                    <button type="submit" class="mt-6 bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600">Confirm and Pay With VN Pay</button>
-              </div>
-            </form>
+                    <div>
+                        <label for="special_requests" class="block text-md font-medium text-gray-700">Special Request</label>
+                        <input type="text" id="special_requests" name="special_requests" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" >
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Additional Amenities</h3>
+                        <div class="space-y-4" id="amenities-list">
+                            <?php
+                            if (!empty($amenityArray) && is_array($amenityArray)) {
+                                foreach ($amenityArray as $item) {
+                                    if (isset($item['amenity_id']) && isset($item['amenity_type'])) {
+                                        echo '<label class="flex items-center">';
+                                        echo '<input type="checkbox" name="services[]" value="' . htmlspecialchars($item['amenity_id']) . '" class="mr-2 amenity-checkbox text-blue-500"> ' . htmlspecialchars($item['amenity_type']) . ' (+ ' . $servicePrice . '$)';
+                                        echo '</label>';
+                                    }
+                                }
+                            } else {
+                                echo '<p>No amenities available.</p>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 border-t-2 border-gray-200">
+                        <p class="font-semibold text-gray-800">Number of nights: <span id="number-of-nights">0</span> nights</p>
+                        <p class="font-semibold text-gray-800">Room Total: <span id="room-price">0</span> $</p>
+                        <p class="font-semibold text-gray-800">Service Total: <span id="service-price">0</span> $</p>
+                        <p class="font-semibold text-gray-800">Total Payment: <span id="total-price">0</span> $</p>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-4">Select Payment Method:</h3>
+                    <div class="flex justify-start items-center gap-16">
+                        <label class="flex items-center">
+                            <input type="radio" name="payment_method" value="vnpay" class="mr-2" checked> Pay with VN Pay
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="payment_method" value="on_site" class="mr-2"> Pay at Check-in
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition duration-300">Confirm and Pay</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
-
 <script>
-    // Get necessary elements
     const checkinDateInput = document.getElementById('checkin_date');
     const checkoutDateInput = document.getElementById('checkout_date');
     const amenitiesCheckboxes = document.querySelectorAll('.amenity-checkbox');
@@ -94,12 +106,10 @@ $servicePrice = 10;
     const roomPrice = <?php echo $roomPrice; ?>;
     const servicePrice = <?php echo $servicePrice; ?>;
 
-    // Function to validate the dates
     function validateDates() {
         const checkinDate = new Date(checkinDateInput.value);
         const checkoutDate = new Date(checkoutDateInput.value);
 
-        // Validate if check-out date is later than check-in date
         if (checkinDate && checkoutDate && checkoutDate <= checkinDate) {
             dateError.classList.remove('hidden');
             return false;
@@ -109,14 +119,12 @@ $servicePrice = 10;
         }
     }
 
-    // Function to calculate total
     function calculateTotal() {
         const checkinDate = new Date(checkinDateInput.value);
         const checkoutDate = new Date(checkoutDateInput.value);
 
         let numberOfNights = 0;
         if (checkinDate && checkoutDate && !isNaN(checkinDate) && !isNaN(checkoutDate)) {
-            // Calculate the number of nights
             numberOfNights = Math.ceil((checkoutDate - checkinDate) / (1000 * 3600 * 24));
         }
 
@@ -126,14 +134,12 @@ $servicePrice = 10;
         const totalServicePrice = selectedAmenitiesCount * servicePrice;
         const totalPrice = totalRoomPrice + totalServicePrice;
 
-        // Update UI with calculated values
         document.getElementById('number-of-nights').textContent = numberOfNights;
         document.getElementById('room-price').textContent = totalRoomPrice.toFixed(2);
         document.getElementById('service-price').textContent = (selectedAmenitiesCount * servicePrice).toFixed(2);
         document.getElementById('total-price').textContent = totalPrice.toFixed(2);
     }
 
-    // Listen for changes in check-in date, check-out date, and amenities selection
     checkinDateInput.addEventListener('change', () => {
         if (validateDates()) {
             calculateTotal();
@@ -148,31 +154,33 @@ $servicePrice = 10;
         checkbox.addEventListener('change', calculateTotal);
     });
 
-    // Calculate the initial total if dates are already selected
     calculateTotal();
-    // Lắng nghe sự kiện khi người dùng cố gắng gửi form
-    const totalPriceElement = document.getElementById('total-price');
     const form = document.querySelector('form');
-
     form.addEventListener('submit', function(event) {
-        // Kiểm tra xem người dùng đã chọn cả ngày check-in và check-out chưa
         const checkinDate = checkinDateInput.value;
         const checkoutDate = checkoutDateInput.value;
+        const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+        const totalPriceElement = document.getElementById('total-price');
 
         if (!checkinDate || !checkoutDate) {
-            event.preventDefault(); // Ngừng gửi form
+            event.preventDefault();
             alert('Please select both check-in and check-out dates.');
         } else if (!validateDates()) {
-            event.preventDefault(); // Ngừng gửi form nếu ngày không hợp lệ
+            event.preventDefault();
             alert('Check-out date must be later than check-in date.');
         } else {
-            // Lấy giá trị total_price và thêm vào action của form
             const totalPrice = totalPriceElement.textContent.trim();
+            let actionUrl = '';
+            if (paymentMethod === 'vnpay') {
+                // Use JavaScript to inject the totalPrice dynamically
+                actionUrl = '<?= $route->getLocateClient('payment-vnpay') ?>';
+            } else if (paymentMethod === 'on_site') {
+                actionUrl = '<?= $route->getLocateClient('payment-onsite') ?>';
+            }
 
-            // Thay đổi action để bao gồm giá trị total_payment
-            const actionUrl = `<?= $route->getLocateClient('payment-vnpay', ['total_payment' => '']) ?>${totalPrice}`;
             form.action = actionUrl;
         }
     });
+
 
 </script>
