@@ -22,6 +22,10 @@ match ($route->getAct()) {
     'check-in' => (new BookingController())->check_in(),
     'check-out' => (new BookingController())->check_out(),
 
+    // reviews
+    'submit-review' => (new ReviewController())->review_post(),
+
+
     // room
     'room-detail' => (new RoomDetailController())->room_detail(),
     'room-list' => (new RoomController())->room_list(),

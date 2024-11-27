@@ -15,13 +15,16 @@ abstract class BaseController {
         $this->loadModels();
     }
 
-
+    public function isLogin(){
+        if (!$this->auth->isLogin) {
+            $this->route->redirectClient('login');
+        }
+    }
     
     public function checkAccess() {
         if (!$this->auth->isLogin) {
             $this->route->redirectClient('login');
         }
-        
         $user = $_SESSION['user'];
         if ($user['role'] !== 'Admin') {
             $this->route->redirectClient('');

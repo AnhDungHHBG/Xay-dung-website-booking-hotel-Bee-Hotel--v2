@@ -3,6 +3,10 @@
 
 class ContactController extends BaseController
 {
+    public function __construct() {
+        parent::__construct(); 
+        $this->isLogin();
+    }
     public $supportTicket;
     public $supportResponse;
     public function loadModels() {

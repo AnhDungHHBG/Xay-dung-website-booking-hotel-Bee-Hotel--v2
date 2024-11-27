@@ -3,9 +3,14 @@
 
 class BookingController extends BaseController
 {
+    public function __construct() {
+        parent::__construct(); 
+        $this->isLogin();
+    }
     public $bookingModel;
     public $bookingHistoryModel;
     public $roomModel;
+
 
     public function loadModels() {
         $this->bookingModel = new Booking();
@@ -14,9 +19,11 @@ class BookingController extends BaseController
     }
 
     public function booking_list() {
-        $user_id = $_SESSION['user']['user_id'];
-        $data = $this->bookingModel->get_user_bookings($user_id);
-        $this->viewApp->requestView('checkin-checkout.checkin', ['data' => $data]);
+       
+            $user_id = $_SESSION['user']['user_id'];
+            $data = $this->bookingModel->get_user_bookings($user_id);
+            $this->viewApp->requestView('checkin-checkout.checkin', ['data' => $data]);
+        
     }
 
     public function check_in() {
@@ -29,7 +36,11 @@ class BookingController extends BaseController
         $status = 'Availble';
         $data = $this->bookingModel->check_out($booking_id);
         $this->roomModel->updateStatus($room_id, $status);
-        $this->viewApp->requestView('checkout-success.index');
+        $data1 = [
+            'user_id' => $_SESSION['user']['user_id'],
+            'room_id' => $room_id,
+        ];
+        $this->viewApp->requestView('checkout-success.index', ['data' => $data1]);
     }
     public function booking_history() {
         $user_id = $_SESSION['user']['user_id'];

@@ -2,6 +2,10 @@
 
 class RoomController extends BaseController
 {
+    public function __construct() {
+        parent::__construct(); 
+        $this->isLogin();
+    }
     public $roomModel;
     public function loadModels() {
         $this->roomModel = new Room();

@@ -1,6 +1,10 @@
 <?php 
 
 class NotificationController extends BaseController {
+    public function __construct() {
+        parent::__construct(); 
+        $this->isLogin();
+    }
     public $notificationModel;
 
     public function loadModels() {
