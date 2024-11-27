@@ -61,7 +61,7 @@
                     <td class="py-3 px-4 text-sm text-gray-700"><?= htmlspecialchars($promotion['start_date']) ?></td>
                     <td class="py-3 px-4 text-sm text-gray-700"><?= htmlspecialchars($promotion['end_date']) ?></td>
                     <td class="py-3 px-4 text-sm flex gap-4  items-start">
-                        <a href="<?= $route->getLocateAdmin('promotion-edit', ['id' => $promotion['promotion_id'] ]) ?>?>" class="text-blue-500 hover:text-blue-700 hover:underline">Chỉnh sửa</a>
+                        <a href="<?= $route->getLocateAdmin('promotion-edit', ['id' => $promotion['promotion_id'] ]) ?>" class="text-blue-500 hover:text-blue-700 hover:underline">Chỉnh sửa</a>
                         <form action="<?= $route->getLocateAdmin('promotion-delete', ['id' => $promotion['promotion_id'] ]) ?>" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');">
                             <button type="submit" class="ml-2 text-red-500 hover:text-red-700 hover:underline">Xóa</button>
                         </form>

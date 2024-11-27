@@ -4,29 +4,30 @@ class Room extends BaseModel{
 
     public function get_rooms($limit = 10, $offset = 0){
         $query = "SELECT 
-                    r.room_id,
-                    rt.type_name,
-                    r.price,
-                    r.capacity,
-                    r.availability_status,
-                    r.description,
-                    GROUP_CONCAT(ri.image_url SEPARATOR ', ') AS image_urls,
-                    GROUP_CONCAT(f.feature_name SEPARATOR ', ') AS features
-                FROM 
-                    room r
-                JOIN 
-                    room_type rt ON r.room_type_id = rt.room_type_id
-                LEFT JOIN 
-                    room_image ri ON r.room_id = ri.room_id
-                LEFT JOIN 
-                    room_feature rf ON r.room_id = rf.room_id
-                LEFT JOIN 
-                    feature f ON rf.feature_id = f.feature_id
-                GROUP BY 
-                    r.room_id
-                ORDER BY 
-                    r.room_id DESC  
-                LIMIT :limit OFFSET :offset;";  
+        r.room_id,
+        rt.type_name,
+        r.price,
+        r.capacity,
+        r.availability_status,
+        r.description,
+        GROUP_CONCAT(DISTINCT ri.image_url SEPARATOR ', ') AS image_urls,
+        GROUP_CONCAT(DISTINCT f.feature_name SEPARATOR ', ') AS features
+    FROM 
+        room r
+    JOIN 
+        room_type rt ON r.room_type_id = rt.room_type_id
+    LEFT JOIN 
+        room_image ri ON r.room_id = ri.room_id
+    LEFT JOIN 
+        room_feature rf ON r.room_id = rf.room_id
+    LEFT JOIN 
+        feature f ON rf.feature_id = f.feature_id
+    GROUP BY 
+        r.room_id
+    ORDER BY 
+        r.room_id DESC  
+    LIMIT :limit OFFSET :offset;";
+
     
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);

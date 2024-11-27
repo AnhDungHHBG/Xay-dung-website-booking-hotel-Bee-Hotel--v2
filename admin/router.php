@@ -50,6 +50,16 @@ match ($route->getAct()) {
 
 
     // 'bookings/add' => (new BookingController())->addBookings(),
+
+    // amenity
+
+    'amenity-list' => (new AmenityController())-> amenity_list(),
+    'amenity-add' => (new AmenityController())-> amenity_add(),
+    'amenity-edit' => (new AmenityController())-> amenity_edit(),
+    'amenity-delete' => (new AmenityController())-> amenity_delete(),
+
+    'amenity-post-add' => (new AmenityController())-> amenity_post_add(),
+    'amenity-post-edit' => (new AmenityController())-> amenity_post_edit(),
     
 
     

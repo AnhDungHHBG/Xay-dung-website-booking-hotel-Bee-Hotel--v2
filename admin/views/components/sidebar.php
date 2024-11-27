@@ -93,12 +93,12 @@
             </a>
             <ul id="amenityManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('hotel_amenities/list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('amenity-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Tiện Nghi Khách sạn
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('hotel_amenities/add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('amenity-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Tiện Nghi Khách Sạn
                     </a>
                 </li>
