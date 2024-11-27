@@ -19,6 +19,7 @@ match ($route->getAct()) {
     // booking 
     'booking-list' => (new BookingController())->booking_list(),
     'booking-history'=> (new BookingController())->booking_history(),
+    'booking-detail'=> (new BookingController())->booking_detail(),
     'check-in' => (new BookingController())->check_in(),
     'check-out' => (new BookingController())->check_out(),
 
@@ -44,4 +45,7 @@ match ($route->getAct()) {
 
     //logout
     'logout' => (new AuthController())->logout(),
+
+    // payment
+    'payment-vnpay' =>  (new PaymentController())->payment_vnpay(),
 };

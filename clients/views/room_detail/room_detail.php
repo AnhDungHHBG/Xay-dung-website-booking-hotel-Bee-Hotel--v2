@@ -59,10 +59,8 @@ $averageRating = $data['averageRating'];
             <h2 class="text-lg font-semibold">Offered Amenities</h2>
             <ul class="list-disc pl-6 mt-4 text-gray-600">
                 <?php
-                // Giả sử $room['feature_names'] chứa chuỗi tên các tính năng được phân cách bằng dấu phẩy
                 $feature_names = explode(", ", $room['feature_names']);
                 
-                // Duyệt qua từng tên tính năng và hiển thị chúng dưới dạng danh sách với biểu tượng tích
                 foreach ($feature_names as $feature_name) {
                     echo '<li><i class="fas fa-check mr-2"></i>' . htmlspecialchars($feature_name) . '</li>';
                 }
@@ -79,7 +77,9 @@ $averageRating = $data['averageRating'];
                     <li>Medium Period: $<?= number_format($room['price'] * 1.5, 2) ?></li>
                     <li>Long Period: $<?= number_format($room['price'] * 2, 2) ?></li>
                 </ul>
-                <button class="bg-blue-600 text-white w-full py-2 mt-4 rounded-md">Reserve Now</button>
+                <a href="<?= $route->getLocateClient('booking-detail', ['room_id' => $room['room_id']]) ?>">
+                  <button class="bg-blue-600 text-white w-full py-2 mt-4 rounded-md">Reserve Now</button>
+                </a>
                 <div class="mt-4 flex space-x-4">
                     <a href="#" class="text-blue-500 hover:underline">Property Inquiry</a>
                     <a href="#" class="text-blue-500 hover:underline">Contact Host</a>
