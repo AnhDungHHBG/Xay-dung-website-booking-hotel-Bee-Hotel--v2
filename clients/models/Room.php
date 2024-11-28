@@ -117,8 +117,9 @@ class Room extends BaseModel {
     }
 
     public function getRoomLastest() {
-      $query = "SELECT 
+        $query = "SELECT 
                     r.*, 
+                    rt.type_name AS room_type_name,   
                     GROUP_CONCAT(ri.image_url) AS image_urls, 
                     GROUP_CONCAT(rf.feature_id) AS feature_ids,
                     GROUP_CONCAT(f.feature_name) AS feature_names,
@@ -133,19 +134,23 @@ class Room extends BaseModel {
                     feature f ON rf.feature_id = f.feature_id
                 LEFT JOIN 
                     review rv ON r.room_id = rv.room_id
+                LEFT JOIN 
+                    room_type rt ON r.room_type_id = rt.room_type_id  
                 GROUP BY 
                     r.room_id
                 ORDER BY 
                     average_rating DESC
-                LIMIT 10;";
-
+                LIMIT 10";
+    
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     public function getRoomTop() {
         $query = "SELECT 
                     r.*, 
+                    rt.type_name AS room_type_name,  
                     GROUP_CONCAT(DISTINCT ri.image_url) AS image_urls, 
                     GROUP_CONCAT(DISTINCT rf.feature_id) AS feature_ids, 
                     GROUP_CONCAT(DISTINCT f.feature_name) AS feature_names, 
@@ -160,11 +165,14 @@ class Room extends BaseModel {
                     feature f ON rf.feature_id = f.feature_id
                 LEFT JOIN 
                     review rv ON r.room_id = rv.room_id
+                LEFT JOIN 
+                    room_type rt ON r.room_type_id = rt.room_type_id  
                 GROUP BY 
                     r.room_id
                 ORDER BY 
                     average_rating DESC
                 LIMIT 10";
+
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

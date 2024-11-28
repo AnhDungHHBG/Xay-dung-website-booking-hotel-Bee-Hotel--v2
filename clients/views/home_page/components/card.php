@@ -6,7 +6,7 @@ $images = isset($data['image_urls']) ? explode(',', $data['image_urls']) : [];
 $featureNames = isset($data['feature_names']) ? explode(',', $data['feature_names']) : [];
 
 ?>
-<div class="relative bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+<div class="relative bg-white rounded-md shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
     <!-- Hình ảnh -->
     <div class="relative h-48">
         <?php if (!empty($images)): ?>
@@ -28,42 +28,43 @@ $featureNames = isset($data['feature_names']) ? explode(',', $data['feature_name
 
     <!-- Nội dung -->
     <div class="p-4">
-    <h3 class="font-semibold text-lg text-gray-800 mb-8 line-clamp-1">
-        <?= htmlspecialchars($data['description'] ?? 'Luxurious Suite') ?>
-    </h3>
-
+        <h3 class="font-semibold text-lg text-[#133E87] mb-8 line-clamp-1">
+            <?= htmlspecialchars($data['room_type_name'] ?? 'Luxurious Suite') ?>
+        </h3>
 
         <!-- Chi tiết -->
-        <div class="flex items-start gap-6 mt-4 text-sm text-gray-600">
-            <!-- Capacity -->
-            <div class="flex items-center gap-1 text-gray-800">
-                <i class="fas fa-users text-lg"></i>
-                <span class="font-medium">Capacity: <?= htmlspecialchars($data['capacity'] ?? '0') ?></span>
-            </div>
+        <div class="flex flex-wrap items-start gap-6 mt-6 text-sm text-[#608BC1]">
+    <!-- Capacity -->
+    <div class="flex items-center gap-2 text-[#133E87]">
+        <i class="fas fa-users text-xl"></i>
+        <span class="font-semibold">Capacity: <?= htmlspecialchars($data['capacity'] ?? '0') ?></span>
+    </div>
 
-            <!-- Rating -->
-            <div class="flex items-center gap-1 text-yellow-500">
-                <i class="fas fa-star text-lg"></i>
-                <span class="font-medium">Rating: <?= htmlspecialchars($data['average_rating'] ?? '0') ?></span>
-            </div>
+    <!-- Rating -->
+    <div class="flex items-center gap-2 text-yellow-500">
+        <i class="fas fa-star text-xl"></i>
+        <span class="font-semibold">Rating: <?= htmlspecialchars($data['average_rating'] ?? '0') ?></span>
+    </div>
 
-            <!-- Features -->
-            <div class="flex-2">
-                <div class="flex items-center gap-1 text-gray-800">
-                    <i class="fas fa-th-list text-lg"></i>
-                    <span class="line-clamp-2 font-medium">Features: <?= !empty($featureNames) ? implode(', ', $featureNames) : 'None' ?></span>
-                </div>
-            </div>
-        </div>  
+    <!-- Features -->
+    <div class="flex items-center gap-2 text-[#133E87] pr-5 overflow-hidden">
+        <i class="fas fa-th-list text-xl"></i>
+        <span class="font-semibold  text-ellipsis whitespace-nowrap " title="<?= htmlspecialchars(!empty($featureNames) ? implode(', ', $featureNames) : 'None') ?>">Features: <?= !empty($featureNames) ? implode(', ', $featureNames) : 'None' ?></span>
+    </div>
+
+</div>
+
 
         <!-- Giá và nút -->
         <div class="mt-4 flex justify-between items-center">
-            <span class="text-lg font-bold text-blue-600">
+            <span class="text-lg font-bold text-[#133E87]">
                 $<?= number_format($data['price'] ?? 0, 2) ?>
             </span>
-            <a href="<?= $route->getLocateClient('room-detail', ['id' => $room['room_id'] ]) ?>"><button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                View Details
-            </button></a>
+            <a href="<?= $route->getLocateClient('room-detail', ['id' => $room['room_id'] ]) ?>">
+                <button class="px-4 py-2 bg-[#608BC1] text-white rounded-lg hover:bg-[#133E87] transition-colors">
+                    View Details
+                </button>
+            </a>
         </div>
     </div>
 </div>

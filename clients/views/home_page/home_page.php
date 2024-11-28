@@ -23,29 +23,84 @@
     <div>
         <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_top, ['key' => 'carousel2'])]); ?>
     </div>
-    <div>
-        <?php $viewApp->requestComponents('home_page.components.banner_section') ?>
+    <div class="container mx-auto my-8 bg-gradient-to-r from-[#133E87] via-[#608BC1] to-[#CBDCEB] text-white h-[400px] rounded-lg shadow-xl flex justify-between items-center px-10">
+        <!-- Phần nội dung bên trái -->
+        <div class="max-w-lg">
+            <h1 class="text-5xl font-bold text-white mb-4">
+                Book Your Dream Stay
+            </h1>
+            <p class="text-lg text-[#CBDCEB] mb-6">
+                Enjoy luxurious hotels, exclusive offers, and seamless booking experiences.
+            </p>
+            <button class="bg-white text-[#133E87] font-semibold px-6 py-3 rounded-full hover:bg-[#CBDCEB] hover:text-white transition duration-300">
+                Start Booking
+            </button>
+        </div>
+        <!-- Phần trang trí hoặc hình ảnh bên phải -->
+        <div class="hidden lg:block">
+            <div class="text-[150px] font-extrabold text-white opacity-10">
+                HOTEL
+            </div>
+        </div>
+    </div>
+
+
     </div>
     <div>
         <?php $viewApp->requestComponents('home_page.components.list_card', ['data' => array_merge($room_top, ['key' => 'carousel2'])]); ?>
     </div>
-    <div>
-        <?php $viewApp->requestComponents('home_page.components.banner_section') ?>
-    </div>
+    <div class="container mx-auto my-16 bg-gradient-to-r from-[#608BC1] via-[#CBDCEB] to-white text-[#133E87] h-[400px] rounded-2xl shadow-2xl flex items-center justify-between px-12 py-8">
+    <!-- Nội dung bên trái -->
+    <div class="max-w-lg">
+            <h2 class="text-5xl font-semibold text-white mb-6">
+                Special Offer for This Season!
+            </h2>
+            <p class="text-xl text-white mb-6">
+                Book your stay now and get up to <span class="font-semibold text-[#608BC1]">30% OFF</span> on selected hotels.
+            </p>
+            <button class="bg-[#133E87] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#608BC1] transition-all duration-300">
+                Explore Deals
+            </button>
+        </div>
 
-
-    <div>
-        <div class="container mx-auto flex">
-            <div class="flex-2">
-                <?php $viewApp->requestComponents('home_page.components.title_section', ['title' => 'Discover More About Property Rental']) ?>    
-                <span>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</span>   
-                <button class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Discover More</button>      
-            </div>
-            <div class="flex-1">
-
-            </div>
+        <!-- Phần trang trí bên phải -->
+        <div class=" block w-[250px] h-[250px] bg-[#133E87] rounded-full flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110">
+            <span class="text-white text-4xl font-bold ">30% OFF</span>
         </div>
     </div>
+
+
+
+
+    <<div class="bg-white text-gray-800 py-16 mt-16 border-t-4 ">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <!-- Left Section: Title, Description, and Buttons -->
+        <div class="flex-2 text-center md:text-left">
+            <?php $viewApp->requestComponents('home_page.components.title_section', ['title' => 'Explore Our Premium Hotel Stays']) ?>
+            <span class="text-gray-600 mt-4 block">
+                Discover the best hotels for your stay, from luxurious resorts to budget-friendly options. Enjoy top-notch amenities, fantastic locations, and seamless booking experiences. Whether you're traveling for business or leisure, we have a hotel for every need.
+            </span>   
+            
+            <!-- Button Section -->
+            <div class="mt-6">
+                <button class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Ask A Question</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Find A Hotel</button>
+            </div>
+
+            <!-- Discover More Button -->
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">Discover More</button>
+        </div>
+        
+        <!-- Right Section: Image -->
+        <div class="flex-1 mt-8 md:mt-0">
+            <!-- Replace with an image related to hotel booking, such as a hotel room or a cityscape -->
+            <img src="uploads/banner/image.png" alt="Hotel Image" class="w-full rounded-lg shadow-lg">
+        </div>
+    </div>
+</div>
+
+</div>
+
 </div>
 
 

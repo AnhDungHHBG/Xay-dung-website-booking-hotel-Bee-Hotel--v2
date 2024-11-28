@@ -16,11 +16,13 @@
     <div class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <!-- Logo -->
-            <span class="text-3xl font-bold text-gray-800">Hotel Luxury</span>
+            <div class= "">
+                <img class="w-[250px] h-[70px] object-cover" src="uploads/logo/logo.png" alt="">
+            </div>
             <!-- Navbar -->
             <?php $viewApp->requestComponents('components.navbar');
             ?>
-<div class="flex gap-5">
+            <div class="flex gap-5">
                 <div class="relative mr-6">
                         <a href="<?= $route->getLocateClient('notification-list') ?>" class="text-gray-700 hover:text-blue-500">
                             <i class="fa-solid fa-bell fa-lg"></i>
