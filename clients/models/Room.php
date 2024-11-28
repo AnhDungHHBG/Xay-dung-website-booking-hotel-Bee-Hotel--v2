@@ -3,6 +3,7 @@ class Room extends BaseModel {
     public $tableName = 'room';
 
     public function getRoomDetail($id) {
+      
                 $query = "SELECT 
                 r.room_id,
                 rt.room_type_id,

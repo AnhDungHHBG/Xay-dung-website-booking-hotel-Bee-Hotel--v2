@@ -38,6 +38,7 @@ class Auth {
                 'name' => $user['name'],
                 'user_id' => $user['user_id'],
                 'email' => $user['email'],
+                'phone' => $user['phone'],
                 'role' => isset($user['role']) ? $user['role'] : null,
             ];
            
