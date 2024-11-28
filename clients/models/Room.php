@@ -193,7 +193,43 @@ class Room extends BaseModel {
             ];
         }
     }
-    
 
+    public function check_status($room_id, $status) {
+        try {
+            $checkStatusQuery = "SELECT availability_status FROM room WHERE room_id = :room_id";
+            $stmt = $this->conn->prepare($checkStatusQuery);
+            $stmt->bindValue(':room_id', $room_id);
+            $stmt->execute();
+    
+            // Kiểm tra nếu có phòng với room_id
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($row['availability_status'] == $status) {
+                    return [
+                        'result' => true,
+                        'message' => 'Room status matches the provided status.',
+                        'status' => $row['availability_status']
+                    ];
+                } else {
+                    return [
+                        'result' => false,
+                        'message' => 'Room status does not match the provided status.',
+                        'status' => $row['availability_status']
+                    ];
+                }
+            } else {
+                return [
+                    'result' => false,
+                    'message' => 'Room not found.'
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+    }
+    
 }
 ?>

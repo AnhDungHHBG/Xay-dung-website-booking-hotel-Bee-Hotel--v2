@@ -27,7 +27,7 @@ $rooms = $data;
                         <td class="py-2 px-4 border-b"><?= htmlspecialchars($room['type_name']) ?></td>
                         <td class="py-2 px-4 border-b"><?= htmlspecialchars($room['price']) ?> VNĐ</td>
                         <td class="py-2 px-4 border-b"><?= htmlspecialchars($room['capacity']) ?> người</td>
-                        <td class="py-2 px-4 border-b"><?= $room['availability_status'] ? 'Trống' : 'Đã Đặt' ?></td>
+                        <td class="py-2 px-4 border-b"><?= htmlspecialchars($room['availability_status']) ?></td>
                         <td class="py-2 px-4 border-b"><?= htmlspecialchars($room['description']) ?></td>
                         <td class="py-2 px-4 border-b">
                             <?php if (!empty($room['image_urls'])): ?>

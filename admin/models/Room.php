@@ -163,7 +163,7 @@ class Room extends BaseModel{
             $stmt->bindParam(':room_type_id', $data['room_type_id'], PDO::PARAM_INT);
             $stmt->bindParam(':price', $data['price'], PDO::PARAM_STR);
             $stmt->bindParam(':capacity', $data['capacity'], PDO::PARAM_INT);
-            $stmt->bindParam(':availability_status', $data['availability_status'], PDO::PARAM_INT);
+            $stmt->bindParam(':availability_status', $data['availability_status']);
             $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR);
             $stmt->bindParam(':room_id', $id, PDO::PARAM_INT);
             

@@ -44,21 +44,11 @@ class BookingController extends BaseController
     public function checkin_checkout_today() {
             $res = $this->bookingModel->checkin_and_checkout();
             $data = $res;
-
         $this->viewApp->requestView('checkin-checkout.index', ['data' => $data]);
     }
-    public function checkin_or_checkout_today() {
-        $filter = $_GET['filter'];  
-        $res = $this->bookingModel->checkin_or_checkout($filter);
-        $data = [
-            'rooms' => $res,
-        ];
-
-        $this->viewApp->requestView('checkin-checkout.index', ['data' => $data]);
-    }
+  
     public function confirm_checkin(){
         $room_id = $_GET['room_id'];
-        
         $response = $this->bookingModel->get_booking( $room_id );
         $booking_id = $response['booking_id'];
         $updateStatusBooking = $this->bookingModel->confirm_checkin($booking_id);

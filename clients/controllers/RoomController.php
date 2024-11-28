@@ -10,7 +10,6 @@ class RoomController extends BaseController
     public function loadModels() {
         $this->roomModel = new Room();
     }
-
     public function room_list() {
         $data = $this->roomModel->getRooms();
   
@@ -18,9 +17,17 @@ class RoomController extends BaseController
     }
     public function room_reverve(){
         $room_id = $_GET['room_id'];
-        $status = 'Reverse';
-        $this->roomModel->update_status($room_id, $status);
-        $this->route->redirectClient('booking-detail', ['room_id' => $room_id]);
+        $statusAvailable = 'Available';
+        $checkStatus = $this->roomModel->check_status($room_id, $statusAvailable);
+
+        if($checkStatus['result']){
+            $status = 'Reverse';
+            $this->roomModel->update_status($room_id, $status);
+            $this->route->redirectClient('booking-detail', ['room_id' => $room_id]);
+        }else{
+            $this->viewApp->requestView('error.index', ['data'=> $checkStatus['message']]);
+        }
+       
     }
    
 }

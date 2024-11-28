@@ -35,6 +35,7 @@ class RoomController extends BaseController
     public function room_post_edit(){
         $id = $_GET['id'];
         $data = $this->route->form;
+        
         if (is_object($data)) {
             $data = (array) $data;
         }
