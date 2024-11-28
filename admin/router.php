@@ -48,8 +48,11 @@ match ($route->getAct()) {
     'booking-post-add' => (new BookingController())->booking_post_add(),
     'booking-post-edit' => (new BookingController())-> booking_post_edit(),
 
+    'checkin-checkout-today' => (new BookingController())-> checkin_checkout_today(),
 
-    // 'bookings/add' => (new BookingController())->addBookings(),
+    'confirm-checkin' => (new BookingController())-> confirm_checkin(),
+
+
 
     // amenity
 

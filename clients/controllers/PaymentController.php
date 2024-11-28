@@ -30,9 +30,14 @@ class PaymentController extends BaseController {
         $array = (array) $object;
         $room_id = $_GET['room_id'];
         $user_id = $_SESSION['user']['user_id'];
+
+        $statusRoom = 'Booked';
+        $this->roomModel->update_status($room_id,$statusRoom);
+
         $status = 'Pending';
         $res = $this->bookingModel->create_booking($user_id, $room_id, $array, $status);
         $id = (int) $res;
+        
         $statusPayment = 'Pending';
         $this->paymentModel->create_payment($id, $array,$statusPayment);
 

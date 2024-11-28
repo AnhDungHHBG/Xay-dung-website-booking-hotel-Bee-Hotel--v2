@@ -16,5 +16,11 @@ class RoomController extends BaseController
   
         $this->viewApp->requestView('room_page.index', ['data' => $data]);
     }
+    public function room_reverve(){
+        $room_id = $_GET['room_id'];
+        $status = 'Reverse';
+        $this->roomModel->update_status($room_id, $status);
+        $this->route->redirectClient('booking-detail', ['room_id' => $room_id]);
+    }
    
 }

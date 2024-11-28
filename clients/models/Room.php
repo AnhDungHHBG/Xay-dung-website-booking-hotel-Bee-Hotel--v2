@@ -169,6 +169,30 @@ class Room extends BaseModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function update_status($room_id, $status) {
+        try {
+            $this->conn->beginTransaction();
+            $updatePaymentQuery = "UPDATE room 
+                                   SET availability_status = :status 
+                                   WHERE room_id = :room_id";
+            $stmt = $this->conn->prepare($updatePaymentQuery);
+            $stmt->bindValue(':status',$status);
+            $stmt->bindValue(':room_id', $room_id);
+            $stmt->execute();
+            $this->conn->commit();
+            return [
+                'success' => true,
+                'message' => 'Update status room success.'
+            ];
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            return [
+                'success' => false,
+                'message' => 'Eror: ' . $e->getMessage()
+            ];
+        }
+    }
     
 
 }

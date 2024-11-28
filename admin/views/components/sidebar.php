@@ -10,6 +10,14 @@
                 <span class="text-sm">Dashboard</span>
             </a>
         </li>
+        <li class="mb-1 group">
+            <a href="<?= $route->getLocateAdmin('checkin-checkout-today') ?>" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md">
+                <i class="fas fa-tachometer-alt mr-3 text-lg"></i>
+                <span class="text-sm">Check in  & Check out today</span>
+            </a>
+        </li>
+      
+     
 
         <!-- Quản lý Phòng -->
         <li class="mb-1 group">

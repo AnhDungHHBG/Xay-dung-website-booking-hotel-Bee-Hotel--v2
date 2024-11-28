@@ -77,7 +77,7 @@ $averageRating = $data['averageRating'];
                     <li>Medium Period: $<?= number_format($room['price'] * 1.5, 2) ?></li>
                     <li>Long Period: $<?= number_format($room['price'] * 2, 2) ?></li>
                 </ul>
-                <a href="<?= $route->getLocateClient('booking-detail', ['room_id' => $room['room_id']]) ?>">
+                <a href="<?= $route->getLocateClient('room-reserve', ['room_id' => $room['room_id']]) ?>">
                   <button class="bg-blue-600 text-white w-full py-2 mt-4 rounded-md">Reserve Now</button>
                 </a>
                 <div class="mt-4 flex space-x-4">
