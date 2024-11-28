@@ -25,7 +25,11 @@ class RoomController extends BaseController
             $this->roomModel->update_status($room_id, $status);
             $this->route->redirectClient('booking-detail', ['room_id' => $room_id]);
         }else{
-            $this->viewApp->requestView('error.index', ['data'=> $checkStatus['message']]);
+            $data = [
+                'url' =>'',
+                'message' =>  $checkStatus['message']
+            ];
+            $this->viewApp->requestView('error.index', ['data'=> $data]);
         }
        
     }

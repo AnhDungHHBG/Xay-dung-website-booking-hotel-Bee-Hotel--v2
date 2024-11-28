@@ -186,7 +186,37 @@ class Booking extends BaseModel
             return "Lỗi: " . $e->getMessage();
         }
     }
-    
+    public function check_booking($room_id, $user_id) {
+        try {
+            $sql = "SELECT booking_id
+                    FROM booking
+                    WHERE room_id = :room_id AND user_id = :user_id";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':room_id', $room_id, PDO::PARAM_INT);
+            $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            
+            if ($stmt->rowCount() > 0) {
+                return [
+                    'result' => false,
+                    'message' => 'User has already booked this room.'
+                ];
+            } else {
+                return [
+                    'result' => true,
+                    'message' => 'User can proceed with the booking for this room.'
+                ];
+            }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+    }
     
 
 }

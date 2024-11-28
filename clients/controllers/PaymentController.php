@@ -31,18 +31,29 @@ class PaymentController extends BaseController {
         $room_id = $_GET['room_id'];
         $user_id = $_SESSION['user']['user_id'];
 
-        $statusRoom = 'Booked';
-        $this->roomModel->update_status($room_id,$statusRoom);
+        $checkBooking = $this->bookingModel->check_booking($room_id, $user_id);
+        if ($checkBooking['result']) {
+            $statusRoom = 'Booked';
+            $this->roomModel->update_status($room_id,$statusRoom);
 
-        $status = 'Pending';
-        $res = $this->bookingModel->create_booking($user_id, $room_id, $array, $status);
-        $id = (int) $res;
+            $status = 'Pending';
+            $res = $this->bookingModel->create_booking($user_id, $room_id, $array, $status);
+            $id = (int) $res;
+            
+            $statusPayment = 'Pending';
+            $this->paymentModel->create_payment($id, $array,$statusPayment);
+
+            $data = $this->bookingModel->getBookingDetail($id);
+            $this->viewApp->requestView('result_booking.index', ['data' => $data]);
+        }else{
+            
+            $data = [
+                'url' =>  'booking-list',
+                'message' => $checkBooking['message'],
+            ];
+            $this->viewApp->requestView('', ['data' =>$data ] );
+        }
         
-        $statusPayment = 'Pending';
-        $this->paymentModel->create_payment($id, $array,$statusPayment);
-
-        $data = $this->bookingModel->getBookingDetail($id);
-        $this->viewApp->requestView('result_booking.index', ['data' => $data]);
     }
    
 }
