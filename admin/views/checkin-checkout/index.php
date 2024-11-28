@@ -1,5 +1,5 @@
 <?php
-$rooms = $data; // Dữ liệu gốc
+$rooms = $data;
 $currentDate = date('Y-m-d');
 $filter = isset($_GET['filter_type']) ? $_GET['filter_type'] : '';
 
@@ -94,14 +94,22 @@ $rooms = $filteredRooms;
                                     <?php echo $room['check_out'] ? htmlspecialchars($room['check_out']) : '---'; ?>
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <a href="<?= $route->getLocateAdmin('confirm-checkin', ['room_id' =>$room['room_id'] ]) ?>" >
-                                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Confirm checkin</button>
-                                    </a>
+                                    <?php if ($room['booking_status'] === 'Pending') : ?>
+                                        <a href="<?= $route->getLocateAdmin('confirm-checkin', ['room_id' =>$room['room_id'] ]) ?>">
+                                            <button class="bg-blue-500 text-white px-4 py-2 rounded">Confirm checkin</button>
+                                        </a>
+                                    <?php else : ?>
+                                        <button class="bg-gray-500 text-white px-4 py-2 rounded" disabled>Confirm checkin</button>
+                                    <?php endif; ?>
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <a href="<?= $route->getLocateAdmin('confirm-checkout', ['room_id' =>$room['room_id'] ]) ?>" >
-                                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Confirm checkout</button>
-                                    </a>
+                                    <?php if ($room['booking_status'] === 'Checked' && $room['payment_status'] === 'Success') : ?>
+                                        <a href="<?= $route->getLocateAdmin('confirm-checkout', ['booking_id' => $room['booking_id'] ]) ?>" >
+                                            <button class="bg-blue-500 text-white px-4 py-2 rounded">Confirm checkout</button>
+                                        </a>
+                                    <?php else : ?>
+                                        <button class="bg-gray-500 text-white px-4 py-2 rounded" disabled>Confirm checkout</button>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

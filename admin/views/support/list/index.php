@@ -11,7 +11,6 @@ $tickets =$data;
                         <th class="py-2 px-4 text-left">#</th>
                         <th class="py-2 px-4 text-left">Tên người gửi</th>
                         <th class="py-2 px-4 text-left">Tiêu đề</th>
-                        <th class="py-2 px-4 text-left">Trạng thái</th>
                         <th class="py-2 px-4 text-left">Ngày tạo</th>
                         <th class="py-2 px-4 text-center">Hành động</th>
                     </tr>
@@ -22,11 +21,7 @@ $tickets =$data;
                             <td class="py-2 px-4"><?= $ticket['ticket_id']; ?></td>
                             <td class="py-2 px-4"><?= htmlspecialchars($ticket['name']); ?></td>
                             <td class="py-2 px-4"><?= htmlspecialchars($ticket['subject']); ?></td>
-                            <td class="py-2 px-4">
-                                <?= $ticket['status'] === 'Open' 
-                                    ? '<span class="text-green-600 font-bold">Open</span>' 
-                                    : '<span class="text-red-600 font-bold">Closed</span>'; ?>
-                            </td>
+                           
                             <td class="py-2 px-4"><?= $ticket['created_at']; ?></td>
                             <td class="py-2 px-4 text-center">
                                 <a href="<?= $route->getLocateAdmin('support-detail', ['id' => $ticket['ticket_id']]) ?>" 

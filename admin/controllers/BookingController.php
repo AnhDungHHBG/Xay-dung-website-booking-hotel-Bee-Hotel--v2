@@ -41,6 +41,8 @@ class BookingController extends BaseController
         $this->bookingModel->updateIdTable($data, $id);
         $this->route->redirectAdmin('booking-list');
     }
+
+    //  managemnt booking
     public function checkin_checkout_today() {
             $res = $this->bookingModel->checkin_and_checkout();
             $data = $res;
@@ -51,8 +53,16 @@ class BookingController extends BaseController
         $room_id = $_GET['room_id'];
         $response = $this->bookingModel->get_booking( $room_id );
         $booking_id = $response['booking_id'];
-        $updateStatusBooking = $this->bookingModel->confirm_checkin($booking_id);
-        $updateStatusPayment = $this->paymentModel->confirm_payment($booking_id);
+        $status = 'Checked';
+        $this->bookingModel->update_status_booking( $booking_id, $status );
+        $this->bookingModel->confirm_checkin($booking_id);
+        $this->paymentModel->confirm_payment($booking_id);
+        $this->route->redirectAdmin('checkin-checkout-today');        
+    }
+    public function confirm_checkout(){
+        $booking_id = $_GET['booking_id'];
+        $status = 'Checkout';
+        $this->bookingModel->update_status_booking( $booking_id, $status );
         $this->route->redirectAdmin('checkin-checkout-today');        
     }
 

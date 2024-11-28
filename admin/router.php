@@ -49,8 +49,8 @@ match ($route->getAct()) {
     'booking-post-edit' => (new BookingController())-> booking_post_edit(),
 
     'checkin-checkout-today' => (new BookingController())-> checkin_checkout_today(),
-
     'confirm-checkin' => (new BookingController())-> confirm_checkin(),
+    'confirm-checkout' => (new BookingController())-> confirm_checkout(),
 
 
 
@@ -96,5 +96,8 @@ match ($route->getAct()) {
     //create
     'create-user' => (new UserController())->create_user(),
     'post-create-user' => (new UserController())->post_create_user(),
+
+    // booking history
+
 
 };

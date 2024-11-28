@@ -2,7 +2,12 @@
 $users = $data['users'];
 $bookings = $data['bookings'];
 $rooms = $data['rooms'];
+$revenue = $data['revenue'];
+$dataRevenuaMonth = $data['data_revenue_mouth'];
+$revenue_per_months = $data['revenue_per_month'];
 
+$bookings_per_month = $dataRevenuaMonth['bookings_per_month'];
+$revenue_per_month = $dataRevenuaMonth['revenue_per_month'];
 ?>
 <body class="bg-gray-100">
 
@@ -25,8 +30,8 @@ $rooms = $data['rooms'];
 
         <!-- Thống kê doanh thu -->
         <div class="bg-white p-4 rounded-lg shadow">
-            <h2 class="text-xl font-semibold">Revenue</h2>
-            <p class="text-2xl">0</p>
+            <h2 class="text-xl font-semibold">Total Revenue</h2>
+            <p class="text-2xl"><?= $revenue ?></p>
         </div>
 
         <!-- Thống kê người dùng -->
@@ -42,6 +47,11 @@ $rooms = $data['rooms'];
         <h2 class="text-2xl font-semibold mb-4">Bookings and Revenue Over Time</h2>
         <canvas id="chart"></canvas>
     </div>
+
+    <div class="bg-white p-6 mt-6 rounded-lg shadow">
+        <h2 class="text-2xl font-semibold mb-4">Monthly Revenue for This Year</h2>
+    <canvas id="monthlyRevenueChart"></canvas>
+</div>
 </div>
 
 <script>
@@ -53,12 +63,12 @@ $rooms = $data['rooms'];
             labels: ['January', 'February', 'March', 'April', 'May', 'June'],
             datasets: [{
                 label: 'Bookings',
-                data: [5, 10, 15, 20, 25, 30], 
+                data: <?php echo json_encode($bookings_per_month); ?>,
                 borderColor: 'rgb(75, 192, 192)',
                 fill: false,
             }, {
                 label: 'Revenue',
-                data: [1000, 2000, 2500, 3000, 4000, 5000], 
+                data: <?php echo json_encode($revenue_per_month); ?>,
                 borderColor: 'rgb(255, 99, 132)',
                 fill: false,
             }]
@@ -73,6 +83,42 @@ $rooms = $data['rooms'];
         }
     });
 </script>
+<script>
+var ctxMonthlyRevenue = document.getElementById('monthlyRevenueChart').getContext('2d');
+var monthlyRevenueChart = new Chart(ctxMonthlyRevenue, {
+    type: 'bar',  
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],  // Các tháng trong năm
+        datasets: [{
+            label: 'Revenua this year(USD)',  
+            data: <?php echo json_encode($revenue_per_month); ?>,  
+            backgroundColor: 'rgba(54, 162, 235, 0.2)', 
+            borderColor: 'rgba(54, 162, 235, 1)',  
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,   
+                ticks: {
+                    callback: function(value) {
+                        return value.toLocaleString();
+                    }
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top',
+            }
+        }
+    }
+});
+
+</script>
+
 
 </body>
 </html>

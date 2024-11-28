@@ -35,7 +35,7 @@ class BaseModel {
         } catch(Exception $e) {
             $coreApp->debug($e);
         }
-    }
+    }   
 
     public function removeIdTable($id) {
         try {
@@ -117,6 +117,29 @@ class BaseModel {
             return $data;
         } else {
             return null;
+        }
+    }
+    public function createBookingHistory($bookingId, $userId, $action, $description) {
+        try {
+            global $coreApp;
+            
+            $currentTime = date('Y-m-d H:i:s');
+            
+            $sql = "INSERT INTO booking_history (booking_id, user_id, action, description, created_at) 
+                    VALUES (:booking_id, :user_id, :action, :description, :created_at)";
+            
+            $stmt = $this->conn->prepare($sql);
+            
+            return $stmt->execute([
+                ':booking_id' => $bookingId,
+                ':user_id' => $userId,
+                ':action' => $action,
+                ':description' => $description,
+                ':created_at' => $currentTime
+            ]);
+        } catch (Exception $e) {
+            global $coreApp;
+            $coreApp->debug($e);
         }
     }
 }
