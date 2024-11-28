@@ -6,13 +6,15 @@ class PaymentController extends BaseController {
         $this->isLogin();
     }
     public $userModel;
-    public $bookingModel;
     public $roomModel;
+    public $bookingModel;
+    public $paymentModel;
 
     public function loadModels() {
         $this->userModel = new User();
-        $this->bookingModel = new Booking();
         $this->roomModel = new Room();
+        $this->paymentModel = new Payment();
+        $this->bookingModel = new Booking();
     }
 
     public function payment_vnpay() {
@@ -29,17 +31,13 @@ class PaymentController extends BaseController {
         $room_id = $_GET['room_id'];
         $user_id = $_SESSION['user']['user_id'];
         $status = 'Pending';
-    
-        // Chèn booking và lấy ID
         $res = $this->bookingModel->create_booking($user_id, $room_id, $array, $status);
         $id = (int) $res;
-    
-        // Lấy chi tiết booking
+        $statusPayment = 'Pending';
+        $this->paymentModel->create_payment($id, $array,$statusPayment);
+
         $data = $this->bookingModel->getBookingDetail($id);
-        print_r($data);
-        die();
-    
-        $this->viewApp->requestView('payment.index', ['data' => $data]);
+        $this->viewApp->requestView('result_booking.index', ['data' => $data]);
     }
    
 }

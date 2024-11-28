@@ -24,26 +24,8 @@ class BookingController extends BaseController
        
             $user_id = $_SESSION['user']['user_id'];
             $data = $this->bookingModel->get_user_bookings($user_id);
-            $this->viewApp->requestView('checkin-checkout.checkin', ['data' => $data]);
+            $this->viewApp->requestView('booking.booking_list', ['data' => $data]);
         
-    }
-
-    public function check_in() {
-        $booking_id = $_GET['booking_id'];
-        $data = $this->bookingModel->check_in($booking_id);        
-    }
-
-    public function check_out() {
-        $booking_id = $_GET['booking_id'];
-        $room_id = $_GET['room_id'];
-        $status = 'Availble';
-        $data = $this->bookingModel->check_out($booking_id);
-        $this->roomModel->updateStatus($room_id, $status);
-        $data1 = [
-            'user_id' => $_SESSION['user']['user_id'],
-            'room_id' => $room_id,
-        ];
-        $this->viewApp->requestView('checkout-success.index', ['data' => $data1]);
     }
 
     public function booking_detail(){
@@ -56,6 +38,14 @@ class BookingController extends BaseController
             'amenity' => $amenity
         ];
         $this->viewApp->requestView('room_booking_detail.index', ['data' => $data]);
+    }
+    public function booked_detail(){
+        $booking_id = $_GET['booking_id'];
+        $id = (int) $booking_id;
+      
+        $data = $this->bookingModel->getBookingDetail($id);
+   
+        $this->viewApp->requestView('result_booking.index', ['data' => $data]);
     }
 
     public function booking_history() {

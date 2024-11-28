@@ -20,8 +20,7 @@ match ($route->getAct()) {
     'booking-list' => (new BookingController())->booking_list(),
     'booking-history'=> (new BookingController())->booking_history(),
     'booking-detail'=> (new BookingController())->booking_detail(),
-    'check-in' => (new BookingController())->check_in(),
-    'check-out' => (new BookingController())->check_out(),
+    'booked_detail' => (new BookingController())->booked_detail(),
 
     // reviews
     'submit-review' => (new ReviewController())->review_post(),

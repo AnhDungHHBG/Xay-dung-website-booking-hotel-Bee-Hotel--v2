@@ -112,8 +112,8 @@ class Booking extends BaseModel
     
     public function create_booking($user_id, $room_id, $data, $status) {
         $query = "INSERT INTO booking (user_id, room_id, check_in, check_out, status, total_price, number_of_guests, special_requests)
-        VALUES (:user_id, :room_id, :check_in, :check_out, :status, :total_price, :number_of_guests, :special_requests)";
-    
+                  VALUES (:user_id, :room_id, :check_in, :check_out, :status, :total_price, :number_of_guests, :special_requests)";
+        
         $stmt = $this->conn->prepare($query);
     
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -134,50 +134,59 @@ class Booking extends BaseModel
             return false;  
         }
     }
+    
     public function getBookingDetail($bookingId) {
         $sql = "SELECT 
-                b.booking_id, 
-                b.check_in, 
-                b.check_out, 
-                b.total_price, 
-                b.number_of_guests, 
-                b.special_requests, 
-                r.room_id, 
-                r.room_type_id, 
-                r.price as room_price, 
-                r.description as room_description, 
-                rt.type_name as room_type, 
-                GROUP_CONCAT(f.feature_name) AS room_features, 
-                GROUP_CONCAT(ri.image_url) AS room_images, 
-                p.payment_method, 
-                p.amount AS payment_amount, 
+                b.booking_id,
+                b.check_in,
+                b.check_out,
+                b.number_of_guests,
+                b.total_price,
+                b.status AS booking_status,
                 p.payment_date,
-                u.name as user_name,
-                u.email as user_email
-            FROM booking b
-            JOIN room r ON b.room_id = r.room_id
-            JOIN room_type rt ON r.room_type_id = rt.room_type_id
-            LEFT JOIN room_feature rf ON r.room_id = rf.room_id
-            LEFT JOIN feature f ON rf.feature_id = f.feature_id
-            LEFT JOIN room_image ri ON r.room_id = ri.room_id
-            LEFT JOIN payment p ON b.booking_id = p.booking_id
-            JOIN user u ON b.user_id = u.user_id
-            WHERE b.booking_id = :booking_id
-            GROUP BY b.booking_id;
-        ";
-    
+                p.amount AS payment_amount,
+                p.payment_method,
+                p.status AS payment_status,
+                r.room_id,
+                r.capacity,
+                r.price AS room_price,
+                r.description AS room_description,
+                rt.type_name AS room_type,
+                u.name AS user_name,
+                u.email AS user_email,
+                u.phone AS user_phone,
+                ri.image_url AS room_image_url
+            FROM 
+                booking b
+            JOIN 
+                payment p ON b.booking_id = p.booking_id
+            JOIN 
+                room r ON b.room_id = r.room_id
+            JOIN 
+                room_type rt ON r.room_type_id = rt.room_type_id
+            JOIN 
+                user u ON b.user_id = u.user_id
+            JOIN 
+                room_image ri ON r.room_id = ri.room_id
+            WHERE 
+                b.booking_id = ?";
+        
         $stmt = $this->conn->prepare($sql);  
-        $stmt->bindParam(':booking_id', $bookingId, PDO::PARAM_INT);
+        $stmt->bindParam(1, $bookingId, PDO::PARAM_INT);  
         try {
             $stmt->execute();
-            $data =  $stmt->fetch(PDO::FETCH_ASSOC); 
-            print_r($data);
-            die();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC); 
+    
+            if (!$data) {
+                return "Không tìm thấy thông tin đặt phòng cho ID đã cho.";
+            }
+            return $data;  
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage()); 
-            return false;  
+            return "Lỗi: " . $e->getMessage();
         }
     }
+    
     
 
 }
