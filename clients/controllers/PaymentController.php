@@ -44,9 +44,12 @@ class PaymentController extends BaseController {
             $this->paymentModel->create_payment($id, $array,$statusPayment);
 
             $data = $this->bookingModel->getBookingDetail($id);
+            $title = 'Booking Thành Công';
+            $content = 'Bạn đã đặt phòng thành công';
+            $this->paymentModel->create_notification($user_id, $title, $content );
             $this->viewApp->requestView('result_booking.index', ['data' => $data]);
+           
         }else{
-            
             $data = [
                 'url' =>  'booking-list',
                 'message' => $checkBooking['message'],

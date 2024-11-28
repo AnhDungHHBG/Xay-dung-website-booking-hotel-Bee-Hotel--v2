@@ -142,4 +142,28 @@ class BaseModel {
             $coreApp->debug($e);
         }
     }
+    public function create_notification($userId, $title, $content) {
+        try {
+            global $coreApp;
+            
+            $currentTime = date('Y-m-d H:i:s');
+            
+            $sql = "INSERT INTO notification (user_id, title, content, is_read, created_at) 
+                    VALUES (:user_id, :title, :content, :is_read, :created_at)";
+            
+            $stmt = $this->conn->prepare($sql);
+            $isRead = 0;
+            return $stmt->execute([
+                ':user_id' => $userId,
+                ':title' => $title,
+                ':content' => $content,
+                ':is_read' => $isRead,
+                ':created_at' => $currentTime
+            ]);
+        } catch (Exception $e) {
+            global $coreApp;
+            $coreApp->debug($e);
+        }
+    }
+    
 }
