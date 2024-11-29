@@ -17,8 +17,14 @@ class RoomController extends BaseController
     }
     public function room_delete(){
         $id = $_GET['id'];
-        $this->roomModel->delete_room($id);
-        $this->route->redirectAdmin('room-list');
+        $is_booking = $this->roomModel->findIdTable($id);
+        if($is_booking['availability_status'] == 'Available'){
+            $this->roomModel->delete_room($id);
+            $this->route->redirectAdmin('room-list');
+        }else{
+            $this->route->redirectAdmin('room-list');
+        }
+        
     }
     public function room_edit(){
         $id = $_GET['id'];

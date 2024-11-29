@@ -1,18 +1,18 @@
 <div class="bg-gray-100">
     <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Danh Sách Đơn Đặt Phòng</h1>
+        <h1 class="text-2xl font-bold mb-4">Booking-List</h1>
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <table class="table-auto w-full border-collapse border border-gray-200">
                 <thead class="bg-gray-100">
                     <tr>
                         <th class="px-4 py-2 border text-left">#</th>
-                        <th class="px-4 py-2 border text-left">ID Khách hàng</th>
-                        <th class="px-4 py-2 border text-left">Mã Phòng</th>
-                        <th class="px-4 py-2 border text-left">Ngày Check-in</th>
-                        <th class="px-4 py-2 border text-left">Ngày Check-out</th>
-                        <th class="px-4 py-2 border text-left">Trạng Thái</th>
-                        <th class="px-4 py-2 border text-left">Tổng Tiền</th>
-                        <th class="px-4 py-2 border text-left">Hành Động</th>
+                        <th class="px-4 py-2 border text-left">User ID</th>
+                        <th class="px-4 py-2 border text-left">Room ID</th>
+                        <th class="px-4 py-2 border text-left">Check-in date</th>
+                        <th class="px-4 py-2 border text-left">Check-out date</th>
+                        <th class="px-4 py-2 border text-left">Status</th>
+                        <th class="px-4 py-2 border text-left">Amount</th>
+                        <th class="px-4 py-2 border text-left">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,18 +29,18 @@
                                         <?php echo htmlspecialchars($booking['status']); ?>
                                     </span>
                                 </td>
-                                <td class="px-4 py-2 border"><?php echo number_format($booking['total_price'], 2) . ' VND'; ?></td>
+                                <td class="px-4 py-2 border">$<?php echo number_format($booking['total_price'], 2) ; ?></td>
                                 <td class="py-3 px-4 text-sm flex gap-4  items-start">
-                                    <a href="<?= $route->getLocateAdmin('booking-edit', ['id' => $booking['booking_id']]) ?>?>" class="text-blue-500 hover:text-blue-700 hover:underline">Chỉnh sửa</a>
+                                    <a href="<?= $route->getLocateAdmin('booking-edit', ['id' => $booking['booking_id']]) ?>?>" class="text-blue-500 hover:text-blue-700 hover:underline">Edit</a>
                                     <form action="<?= $route->getLocateAdmin('booking-delete', ['id' => $booking['booking_id']]) ?>" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đơn đặt phòng này?');">
-                                        <button type="submit" class="ml-2 text-red-500 hover:text-red-700 hover:underline">Xóa</button>
+                                        <button type="submit" class="ml-2 text-red-500 hover:text-red-700 hover:underline">Delete</button>
                                     </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else : ?>
                         <tr>
-                            <td colspan="8" class="text-center py-4 text-gray-500">Không có đơn đặt phòng nào.</td>
+                            <td colspan="8" class="text-center py-4 text-gray-500">No booking</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
