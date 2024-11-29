@@ -102,6 +102,49 @@ class Room extends BaseModel {
             ];
         }
     }
+    public function get_rooms_filter($room_type_id) {
+        $query = "SELECT 
+                    r.room_id,
+                    rt.room_type_id,
+                    rt.type_name AS room_type,
+                    r.capacity,
+                    r.price,
+                    r.description,
+                    r.availability_status,
+                    COALESCE(GROUP_CONCAT(DISTINCT ri.image_url SEPARATOR ', '), '') AS images,
+                    COALESCE(GROUP_CONCAT(DISTINCT f.feature_name SEPARATOR ', '), '') AS feature_names
+                FROM 
+                    room r
+                LEFT JOIN 
+                    room_type rt ON r.room_type_id = rt.room_type_id
+                LEFT JOIN 
+                    room_image ri ON r.room_id = ri.room_id
+                LEFT JOIN 
+                    room_feature rf ON r.room_id = rf.room_id
+                LEFT JOIN 
+                    feature f ON rf.feature_id = f.feature_id
+                WHERE 
+                    r.availability_status = 'Available' AND rt.room_type_id = :room_type_id
+                GROUP BY 
+                    r.room_id 
+                ORDER BY 
+                    r.room_id ASC";
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':room_type_id', $room_type_id, PDO::PARAM_INT);
+    
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $errorInfo = $stmt->errorInfo();
+            error_log("SQL Error: " . $errorInfo[2]);
+            return [
+                'success' => false,
+                'message' => 'Có lỗi xảy ra khi lấy danh sách phòng theo loại.'
+            ];
+        }
+    }
+    
     
     public function updateStatus($id, $status) {
        
@@ -240,7 +283,6 @@ class Room extends BaseModel {
                 'message' => 'Error: ' . $e->getMessage()
             ];
         }
-    }
-    
+    } 
 }
 ?>

@@ -9,7 +9,7 @@ class BaseModel {
         $this->conn = $coreApp->connectDB();
     }
 
-    public function allTable($limit = 10) {
+    public function allTable($limit = 20) {
         try {
             global $coreApp;
             $sql = "SELECT * FROM {$this->tableName} ORDER BY {$this->tableName}_id DESC LIMIT :limit";

@@ -29,6 +29,7 @@ match ($route->getAct()) {
     // room
     'room-detail' => (new RoomDetailController())->room_detail(),
     'room-list' => (new RoomController())->room_list(),
+    'filter-room' => (new RoomController())->room_type_filter(),
 
 
     // notification

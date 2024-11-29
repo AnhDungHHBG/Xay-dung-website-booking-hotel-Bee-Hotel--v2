@@ -7,12 +7,18 @@ class RoomController extends BaseController
         $this->isLogin();
     }
     public $roomModel;
+    public $roomTypeModel;
     public function loadModels() {
         $this->roomModel = new Room();
+        $this->roomTypeModel = new RoomType();
     }
     public function room_list() {
-        $data = $this->roomModel->getRooms();
-  
+        $rooms = $this->roomModel->getRooms();
+        $room_type = $this->roomTypeModel->allTable();
+        $data = [
+            'rooms' => $rooms,
+            'room_types'=> $room_type
+        ];
         $this->viewApp->requestView('room_page.index', ['data' => $data]);
     }
     public function room_reverve(){
@@ -32,6 +38,18 @@ class RoomController extends BaseController
             $this->viewApp->requestView('error.index', ['data'=> $data]);
         }
        
+    }
+    public function room_type_filter(){
+        $room_type_id = $_GET['room_type_id'];
+        $rooms_filter = $this->roomModel->get_rooms_filter($room_type_id);
+        if(isset($rooms_filter)){
+            $room_type = $this->roomTypeModel->allTable();
+            $data = [
+                'rooms' => $rooms_filter,
+                'room_types'=> $room_type
+            ];
+            $this->viewApp->requestView('room_page.index', ['data' => $data]);
+        }
     }
    
 }
