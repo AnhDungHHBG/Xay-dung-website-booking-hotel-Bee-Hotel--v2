@@ -26,10 +26,10 @@
                 <div class="relative mr-6">
                         <a href="<?= $route->getLocateClient('notification-list') ?>" class="text-gray-700 hover:text-blue-500">
                             <i class="fa-solid fa-bell fa-lg"></i>
-                            <?php $unreadCount = 5;?>
-                            <?php if ($unreadCount > 0): ?>
-                                <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1"><?= $unreadCount ?></span>
-                            <?php endif; ?>
+                            
+                            
+                                <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1"></span>
+                            
                         </a>
                     </div>
                 <!-- User Section -->

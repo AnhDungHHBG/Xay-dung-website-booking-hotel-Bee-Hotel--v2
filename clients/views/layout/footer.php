@@ -6,10 +6,6 @@
         <div class="text-center md:text-left">
             <h1 class="text-3xl font-bold text-blue-500">HOTEL BOOKING</h1>
             <p class="text-gray-400 mt-2">We offer easy and convenient hotel booking services. Find your ideal hotel for your next trip today!</p>
-            <div class="mt-6">
-                <a href="#" class="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-colors mr-4">Download on PlayStore</a>
-                <a href="#" class="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors">Download on AppleStore</a>
-            </div>
         </div>
         <div class="mt-8 md:mt-0 text-center md:text-left">
             <h2 class="text-xl font-semibold text-blue-500 mb-4">COMPANY</h2>

@@ -17,7 +17,6 @@ class ContactController extends BaseController
 
     public function contact() {
         $user_id = $_SESSION['user']['user_id'];  
-        
         $responses = $this->supportResponse->get_ticket_and_responses($user_id);
         $this->viewApp->requestView('contact.index', ['data' => $responses]);
     }

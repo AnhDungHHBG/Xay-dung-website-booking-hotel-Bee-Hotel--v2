@@ -4,7 +4,6 @@ class RoomController extends BaseController
 {
     public function __construct() {
         parent::__construct(); 
-        $this->isLogin();
     }
     public $roomModel;
     public function loadModels() {
@@ -16,6 +15,8 @@ class RoomController extends BaseController
         $this->viewApp->requestView('room_page.index', ['data' => $data]);
     }
     public function room_reverve(){
+        $this->isLogin();
+
         $room_id = $_GET['room_id'];
         $statusAvailable = 'Available';
         $checkStatus = $this->roomModel->check_status($room_id, $statusAvailable);
