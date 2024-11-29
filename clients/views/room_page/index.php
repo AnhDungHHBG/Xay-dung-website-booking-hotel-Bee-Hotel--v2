@@ -1,10 +1,10 @@
 <?php
 $rooms = $data;
 
+// Giới hạn hiển thị tối đa 18 sản phẩm
+$roomsToShow = array_slice($rooms, 0, 18);
 ?>
 <div class="bg-gray-100 font-sans">
- 
-    <!-- Filters and Grid -->
     <div class="container mx-auto p-6">
         <div class="flex justify-between items-center mb-6">
             <div class="flex space-x-4 text-gray-600">
@@ -20,11 +20,11 @@ $rooms = $data;
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <?php foreach ($rooms as $room): ?>
+            <?php foreach ($roomsToShow as $room): ?>
                 <?php $viewApp->requestComponents('room_page.components.card', ['data' => $room]); ?>
             <?php endforeach; ?>
         </div>
+
         <div class="text-center mt-6 text-gray-500">Pagination or Load more...</div>
     </div>
 </div>
-</html>
