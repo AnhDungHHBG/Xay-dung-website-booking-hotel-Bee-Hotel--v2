@@ -4,29 +4,29 @@ class Room extends BaseModel{
 
     public function get_rooms($limit = 10, $offset = 0){
         $query = "SELECT 
-        r.room_id,
-        rt.type_name,
-        r.price,
-        r.capacity,
-        r.availability_status,
-        r.description,
-        GROUP_CONCAT(DISTINCT ri.image_url SEPARATOR ', ') AS image_urls,
-        GROUP_CONCAT(DISTINCT f.feature_name SEPARATOR ', ') AS features
-    FROM 
-        room r
-    JOIN 
-        room_type rt ON r.room_type_id = rt.room_type_id
-    LEFT JOIN 
-        room_image ri ON r.room_id = ri.room_id
-    LEFT JOIN 
-        room_feature rf ON r.room_id = rf.room_id
-    LEFT JOIN 
-        feature f ON rf.feature_id = f.feature_id
-    GROUP BY 
-        r.room_id
-    ORDER BY 
-        r.room_id DESC  
-    LIMIT :limit OFFSET :offset;";
+                    r.room_id,
+                    rt.type_name,
+                    r.price,
+                    r.capacity,
+                    r.availability_status,
+                    r.description,
+                    GROUP_CONCAT(DISTINCT ri.image_url SEPARATOR ', ') AS image_urls,
+                    GROUP_CONCAT(DISTINCT f.feature_name SEPARATOR ', ') AS features
+                FROM 
+                    room r
+                JOIN 
+                    room_type rt ON r.room_type_id = rt.room_type_id
+                LEFT JOIN 
+                    room_image ri ON r.room_id = ri.room_id
+                LEFT JOIN 
+                    room_feature rf ON r.room_id = rf.room_id
+                LEFT JOIN 
+                    feature f ON rf.feature_id = f.feature_id
+                GROUP BY 
+                    r.room_id
+                ORDER BY 
+                    r.room_id DESC  
+                LIMIT :limit OFFSET :offset;";
 
     
         $stmt = $this->conn->prepare($query);
@@ -85,7 +85,6 @@ class Room extends BaseModel{
         }
     }
     
-  
     public function add_room($data) {
         $this->conn->beginTransaction();
         try {
@@ -97,7 +96,7 @@ class Room extends BaseModel{
             $stmt->bindParam(':room_type_id', $data['room_type_id'], PDO::PARAM_INT);
             $stmt->bindParam(':price', $data['price'], PDO::PARAM_STR);
             $stmt->bindParam(':capacity', $data['capacity'], PDO::PARAM_INT);
-            $stmt->bindParam(':availability_status', $data['availability_status'], PDO::PARAM_INT);
+            $stmt->bindParam(':availability_status', $data['availability_status']);
             $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR);
             
             $stmt->execute();

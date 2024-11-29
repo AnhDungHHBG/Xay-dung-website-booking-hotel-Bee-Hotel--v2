@@ -1,6 +1,7 @@
 <?php
 $rooms = $data;
 $currentDate = date('Y-m-d');
+
 $filter = isset($_GET['filter_type']) ? $_GET['filter_type'] : '';
 
 $filteredRooms = array_filter($rooms, function ($room) use ($filter, $currentDate) {
@@ -104,7 +105,8 @@ $rooms = $filteredRooms;
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
                                     <?php if ($room['booking_status'] === 'Checked' && $room['payment_status'] === 'Success') : ?>
-                                        <a href="<?= $route->getLocateAdmin('confirm-checkout', ['booking_id' => $room['booking_id'] ]) ?>" >
+                                        <a href="<?= $route->getLocateAdmin('confirm-checkout', ['booking_id' => $room['booking_id'], 'user_id_booking' => $room['user_id']]) ?>">
+
                                             <button class="bg-blue-500 text-white px-4 py-2 rounded">Confirm checkout</button>
                                         </a>
                                     <?php else : ?>

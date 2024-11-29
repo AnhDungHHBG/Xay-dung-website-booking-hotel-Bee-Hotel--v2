@@ -19,15 +19,29 @@ class Booking extends BaseModel{
     
     public function checkin_and_checkout() {
         $today = date('Y-m-d'); 
-        $sql = "SELECT r.room_id, r.capacity, r.price, r.availability_status, rt.type_name, 
-                       b.booking_id, b.check_in, b.check_out, b.status AS booking_status, 
-                       p.status AS payment_status
-                FROM room r
-                LEFT JOIN room_type rt ON r.room_type_id = rt.room_type_id
-                LEFT JOIN booking b ON r.room_id = b.room_id
-                LEFT JOIN payment p ON b.booking_id = p.booking_id
-                WHERE r.availability_status = 'Booked'
-                AND (DATE(b.check_in) = :today OR DATE(b.check_out) = :today)";
+        $sql = "SELECT 
+                    r.room_id, 
+                    r.capacity, 
+                    r.price, 
+                    r.availability_status, 
+                    rt.type_name, 
+                    b.booking_id, 
+                    b.user_id, 
+                    b.check_in, 
+                    b.check_out, 
+                    b.status AS booking_status, 
+                    p.status AS payment_status
+                FROM 
+                    room r
+                LEFT JOIN 
+                    room_type rt ON r.room_type_id = rt.room_type_id
+                LEFT JOIN 
+                    booking b ON r.room_id = b.room_id
+                LEFT JOIN 
+                    payment p ON b.booking_id = p.booking_id
+                WHERE 
+                    r.availability_status = 'Booked'
+                    AND (DATE(b.check_in) = :today OR DATE(b.check_out) = :today)";
         
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':today', $today);
@@ -36,6 +50,7 @@ class Booking extends BaseModel{
         $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rooms;
     }
+    
     
 
     public function confirm_checkin($booking_id) {

@@ -3,7 +3,6 @@ class Room extends BaseModel {
     public $tableName = 'room';
 
     public function getRoomDetail($id) {
-      
                 $query = "SELECT 
                 r.room_id,
                 rt.room_type_id,
@@ -25,7 +24,7 @@ class Room extends BaseModel {
             LEFT JOIN 
                 feature f ON rf.feature_id = f.feature_id
             WHERE 
-                r.room_id = :room_id
+                r.room_id = :room_id 
             GROUP BY 
                 r.room_id, rt.room_type_id";
 
@@ -137,11 +136,13 @@ class Room extends BaseModel {
                     review rv ON r.room_id = rv.room_id
                 LEFT JOIN 
                     room_type rt ON r.room_type_id = rt.room_type_id  
+                 WHERE 
+                r.availability_status = 'Available'
                 GROUP BY 
                     r.room_id
                 ORDER BY 
                     average_rating DESC
-                LIMIT 10";
+                LIMIT 20";
     
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -168,12 +169,13 @@ class Room extends BaseModel {
                     review rv ON r.room_id = rv.room_id
                 LEFT JOIN 
                     room_type rt ON r.room_type_id = rt.room_type_id  
+                     WHERE 
+                r.availability_status = 'Available'
                 GROUP BY 
                     r.room_id
                 ORDER BY 
                     average_rating DESC
-                LIMIT 10";
-
+                LIMIT 20";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

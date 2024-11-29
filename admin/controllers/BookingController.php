@@ -61,6 +61,10 @@ class BookingController extends BaseController
     }
     public function confirm_checkout(){
         $booking_id = $_GET['booking_id'];
+        $user_id_booking = $_GET['user_id_booking'];
+        $title = 'Bạn đã checkout thành công';
+        $content = 'Cảm ơn bạn dã sử dụng dịch vụ của chúng tôi.';
+        $this->bookingModel->create_notification($user_id_booking,$title, $content );
         $status = 'Checkout';
         $this->bookingModel->update_status_booking( $booking_id, $status );
         $this->route->redirectAdmin('checkin-checkout-today');        

@@ -29,7 +29,7 @@ $featureNames = isset($data['feature_names']) ? explode(',', $data['feature_name
     <!-- Nội dung -->
     <div class="p-4">
         <h3 class="font-semibold text-lg text-[#133E87] mb-8 line-clamp-1">
-            <?= htmlspecialchars($data['room_type_name'] ?? 'Luxurious Suite') ?>
+            Room code: <?= htmlspecialchars($data['room_id'] ?? 'Luxurious Suite') ?> --  <?= htmlspecialchars($data['room_type_name'] ?? 'Luxurious Suite') ?>
         </h3>
 
         <!-- Chi tiết -->
