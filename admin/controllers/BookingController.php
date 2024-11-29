@@ -52,7 +52,12 @@ class BookingController extends BaseController
     public function confirm_checkin(){
         $room_id = $_GET['room_id'];
         $response = $this->bookingModel->get_booking( $room_id );
+        $user_id_booking = $_GET['user_id_booking'];
         $booking_id = $response['booking_id'];
+        $title = 'Bạn đã checkin thành công';
+        $content = 'Cảm ơn bạn dã sử dụng dịch vụ của chúng tôi.';
+        $this->bookingModel->create_notification($user_id_booking,$title, $content );
+        $status = 'Checkout';
         $status = 'Checked';
         $this->bookingModel->update_status_booking( $booking_id, $status );
         $this->bookingModel->confirm_checkin($booking_id);

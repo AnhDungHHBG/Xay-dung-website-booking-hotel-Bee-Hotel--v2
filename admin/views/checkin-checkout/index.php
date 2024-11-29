@@ -96,7 +96,7 @@ $rooms = $filteredRooms;
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
                                     <?php if ($room['booking_status'] === 'Pending') : ?>
-                                        <a href="<?= $route->getLocateAdmin('confirm-checkin', ['room_id' =>$room['room_id'] ]) ?>">
+                                        <a href="<?= $route->getLocateAdmin('confirm-checkin', ['room_id' =>$room['room_id'],'user_id_booking' => $room['user_id']]) ?>">
                                             <button class="bg-blue-500 text-white px-4 py-2 rounded">Confirm checkin</button>
                                         </a>
                                     <?php else : ?>
@@ -124,16 +124,7 @@ $rooms = $filteredRooms;
                     <?php endif; ?>
                 </tbody>
             </table>
-        </div>
+        </div>  
     </div>
 </div>
 
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const filterForm = document.getElementById('filterForm');
-    
-    filterForm.addEventListener('change', function() {
-        filterForm.submit();
-    });
-});
-</script> -->
