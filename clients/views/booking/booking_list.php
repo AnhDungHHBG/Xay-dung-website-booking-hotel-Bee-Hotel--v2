@@ -9,16 +9,16 @@ $booking_list = $data;
             <table class="min-w-full table-auto">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="py-2 px-4 border-b">Mã Đặt Phòng</th>
-                        <th class="py-2 px-4 border-b">Phòng</th>
+                        <th class="py-2 px-4 border-b">Room Code</th>
+                        <th class="py-2 px-4 border-b">Room</th>
                         <th class="py-2 px-4 border-b">Check-in</th>
                         <th class="py-2 px-4 border-b">Check-out</th>
                         <th class="py-2 px-4 border-b">Số Khách</th>
-                        <th class="py-2 px-4 border-b">Tổng Tiền</th>
-                        <th class="py-2 px-4 border-b">Yêu Cầu Đặc Biệt</th>
-                        <th class="py-2 px-4 border-b">Trạng Thái</th>
-                        <th class="py-2 px-4 border-b">Ảnh Phòng</th>
-                        <th class="py-2 px-4 border-b">Chi Tiết</th> 
+                        <th class="py-2 px-4 border-b">Amout</th>
+                        <th class="py-2 px-4 border-b">Special Requests</th>
+                        <th class="py-2 px-4 border-b">Status</th>
+                        <th class="py-2 px-4 border-b">Image</th>
+                        <th class="py-2 px-4 border-b">Detail</th> 
                     </tr>
                 </thead>
                 <tbody>

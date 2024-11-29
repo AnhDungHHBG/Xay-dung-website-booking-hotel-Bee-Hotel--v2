@@ -65,7 +65,8 @@ class Room extends BaseModel {
                     room_feature rf ON r.room_id = rf.room_id
                 LEFT JOIN 
                     feature f ON rf.feature_id = f.feature_id
-                WHERE 1=1"; 
+                WHERE 
+                r.availability_status = 'Available'";  
     
         if (!empty($filters['room_type'])) {
             $query .= " AND rt.type_name LIKE :room_type";
