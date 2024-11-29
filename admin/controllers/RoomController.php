@@ -39,6 +39,9 @@ class RoomController extends BaseController
         if (is_object($data)) {
             $data = (array) $data;
         }
+        // $room = $this->roomModel->get_room_by_id($id);
+        // $old_images = !empty($room['images']) ? explode(', ', $room['images']) : [];
+    
         if (!empty($_FILES['images']['name'][0])) {
             $upload_result = $this->upload_images($_FILES['images']);
             if (!empty($upload_result['errors'])) {
