@@ -25,11 +25,11 @@ $booking_list = $data;
                     <?php foreach ($booking_list as $booking): ?>
                     <tr class="hover:bg-gray-50">
                         <td class="py-2 px-4 border-b"><?= $booking['booking_id'] ?></td>
-                        <td class="py-2 px-4 border-b"><?= $booking['room_description'] ?> (<?= $booking['room_type_name'] ?>)</td>
+                        <td class="py-2 px-4 border-b"><?= $booking['room_type_name'] ?></td>
                         <td class="py-2 px-4 border-b"><?= date('d-m-Y', strtotime($booking['check_in'])) ?></td>
                         <td class="py-2 px-4 border-b"><?= date('d-m-Y', strtotime($booking['check_out'])) ?></td>
                         <td class="py-2 px-4 border-b"><?= $booking['number_of_guests'] ?></td>
-                        <td class="py-2 px-4 border-b"><?= number_format($booking['total_price'], 2, ',', '.') ?> VNĐ</td>
+                        <td class="py-2 px-4 border-b"><?= number_format($booking['total_price'], 2, ',', '.') ?> USD</td>
                         <td class="py-2 px-4 border-b"><?= $booking['special_requests'] ?></td>
                         <td class="py-2 px-4 border-b"><?= $booking['status'] ?></td>
                         <td class="py-2 px-4 border-b">

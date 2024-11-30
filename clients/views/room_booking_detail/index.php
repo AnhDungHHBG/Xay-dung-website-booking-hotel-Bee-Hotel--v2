@@ -13,8 +13,13 @@ $servicePrice = 10;
 ?>
 <div class="bg-gray-100 font-sans w-full max-w-6xl mx-auto px-4 py-8">
     <div class="bg-white p-8 rounded-lg shadow-lg">
+       <a href="<?= $route->getLocateClient('room-cancel-reserve', ['room_id' => $room['room_id']]) ?>">
+            <div class = "flex  items-center justify-start gap-2 font-medium text-base">
+            <i class="fa-solid fa-arrow-left"></i> 
+            <span>Cancel Reverse</span>
+            </div>
+       </a>
         <h1 class="text-3xl font-semibold text-center text-[#133E87] mb-8">Room Booking Details</h1>
-
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <!-- Room Details -->
             <div>

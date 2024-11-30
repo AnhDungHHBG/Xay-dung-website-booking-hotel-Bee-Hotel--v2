@@ -42,6 +42,24 @@ class RoomController extends BaseController
             $this->viewApp->requestView('error.index', ['data'=> $data]);
         }
     }
+    public function room_cancel_reverve(){
+        $room_id = $_GET['room_id'];
+        $statusAvailable = 'Reverse';
+        $checkStatus = $this->roomModel->check_status($room_id, $statusAvailable);
+
+        if($checkStatus['result']){
+            $status = 'Available';
+            $this->roomModel->update_status($room_id, $status);
+            $this->route->redirectClient('booking-detail', ['room_id' => $room_id]);
+            $this->route->redirectClient('room-list') ;
+        }else{
+            $data = [
+                'url' =>'',
+                'message' =>  'some error'
+            ];
+            $this->viewApp->requestView('error.index', ['data'=> $data]);
+        }
+    }
     public function room_type_filter(){
         $room_type_id = $_GET['room_type_id'];
         $limit = $_GET['limit'];

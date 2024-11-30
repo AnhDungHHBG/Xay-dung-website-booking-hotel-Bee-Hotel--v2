@@ -7,13 +7,9 @@ extends BaseController
 {
     public $reviewModel;
     public $roomModel;
-    // public $roomFeature;
-
-
     public function loadModels() {
         $this->reviewModel = new Review();
         $this->roomModel = new Room();
-        // $this->roomFeature = new Feature();
     }
     public function room_detail() {
         $room_id = $_GET['id']; 
@@ -28,8 +24,6 @@ extends BaseController
             'reviews' => $reviews,
             'averageRating' => $averageRating,
         ];
-        // print_r($data);
-        // die();
         $this->viewApp->requestView('room_detail.room_detail',['data' => $data]);
     }
 }

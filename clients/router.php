@@ -29,6 +29,8 @@ match ($route->getAct()) {
     // room
     'room-detail' => (new RoomDetailController())->room_detail(),
     'room-list' => (new RoomController())->room_list(),
+    'room-reserve' => (new RoomController())->room_reverve(),
+    'room-cancel-reserve' => (new RoomController())->room_cancel_reverve(),
     'filter-room' => (new RoomController())->room_type_filter(),
 
 
@@ -49,5 +51,4 @@ match ($route->getAct()) {
     // payment
     'payment-vnpay' =>  (new PaymentController())->payment_vnpay(),
     'payment-onsite' =>  (new PaymentController())->payment_onsite(),
-    'room-reserve' => (new RoomController())->room_reverve(),
 };
