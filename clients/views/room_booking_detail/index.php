@@ -13,22 +13,22 @@ $servicePrice = 10;
 ?>
 <div class="bg-gray-100 font-sans w-full max-w-6xl mx-auto px-4 py-8">
     <div class="bg-white p-8 rounded-lg shadow-lg">
-        <h1 class="text-3xl font-semibold text-center text-gray-800 mb-8">Room Booking Details</h1>
+        <h1 class="text-3xl font-semibold text-center text-[#133E87] mb-8">Room Booking Details</h1>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <!-- Room Details -->
             <div>
                 <div>
                     <h2 class="text-2xl font-semibold mb-4">Room: <?php echo htmlspecialchars($roomId); ?></h2>
-                    <p class="text-lg text-gray-700 mb-4">Type: <?php echo htmlspecialchars($roomName); ?></p>
-                    <p class="text-md text-gray-600 mb-4">Price: <?php echo number_format($roomPrice, 2, '.', ',') . ' $ / night'; ?></p>
-
+                    <p class="text-lg pl-4 font-bold text-[#608BC1] mb-4">Type: <?php echo htmlspecialchars($roomName); ?></p>
+                    <p class="text-lg pl-4 font-bold text-[#608BC1] mb-4">Price: <?php echo number_format($roomPrice, 2, '.', ',') . ' $ / night'; ?></p>
+                    <p class="text-lg pl-4  font-bold text-[#608BC1] mb-4">Capacity: <?php echo htmlspecialchars($room['capacity']); ?></p>
                     <div>
                         <h3 class="text-xl font-semibold mb-2">Room Images:</h3>
-                        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-2">
+                        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-2 p-4">
                             <?php
                             $images = isset($room['images']) ? explode(', ', $room['images']) : [];
-                            $maxImages = 8; 
+                            $maxImages = 4; 
                             $imagesToShow = array_slice($images, 0, $maxImages);  
         
                             foreach ($imagesToShow as $image) {
@@ -65,63 +65,63 @@ $servicePrice = 10;
 
             <!-- Booking Form -->
             <div>
-                <form method="POST" class="space-y-6">
-                <div>
-                    <label for="checkin_date" class="block text-md font-medium text-gray-700">Check-in Date: 12-am <span id="checkin-value"></span></label>
-                    <input type="date" id="checkin_date" name="checkin_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" >
-
-                    <label for="checkout_date" class="block text-md font-medium text-gray-700 mt-4">Check-out Date: 11h-am <span id="checkout-value"></span></label>
-                    <input type="date" id="checkout_date" name="checkout_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" >
-                    <p id="date-error" class="text-red-500 mt-2 hidden">Check-out date must be later than Check-in date.</p>
-                </div>
-                    <input type="hidden" name="special_requests" id="special_requests">
-                    <input type="hidden" name="amount" id="amount">
+                <form method="POST" id = "form_booking" class="space-y-6">
                     <div>
-                        <label for="number_of_people" class="block text-md font-medium text-gray-700">Number of People</label>
-                        <input type="number" id="number_of_people" name="number_of_guests" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" min="1" >
-                        <p id="number-of-people-error" class="text-red-500 mt-2 hidden">Number of people must be at least 1.</p>
+                        <label for="checkin_date" class="block text-md font-medium   text-[#608BC1]">Check-in Date: 12-am <span id="checkin-value"></span></label>
+                        <input type="date" id="checkin_date" name="checkin_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" >
 
+                        <label for="checkout_date" class="block text-md font-medium   text-[#608BC1] mt-4">Check-out Date: 11h-am <span id="checkout-value"></span></label>
+                        <input type="date" id="checkout_date" name="checkout_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" >
+                        <p id="date-error" class="text-red-500 mt-2 hidden">Check-out date must be later than Check-in date.</p>
                     </div>
+                        <input type="hidden" name="special_requests" id="special_requests">
+                        <input type="hidden" name="amount" id="amount">
+                        <div>
+                            <label for="number_of_people" class="block text-md font-medium text-[#608BC1]">Number of People</label>
+                            <input type="number" id="number_of_people" name="number_of_guests" class="p-4 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" min="1" >
+                            <p id="number-of-people-error" class="text-red-500 mt-2 hidden">Number of people must be at least 1.</p>
+
+                        </div>
 
 
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Additional Amenities</h3>
-                        <div class="space-y-4" id="amenities-list">
-                        <div class="grid grid-cols-2 gap-4">
-                            <?php
-                            if (!empty($amenityArray) && is_array($amenityArray)) {
-                                foreach ($amenityArray as $item) {
-                                    if (isset($item['amenity_id']) && isset($item['amenity_type'])) {
-                                        echo '<label class="flex items-center">';
-                                        echo '<input type="checkbox" value="' . htmlspecialchars($item['amenity_type']) . '" class="mr-2 amenity-checkbox text-blue-500"> ' . htmlspecialchars($item['amenity_type']) . ' (+ ' . $servicePrice . '$)';
-                                        echo '</label>';
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Additional Amenities</h3>
+                            <div class="space-y-4" id="amenities-list">
+                            <div class="grid grid-cols-2 gap-4 pl-4">
+                                <?php
+                                if (!empty($amenityArray) && is_array($amenityArray)) {
+                                    foreach ($amenityArray as $item) {
+                                        if (isset($item['amenity_id']) && isset($item['amenity_type'])) {
+                                            echo '<label class="flex items-center  text-[#133E87] ">';
+                                            echo '<input type="checkbox" value="' . htmlspecialchars($item['amenity_type']) . '" class="mr-2 amenity-checkbox text-blue-500"> ' . htmlspecialchars($item['amenity_type']) . ' (+ ' . $servicePrice . '$)';
+                                            echo '</label>';
+                                        }
                                     }
+                                } else {
+                                    echo '<p>No amenities available.</p>';
                                 }
-                            } else {
-                                echo '<p>No amenities available.</p>';
-                            }
-                            ?>
+                                ?>
+                            </div>
+
+                            </div>
                         </div>
 
+                        <div class="mt-6 p-4 border-t-2 border-gray-200">
+                            <p class="font-semibold text-gray-800">Number of nights: <span id="number-of-nights">0</span> nights</p>
+                            <p class="font-semibold text-gray-800">Room Total: <span id="room-price">0</span> $</p>
+                            <p class="font-semibold text-gray-800">Service Total: <span id="service-price">0</span> $</p>
+                            <p class="mt-5 border-t-2 border-gray-200 text-[#133E87] font-bold text-lg ">Total Payment: <span id="total-price">0</span> $</p>
                         </div>
-                    </div>
 
-                    <div class="mt-6 p-4 border-t-2 border-gray-200">
-                        <p class="font-semibold text-gray-800">Number of nights: <span id="number-of-nights">0</span> nights</p>
-                        <p class="font-semibold text-gray-800">Room Total: <span id="room-price">0</span> $</p>
-                        <p class="font-semibold text-gray-800">Service Total: <span id="service-price">0</span> $</p>
-                        <p class="font-semibold text-gray-800">Total Payment: <span id="total-price">0</span> $</p>
-                    </div>
-
-                    <h3 class="text-xl font-semibold text-gray-800 mt-4">Select Payment Method:</h3>
-                    <div class="flex justify-start items-center gap-16">
-                        <label class="flex items-center">
-                            <input type="radio" name="payment_method" value="vnpay" class="mr-2" checked> Pay with VN Pay
-                        </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="payment_method" value="on_site" class="mr-2"> Pay at Check-in
-                        </label>
-                    </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mt-4">Select Payment Method:</h3>
+                        <div class="p-4 flex justify-start items-center gap-16">
+                            <label class="flex items-center text-[#133E87] font-bold">
+                                <input type="radio" name="payment_method" value="vnpay" class="mr-2" checked> Pay with VN Pay
+                            </label>
+                            <label class="flex items-center text-[#133E87] font-bold">
+                                <input type="radio" name="payment_method" value="on_site" class="mr-2"> Pay at Check-in
+                            </label>
+                        </div>
                     <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition duration-300">Confirm and Pay</button>
                 </form>
             </div>
@@ -135,7 +135,7 @@ $servicePrice = 10;
     const numberOfPeopleInput = document.getElementById('number_of_people');
     const amenitiesCheckboxes = document.querySelectorAll('.amenity-checkbox');
     const dateError = document.getElementById('date-error');
-    const numberOfPeopleError = document.getElementById('number-of-people-error'); // Add error message element
+    const numberOfPeopleError = document.getElementById('number-of-people-error'); 
 
 
 
@@ -158,8 +158,8 @@ $servicePrice = 10;
                 numberOfPeopleError.textContent = "Number of people must be at least 1.";
                 numberOfPeopleError.classList.remove("hidden");
                 return false;
-            } else if (numberOfPeople > 10) {
-                numberOfPeopleError.textContent = "Number of people cannot exceed 10.";
+            } else if (numberOfPeople > <?= $room['capacity'] ?>) {
+                numberOfPeopleError.textContent = "Number of people cannot exceed <?= $room['capacity'] ?>.";
                 numberOfPeopleError.classList.remove("hidden");
                 return false;
             } else {
@@ -245,7 +245,7 @@ $servicePrice = 10;
     });
 
     calculateTotal();
-    const form = document.querySelector('form');
+    const form = document.getElementById('form_booking');
     const specialRequestsInput = document.getElementById('special_requests'); 
     const amount = document.getElementById('amount'); 
 
@@ -254,6 +254,10 @@ $servicePrice = 10;
     const checkoutDate = checkoutDateInput.value;
 
     if (!validateDates()) {
+        event.preventDefault();
+        return;
+    }
+    if(!validateNumberOfPeople()){
         event.preventDefault();
         return;
     }
