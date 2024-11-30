@@ -4,7 +4,9 @@ class RoomController extends BaseController
 {
     public function __construct() {
         parent::__construct(); 
+        $this->isLogin();
     }
+
     public $roomModel;
     public $roomTypeModel;
     public function loadModels() {
@@ -12,17 +14,18 @@ class RoomController extends BaseController
         $this->roomTypeModel = new RoomType();
     }
     public function room_list() {
-        $rooms = $this->roomModel->getRooms();
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
+        $totalRoom = $this->roomModel->countRooms();
+        $rooms = $this->roomModel->getRooms($limit);
         $room_type = $this->roomTypeModel->allTable();
         $data = [
             'rooms' => $rooms,
-            'room_types'=> $room_type
+            'room_types'=> $room_type,
+            'total_rooms' => $totalRoom
         ];
         $this->viewApp->requestView('room_page.index', ['data' => $data]);
     }
     public function room_reverve(){
-        $this->isLogin();
-
         $room_id = $_GET['room_id'];
         $statusAvailable = 'Available';
         $checkStatus = $this->roomModel->check_status($room_id, $statusAvailable);
@@ -38,16 +41,18 @@ class RoomController extends BaseController
             ];
             $this->viewApp->requestView('error.index', ['data'=> $data]);
         }
-       
     }
     public function room_type_filter(){
         $room_type_id = $_GET['room_type_id'];
-        $rooms_filter = $this->roomModel->get_rooms_filter($room_type_id);
+        $limit = $_GET['limit'];
+        $totalRoom = $this->roomModel->countRooms($room_type_id);
+        $rooms_filter = $this->roomModel->get_rooms_filter($room_type_id, $limit);
         if(isset($rooms_filter)){
             $room_type = $this->roomTypeModel->allTable();
             $data = [
                 'rooms' => $rooms_filter,
-                'room_types'=> $room_type
+                'room_types'=> $room_type,
+                'total_rooms' => $totalRoom
             ];
             $this->viewApp->requestView('room_page.index', ['data' => $data]);
         }

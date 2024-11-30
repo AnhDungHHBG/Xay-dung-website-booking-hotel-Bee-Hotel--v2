@@ -2,6 +2,8 @@
 class Room extends BaseModel {
     public $tableName = 'room';
 
+   
+
     public function getRoomDetail($id) {
                 $query = "SELECT 
                 r.room_id,
@@ -43,7 +45,33 @@ class Room extends BaseModel {
             ];
         }
     }
-    public function getRooms($filters = []) {
+    public function countRooms($room_type_id = null) {
+        $countQuery = "SELECT COUNT(r.room_id) AS total_rooms
+                    FROM room r
+                    WHERE r.availability_status = 'Available'";
+
+
+        if ($room_type_id !== null) {
+            $countQuery .= " AND r.room_type_id = :room_type_id";
+        }
+      
+        $countStmt = $this->conn->prepare($countQuery);
+
+        if ($room_type_id !== null) {
+            $countStmt->bindValue(':room_type_id', $room_type_id, PDO::PARAM_INT);
+        }
+        
+        if (!$countStmt->execute()) {
+            $errorInfo = $countStmt->errorInfo();
+            return [
+                'success' => false,
+                'message' => 'Có lỗi xảy ra khi đếm tổng số phòng.'
+            ];
+        }
+        $countResult = $countStmt->fetch(PDO::FETCH_ASSOC);
+        return $countResult['total_rooms'];
+    }
+    public function getRooms($limit) {
         $query = "SELECT 
                     r.room_id,
                     rt.room_type_id,
@@ -65,44 +93,38 @@ class Room extends BaseModel {
                 LEFT JOIN 
                     feature f ON rf.feature_id = f.feature_id
                 WHERE 
-                r.availability_status = 'Available'";  
-    
-        if (!empty($filters['room_type'])) {
-            $query .= " AND rt.type_name LIKE :room_type";
-        }
-        if (isset($filters['min_price'])) {
-            $query .= " AND r.price >= :min_price";
-        }
-        if (isset($filters['max_price'])) {
-            $query .= " AND r.price <= :max_price";
-        }
-
-        $query .= " GROUP BY r.room_id ORDER BY r.room_id ASC";
+                    r.availability_status = 'Available'
+                GROUP BY 
+                    r.room_id 
+                ORDER BY 
+                    r.room_id ASC
+                LIMIT :limit";
     
         $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     
-        if (!empty($filters['room_type'])) {
-            $stmt->bindValue(':room_type', "%" . $filters['room_type'] . "%", PDO::PARAM_STR);
-        }
-        if (isset($filters['min_price'])) {
-            $stmt->bindValue(':min_price', $filters['min_price'], PDO::PARAM_INT);
-        }
-        if (isset($filters['max_price'])) {
-            $stmt->bindValue(':max_price', $filters['max_price'], PDO::PARAM_INT);
-        }
-
-        if ($stmt->execute()) {
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } else {
+        if (!$stmt->execute()) {
             $errorInfo = $stmt->errorInfo();
-            error_log("SQL Error: " . $errorInfo[2]);
             return [
                 'success' => false,
                 'message' => 'Có lỗi xảy ra khi lấy danh sách phòng.'
             ];
         }
+    
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        if (empty($result)) {
+            return [
+                'success' => true,
+                'message' => 'Không tìm thấy phòng nào.',
+                'data' => []
+            ];
+        }
+    
+        return $result;
     }
-    public function get_rooms_filter($room_type_id) {
+    
+    public function get_rooms_filter($room_type_id, $limit) {
         $query = "SELECT 
                     r.room_id,
                     rt.room_type_id,
@@ -128,9 +150,11 @@ class Room extends BaseModel {
                 GROUP BY 
                     r.room_id 
                 ORDER BY 
-                    r.room_id ASC";
+                    r.room_id ASC
+                LIMIT :limit";
     
         $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':room_type_id', $room_type_id, PDO::PARAM_INT);
     
         if ($stmt->execute()) {
