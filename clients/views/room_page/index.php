@@ -11,17 +11,17 @@ $isLoadMoreDisabled = $array_length < $total_rooms;
         <div class="flex justify-between items-center mb-6">
             <div class="flex space-x-4 text-gray-600">
                 <a href="<?= $route->getLocateClient('room-list') ?>" >
-                    <span class= "font-medium hover:text-[#608BC1]   <?php echo empty($_GET['room_type_id']) ? 'underline text-[#133E87] underline-offset-4' : ''; ?>" >All</span>
+                    <span class= "font-medium hover:text-[#608BC1]   <?php echo empty($_GET['room_type_id']) ? 'underline  text-[#133E87]  underline-offset-4' : ''; ?>" >All</span>
                 </a>
                 <?php foreach($room_types as $room_type): ?>
-                  <a href="<?= $route->getLocateClient('filter-room', ['room_type_id' => $room_type['room_type_id'],'limit' => 10 ]) ?>">
-                    <span class=" font-medium cursor-pointer hover:text-[#608BC1] <?= isset($_GET['room_type_id']) && $_GET['room_type_id'] == $room_type['room_type_id'] ? 'underline text-[#133E87] underline-offset-4' : '' ?>">
-                        <?= htmlspecialchars($room_type['type_name']) ?>
-                    </span>         
-                     </a>
+                    <a href="<?= $route->getLocateClient('filter-room', ['room_type_id' => $room_type['room_type_id'],'limit' => 10 ]) ?>">
+                        <span class=" font-medium cursor-pointer hover:text-[#608BC1] <?= isset($_GET['room_type_id']) && $_GET['room_type_id'] == $room_type['room_type_id'] ? 'underline text-[#133E87] underline-offset-4' : '' ?>">
+                            <?= htmlspecialchars($room_type['type_name']) ?>
+                        </span>         
+                    </a>
+                    <div class="font-medium text-[#133E87]">|</div>
                 <?php endforeach; ?>
             </div>
-            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Filter</button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ($rooms as $room): ?>
