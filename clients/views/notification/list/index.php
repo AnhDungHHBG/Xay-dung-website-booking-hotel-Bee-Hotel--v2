@@ -9,7 +9,21 @@ $notifications = $data;
                 <div class="bg-white shadow-md rounded-lg p-4 flex flex-col">
                     <div class="flex justify-between items-center">
                         <h2 class="text-xl font-semibold"><?php echo htmlspecialchars($notification['title'] ?? 'N/A'); ?></h2>
-                        <span class="text-sm text-gray-500"><?php echo date('d/m/Y H:i', strtotime($notification['created_at'] ?? '')); ?></span>
+                        <div class="gap-5">
+                            <span class="text-sm text-gray-500"><?php echo date('d/m/Y H:i', strtotime($notification['created_at'] ?? '')); ?></span>
+                            <div>
+                                <?php
+                                    $search = "checkout";
+                                    if (strpos($notification['title'] , $search) !== false) {
+                                    ?>
+                                        <a href="<?= $route->getLocateClient('review-now')?>" class="inline-block px-6 py-3 bg-slate-500 text-white font-semibold text-lg rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300">
+                                            <span>Đánh giá ngay</span>
+                                        </a>
+
+                                <?php
+                                } 
+                            ?></div>
+                        </div>
                     </div>
                     <p class="mt-2 text-gray-700"><?php echo htmlspecialchars($notification['content'] ?? 'N/A'); ?></p>
                     <div class="mt-2">

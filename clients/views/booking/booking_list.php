@@ -2,7 +2,7 @@
 $booking_list = $data;
 ?>
 <div class="bg-gray-100">
-    <div class="container mx-auto p-6">
+    <div class="container mx-auto p-6"> 
         <h1 class="text-3xl font-semibold text-center mb-6">Danh Sách Đặt Phòng</h1>
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">

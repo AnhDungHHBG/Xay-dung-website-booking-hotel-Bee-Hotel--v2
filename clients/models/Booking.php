@@ -109,6 +109,52 @@ class Booking extends BaseModel
             return "". $e->getMessage();
         }
     }
+    public function get_room_checkout($user_id) {
+        $sql = "SELECT 
+                    b.booking_id,
+                    b.check_in,
+                    b.check_out,
+                    r.room_id,
+                    r.capacity,
+                    r.price AS room_price,
+                    r.description AS room_description,
+                    rt.type_name AS room_type,
+                    ri.image_url AS room_image_url
+                FROM 
+                    booking b
+                JOIN 
+                    room r ON b.room_id = r.room_id
+                JOIN 
+                    room_type rt ON r.room_type_id = rt.room_type_id
+                JOIN 
+                    room_image ri ON r.room_id = ri.room_id
+                LEFT JOIN 
+                    review rev ON rev.room_id = r.room_id AND rev.user_id = b.user_id  
+                WHERE 
+                    b.user_id = :user_id 
+                    AND b.check_out <= CURDATE()   
+                    AND b.status = 'Checkout'  
+                    AND rev.review_id IS NULL";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        
+        try {
+            $stmt->execute();
+            $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            if (!$bookings) {
+                return [];
+            }
+            return $bookings;  
+            
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            return "Lỗi: " . $e->getMessage();
+        }
+    }
+    
+    
     
     public function create_booking($user_id, $room_id, $data, $status) {
         $query = "INSERT INTO booking (user_id, room_id, check_in, check_out, status, total_price, number_of_guests, special_requests)

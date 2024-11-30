@@ -14,8 +14,6 @@ match ($route->getAct()) {
     'contact' => (new ContactController())->contact(),
     'contact-post' => (new ContactController())-> contact_post(),
 
-
-
     // booking 
     'booking-list' => (new BookingController())->booking_list(),
     'booking-history'=> (new BookingController())->booking_history(),
@@ -51,4 +49,7 @@ match ($route->getAct()) {
     // payment
     'payment-vnpay' =>  (new PaymentController())->payment_vnpay(),
     'payment-onsite' =>  (new PaymentController())->payment_onsite(),
+    // reviews
+
+    'review-now' =>  (new ReviewController())->review_page(),
 };
