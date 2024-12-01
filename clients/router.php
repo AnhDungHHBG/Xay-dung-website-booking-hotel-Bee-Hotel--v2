@@ -21,7 +21,7 @@ match ($route->getAct()) {
     'booked_detail' => (new BookingController())->booked_detail(),
 
     // reviews
-    'submit-review' => (new ReviewController())->review_post(),
+    'post-reviews' => (new ReviewController())->post_reviews(),
 
 
     // room

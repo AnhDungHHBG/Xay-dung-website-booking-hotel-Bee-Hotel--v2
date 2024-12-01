@@ -9,7 +9,7 @@ $vnp_TmnCode = "VNPAY_TMN_CODE";  // Mã Merchant của bạn
 // Lấy dữ liệu trả về từ VNPAY
 $vnp_ResponseCode = $_GET['vnp_ResponseCode'];
 $vnp_TxnRef = $_GET['vnp_TxnRef'];
-$vnp_Amount = $_GET['vnp_Amount'] / 100; // VNPAY gửi số tiền theo đơn vị đồng
+$vnp_Amount = $_GET['vnp_Amount'] / 100; 
 $vnp_SecureHash = $_GET['vnp_SecureHash'];
 
 // Kiểm tra mã giao dịch và mã bảo mật

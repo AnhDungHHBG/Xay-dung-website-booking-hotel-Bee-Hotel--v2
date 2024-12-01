@@ -4,7 +4,6 @@ $booking_list = $data;
 <div class="bg-gray-100">
     <div class="container mx-auto p-6"> 
         <h1 class="text-3xl font-semibold text-center mb-6">Danh Sách Đặt Phòng</h1>
-
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">
             <table class="min-w-full table-auto">
                 <thead class="bg-gray-200">
@@ -13,7 +12,7 @@ $booking_list = $data;
                         <th class="py-2 px-4 border-b">Room</th>
                         <th class="py-2 px-4 border-b">Check-in</th>
                         <th class="py-2 px-4 border-b">Check-out</th>
-                        <th class="py-2 px-4 border-b">Số Khách</th>
+                        <th class="py-2 px-4 border-b">Number of people</th>
                         <th class="py-2 px-4 border-b">Amout</th>
                         <th class="py-2 px-4 border-b">Special Requests</th>
                         <th class="py-2 px-4 border-b">Status</th>

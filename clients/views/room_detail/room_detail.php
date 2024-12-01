@@ -8,7 +8,6 @@ $averageRating = $data['averageRating'];
 
   <!-- Main Content -->
   <main class="container mx-auto px-6 py-8">
-    
     <!-- Image Section -->
     <div class="grid grid-cols-3 gap-6">
         <div class="col-span-2 space-y-6">
@@ -27,7 +26,6 @@ $averageRating = $data['averageRating'];
                 ?>
             </div>
         </div>
-
        <!-- "More Photos" Section -->
       <div class="h-64 bg-gray-300 flex justify-center items-center text-gray-500 rounded-lg shadow-md" style="background-image: url('<?= htmlspecialchars($images[count($images) - 1]) ?>')">
           <?php

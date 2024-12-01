@@ -13,6 +13,8 @@ match ($route->getAct()) {
 
     'room-post-add' => (new RoomController())->room_post_add(),
     'room-post-edit' => (new RoomController())-> room_post_edit(),
+    'reset-room' => (new RoomController())-> reset_room(),
+
 
 
     // feature 

@@ -21,7 +21,7 @@ $rooms = $filteredRooms;
 
 <div class="bg-gray-100">
     <div class="container mx-auto py-10">
-        <h1 class="text-3xl font-bold text-center mb-6">Danh sách phòng hôm nay</h1>
+        <h1 class="text-3xl font-bold text-center mb-6">List of check-in and checkout rooms today</h1>
 
         <!-- Phần Lọc -->
         <div class="bg-white shadow rounded-lg p-4 mb-6">
@@ -73,6 +73,8 @@ $rooms = $filteredRooms;
                         <th class="border border-gray-300 px-4 py-2">Check-Out</th>
                         <th class="border border-gray-300 px-4 py-2">Confirm Checkin</th> 
                         <th class="border border-gray-300 px-4 py-2">Confirm Checkout</th> 
+                        <th class="border border-gray-300 px-4 py-2">Reset Room </th> 
+
                     </tr>
                 </thead>
                 <tbody>
@@ -113,12 +115,23 @@ $rooms = $filteredRooms;
                                         <button class="bg-gray-500 text-white px-4 py-2 rounded" disabled>Confirm checkout</button>
                                     <?php endif; ?>
                                 </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <?php if ($room['booking_status'] === 'Checkout') :?>
+                                        <a
+                                        class="bg-blue-500 text-white px-4 py-2 rounded"
+                                        href="<?= $route->getLocateAdmin('reset-room', ['room_id' => $room['room_id']])?>">
+                                            Reset now
+                                        </a>
+                                    <?php else : ?>
+                                        <button class="bg-gray-500 text-white px-4 py-2 rounded" disabled> Reset now</button>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
                             <td colspan="7" class="border border-gray-300 px-4 py-2 text-center text-gray-500">
-                                Không có phòng nào trong hôm nay.
+                                No room.
                             </td>
                         </tr>
                     <?php endif; ?>

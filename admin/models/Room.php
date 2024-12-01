@@ -2,6 +2,29 @@
 class Room extends BaseModel{
     public $tableName = 'room';
 
+    public function update_status_room($room_id, $status) {
+        $query = "UPDATE room SET availability_status = :status WHERE room_id = :id";
+        
+        try {
+            $stmt = $this->conn->prepare($query);
+    
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $room_id, PDO::PARAM_INT);
+    
+            if ($stmt->execute()) {
+                return true; 
+            } else {
+                $errorInfo = $stmt->errorInfo();
+                error_log("SQL Error in update_status_room: " . $errorInfo[2]);
+                return false; 
+            }
+        } catch (PDOException $e) {
+            error_log("PDOException in update_status_room: " . $e->getMessage());
+            return false; 
+        }
+    }
+    
+
     public function get_rooms($limit = 10, $offset = 0){
         $query = "SELECT 
                     r.room_id,
@@ -168,14 +191,12 @@ class Room extends BaseModel{
             
             $stmt->execute();
     
-            // Xử lý ảnh
             if (isset($data['images']) && !empty($data['images'])) {
                 $query = "DELETE FROM room_image WHERE room_id = :room_id";
                 $stmt = $this->conn->prepare($query);
                 $stmt->bindParam(':room_id', $id, PDO::PARAM_INT);
                 $stmt->execute();
     
-                // Chia chuỗi images và lưu từng ảnh vào cơ sở dữ liệu
                 $images = explode(', ', $data['images']);
                 foreach ($images as $image) {
                     $query = "INSERT INTO room_image (room_id, image_url) VALUES (:room_id, :image_url)";
@@ -186,9 +207,7 @@ class Room extends BaseModel{
                 }
             }
     
-            // Xử lý các tính năng (features) nếu có
             if (isset($data['features']) && !empty($data['features'])) {
-                // Xóa các tính năng hiện có cho phòng
                 $query = "DELETE FROM room_feature WHERE room_id = :room_id";
                 $stmt = $this->conn->prepare($query);
                 $stmt->bindParam(':room_id', $id, PDO::PARAM_INT);
