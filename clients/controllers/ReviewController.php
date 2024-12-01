@@ -25,6 +25,7 @@ class ReviewController extends BaseController
         $data->user_id = $user_id;
         $data->room_id = $room_id_booked;
         $data->review_date = $current_date; 
+        
         $this->reviewModel->insertTable($data);
         $this->route->redirectClient('review-now');
     }   

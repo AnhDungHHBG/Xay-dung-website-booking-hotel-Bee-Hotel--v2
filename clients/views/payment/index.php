@@ -49,5 +49,5 @@ $vnp_Url = $vnp_ApiUrl . "?" . $query;
 </form>
 
 <script type="text/javascript">
-    document.forms['redirect'].submit(); // Tự động submit form để chuyển hướng đến VNPAY
+document.forms['redirect'].submit(); // Tự động submit form để chuyển hướng đến VNPAY
 </script>

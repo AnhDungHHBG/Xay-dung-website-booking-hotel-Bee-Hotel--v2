@@ -43,7 +43,7 @@ $featureNames = isset($data['feature_names']) ? explode(',', $data['feature_name
     <!-- Rating -->
     <div class="flex items-center gap-2 text-yellow-500">
         <i class="fas fa-star text-xl"></i>
-        <span class="font-semibold">Rating: <?= htmlspecialchars($data['average_rating'] ?? '0') ?></span>
+        <span class="font-semibold">Rating: <?=number_format($data['average_rating'] ?? '0', 1)?></span>
     </div>
 
     <!-- Features -->

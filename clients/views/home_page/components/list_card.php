@@ -10,12 +10,14 @@ $carouselKey = $data['key'];
         <div>
             <?php $viewApp->requestComponents('home_page.components.title_section', ['title' => $title]); ?>
         </div>
-       
+
         <div class="flex gap-4">
-            <button class="listing-prev-<?php echo $carouselKey; ?> w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 hover:bg-gray-100 transition-colors">
+            <button
+                class="listing-prev-<?php echo $carouselKey; ?> w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 hover:bg-gray-100 transition-colors">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="listing-next-<?php echo $carouselKey; ?> w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 hover:bg-gray-100 transition-colors">
+            <button
+                class="listing-next-<?php echo $carouselKey; ?> w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 hover:bg-gray-100 transition-colors">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
@@ -24,9 +26,9 @@ $carouselKey = $data['key'];
     <div class="swiper listingSwiper-<?php echo $carouselKey; ?> w-full overflow-hidden">
         <div class="swiper-wrapper">
             <?php foreach ($rooms as $room): ?>
-                <div class="swiper-slide">
-                    <?php $viewApp->requestComponents('home_page.components.card', ['room' => $room]); ?>
-                </div>
+            <div class="swiper-slide">
+                <?php $viewApp->requestComponents('home_page.components.card', ['room' => $room]); ?>
+            </div>
             <?php endforeach; ?>
         </div>
     </div>

@@ -4,7 +4,6 @@ class Room extends BaseModel{
 
     public function update_status_room($room_id, $status) {
         $query = "UPDATE room SET availability_status = :status WHERE room_id = :id";
-        
         try {
             $stmt = $this->conn->prepare($query);
     

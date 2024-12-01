@@ -44,8 +44,11 @@ class BookingController extends BaseController
 
     //  managemnt booking
     public function checkin_checkout_today() {
-            $res = $this->bookingModel->checkin_and_checkout();
-            $data = $res;
+        $res = $this->bookingModel->checkin_and_checkout();
+        $data = $res;
+        // print_r($data);
+        // die();  
+
         $this->viewApp->requestView('checkin-checkout.index', ['data' => $data]);
     }
   

@@ -9,7 +9,6 @@ class RoomController extends BaseController
         $this->roomModel = new Room();
         $this->featureModel = new Feature();
         $this->roomTypeModel = new RoomType();
-
     }
     public function room_list() {
         $data = $this->roomModel->get_rooms();

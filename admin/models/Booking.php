@@ -30,7 +30,9 @@ class Booking extends BaseModel{
                     b.check_in, 
                     b.check_out, 
                     b.status AS booking_status, 
-                    p.status AS payment_status
+                    p.status AS payment_status, 
+                    u.name AS user_name, 
+                    u.email AS user_email
                 FROM 
                     room r
                 LEFT JOIN 
@@ -39,9 +41,14 @@ class Booking extends BaseModel{
                     booking b ON r.room_id = b.room_id
                 LEFT JOIN 
                     payment p ON b.booking_id = p.booking_id
+                LEFT JOIN 
+                    user u ON b.user_id = u.user_id
                 WHERE 
                     r.availability_status = 'Booked'
-                    AND (DATE(b.check_in) = :today OR DATE(b.check_out) = :today)";
+                    AND (DATE(b.check_in) = :today OR DATE(b.check_out) = :today)
+                ORDER BY 
+                r.room_id DESC    
+                ";
         
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':today', $today);
@@ -50,7 +57,6 @@ class Booking extends BaseModel{
         $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rooms;
     }
-    
     
 
     public function confirm_checkin($booking_id) {

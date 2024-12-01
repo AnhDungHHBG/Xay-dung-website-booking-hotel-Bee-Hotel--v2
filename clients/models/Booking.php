@@ -132,7 +132,6 @@ class Booking extends BaseModel
                     review rev ON rev.room_id = r.room_id AND rev.user_id = b.user_id  
                 WHERE 
                     b.user_id = :user_id 
-                    AND b.check_out <= CURDATE()   
                     AND b.status = 'Checkout'  
                     AND rev.review_id IS NULL";
         
