@@ -137,34 +137,27 @@ $averageRating = $data['averageRating'];
     <section class="mt-12">
       <h2 class="text-2xl font-semibold text-[#133E87] mb-6">Reviews <span class="text-yellow-500">★ <?php echo number_format($averageRating, 1); ?></span></h2>
       
-      <!-- Review Ratings -->
-      <?php
-      // Giả sử $reviews chứa tất cả các đánh giá từ truy vấn trên
-      foreach ($reviews as $review) {
-          echo '<div class="review-item bg-white p-6 mb-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">';
-          echo '<div class="flex justify-between items-center mb-4">';
-          // Tên người đánh giá
-          echo '<p class="text-xl font-semibold text-gray-800">' . htmlspecialchars($review['reviewer_name']) . '</p>';
-          // Đánh giá sao
-          echo '<div class="flex text-yellow-400">';
-          for ($i = 0; $i < 5; $i++) {
-              if ($i < $review['rating']) {
-                  echo '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" stroke="currentColor"><path d="M10 15l-3.5 2l1-4.5L2 8h4.5L10 3l1.5 5.5H16l-5.5 4.5L10 15z" /></svg>';
-              } else {
-                  echo '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 20 20"><path d="M10 15l-3.5 2l1-4.5L2 8h4.5L10 3l1.5 5.5H16l-5.5 4.5L10 15z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /></svg>';
-              }
-          }
-          echo '</div>';
-          echo '</div>';
-
-          // Nội dung đánh giá
-          echo '<p class="text-gray-700 text-base mb-4">' . htmlspecialchars($review['comment']) . '</p>';
-
-          // Ngày đánh giá
-          echo '<p class="text-sm text-gray-500"><small>Ngày đánh giá: ' . date('d-m-Y', strtotime($review['review_date'])) . '</small></p>';
-          echo '</div>';
-      }
-      ?>
+      <div class="reviews-container my-5">
+    <h2 class="text-2xl font-bold mb-4">Đánh giá</h2>
+    <?php if (!empty($reviews)): ?>
+        <?php foreach ($reviews as $review): ?>
+            <div class="review-item bg-white p-4 rounded-lg shadow-md mb-4">
+                <div class="flex items-center mb-2">
+                    <h3 class="text-lg font-semibold mr-2"><?= htmlspecialchars($review['name']) ?></h3>
+                    <span class="text-gray-500 text-sm">(<?= htmlspecialchars($review['review_date']) ?>)</span>
+                </div>
+                <div class="flex items-center mb-2">
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                        <span class="<?= $i <= $review['rating'] ? 'text-yellow-500' : 'text-gray-300' ?>">★</span>
+                    <?php endfor; ?>
+                </div>
+                <p class="text-gray-700"><?= htmlspecialchars($review['comment']) ?></p>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p class="text-gray-500">Chưa có đánh giá nào.</p>
+    <?php endif; ?>
+</div>
 
     
     <hr class="border-t border-gray-300 my-8">

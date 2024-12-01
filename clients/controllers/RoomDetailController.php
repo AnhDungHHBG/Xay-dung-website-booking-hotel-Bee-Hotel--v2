@@ -18,7 +18,6 @@ extends BaseController
     
         $averageRatingData = $this->reviewModel->getAverageRating($room_id);
         $averageRating = $averageRatingData['average_rating'] ?? 0; 
-      
         $data = [
             'room' => $roomDetail,
             'reviews' => $reviews,
