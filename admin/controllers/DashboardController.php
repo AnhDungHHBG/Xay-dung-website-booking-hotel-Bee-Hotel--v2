@@ -20,7 +20,9 @@ class DashboardController extends BaseController
 
     public function dashboard() {
         $rooms = $this->roomModel->get_all_rooms_count();
+        $total_bookings = $this->bookingModel->get_total_bookings_count();
         $bookings = $this->bookingModel->get_all_bookings_count();
+
         $users = $this->userModel->get_all_users_count();
         $revenue = $this->paymentModel->get_total_revenue();
     
@@ -33,24 +35,22 @@ class DashboardController extends BaseController
         $revenue_per_month = $dataRevenuaMonth['revenue_per_month'];
         
         // Đảm bảo có đủ 12 tháng dữ liệu (1 đến 12)
-        $bookings_per_month = array_pad($bookings_per_month, 12, 0); // Điền 0 cho các tháng thiếu
-        $revenue_per_month = array_pad($revenue_per_month, 12, 0); // Điền 0 cho các tháng thiếu
+        $bookings_per_month = array_pad($bookings_per_month, 12, 0);  
+        $revenue_per_month = array_pad($revenue_per_month, 12, 0); 
     
         $months = $dataRevenuaMonth['months'];
     
         $data = [
             'rooms' => $rooms,
             'bookings' => $bookings,
+            'total_bookings' => $total_bookings,
             'users' => $users,
             'revenue' => $revenue,
             'data_revenue_mouth' => $dataRevenuaMonth,
             'revenue_per_month' => $revenue_per_month,
             'bookings_per_month' => $bookings_per_month,
             'months' => $months  
-        ];
-    
-     
-    
+        ];    
         $this->viewApp->requestView('Dashboard.dashboard', ['data' =>$data]);
     }
     

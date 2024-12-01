@@ -46,13 +46,28 @@ class Payment extends BaseModel
     }
 
     public function get_bookings_and_revenue_permonth() {
-        $current_month = date('n');
+        $query = "SELECT MIN(MONTH(booking.check_in)) AS first_month
+          FROM booking
+          JOIN payment ON booking.booking_id = payment.booking_id
+          WHERE payment.status = 'Success'";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $first_month = $row['first_month']; // Tháng đầu tiên có dữ liệu từ cơ sở dữ liệu
         $current_year = date('Y');
 
+        // Kiểm tra nếu không có dữ liệu, tháng đầu tiên sẽ là tháng 1 của năm hiện tại
+        if (!$first_month) {
+            $first_month = 1;
+        }
+
+        // Tạo mảng tháng (từ tháng đầu tiên đến 12 tháng)
         $months = [];
         for ($i = 0; $i < 12; $i++) {
-            $month = ($current_month + $i - 1) % 12 + 1;
-            $year_offset = floor(($current_month + $i - 1) / 12);
+            $month = ($first_month + $i - 1) % 12 + 1;
+            $year_offset = floor(($first_month + $i - 1) / 12);
             $months[] = date('F', mktime(0, 0, 0, $month, 1)) . ' ' . ($current_year + $year_offset);
         }
 

@@ -1,6 +1,7 @@
 <?php 
 $users = $data['users'];
 $bookings = $data['bookings'];
+$total_bookings = $data['total_bookings'];
 $rooms = $data['rooms'];
 $revenue = $data['revenue'];
 $dataRevenuaMonth = $data['data_revenue_mouth'];
@@ -20,14 +21,19 @@ $current_month = date('n');
     <div class="container mx-auto p-6">
         <h1 class="text-4xl font-bold mb-6">Admin Dashboard</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             <div class="bg-white p-4 rounded-lg shadow">
                 <h2 class="text-xl font-semibold">Rooms</h2>
                 <p class="text-2xl"><?= $rooms ?></p>
             </div>
 
             <div class="bg-white p-4 rounded-lg shadow">
-                <h2 class="text-xl font-semibold">Bookings</h2>
+                <h2 class="text-xl font-semibold">Total Bookings</h2>
+                <p class="text-2xl"><?= $total_bookings ?></p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h2 class="text-xl font-semibold"> Booking</h2>
                 <p class="text-2xl"><?= $bookings ?></p>
             </div>
 

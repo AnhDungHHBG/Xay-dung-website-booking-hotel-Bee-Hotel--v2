@@ -2,13 +2,25 @@
 class Booking extends BaseModel{
     public $tableName = 'booking';
 
-    public function get_all_bookings_count(){
+    public function get_total_bookings_count(){
         $query = 'SELECT COUNT(*) AS booking_count FROM booking;';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['booking_count'];  
     }
+    public function get_all_bookings_count() {
+        $query = 'SELECT COUNT(*) AS booking_count 
+                  FROM booking b
+                  JOIN room r ON b.room_id = r.room_id
+                  WHERE r.availability_status = "Booked"';
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['booking_count'];
+    }
+    
     public function get_all_room_reserve_count() {
         $query = "SELECT COUNT(*) AS reserve_count FROM room WHERE availability_status = 'Reserve';";
         $stmt = $this->conn->prepare($query);
@@ -53,7 +65,6 @@ class Booking extends BaseModel{
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':today', $today);
         $stmt->execute();
-        
         $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rooms;
     }
