@@ -24,7 +24,7 @@ class Room extends BaseModel{
     }
     
 
-    public function get_rooms($limit = 10, $offset = 0){
+    public function get_rooms($limit = 50, $offset = 0){
         $query = "SELECT 
                     r.room_id,
                     rt.type_name,

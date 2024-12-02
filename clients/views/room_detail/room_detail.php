@@ -147,7 +147,7 @@ $averageRating = $data['averageRating'];
                     <?php echo number_format($averageRating, 1); ?></span></h2>
 
             <div class="reviews-container my-5">
-                <h2 class="text-2xl font-bold mb-4">Đánh giá</h2>
+                <h2 class="text-2xl font-bold mb-4">Reviews</h2>
                 <?php if (!empty($reviews)): ?>
                 <?php foreach ($reviews as $review): ?>
                 <div class="review-item bg-white p-4 rounded-lg shadow-md mb-4">
@@ -164,7 +164,7 @@ $averageRating = $data['averageRating'];
                 </div>
                 <?php endforeach; ?>
                 <?php else: ?>
-                <p class="text-gray-500">Chưa có đánh giá nào.</p>
+                <p class="text-gray-500">No reviews.</p>
                 <?php endif; ?>
             </div>
 

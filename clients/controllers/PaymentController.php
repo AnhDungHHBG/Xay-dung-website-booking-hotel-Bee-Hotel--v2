@@ -30,32 +30,32 @@ class PaymentController extends BaseController {
         $array = (array) $object;
         $room_id = $_GET['room_id'];
         $user_id = $_SESSION['user']['user_id'];
-
         $checkBooking = $this->bookingModel->check_booking($room_id, $user_id);
-        if ($checkBooking['result']) {
-            $statusRoom = 'Booked';
-            $this->roomModel->update_status($room_id,$statusRoom);
+        $statusRoom = 'Booked';
+        $this->roomModel->update_status($room_id,$statusRoom);
 
-            $status = 'Pending';
-            $res = $this->bookingModel->create_booking($user_id, $room_id, $array, $status);
-            $id = (int) $res;
-            
-            $statusPayment = 'Pending';
-            $this->paymentModel->create_payment($id, $array,$statusPayment);
+        $status = 'Pending';
+        $res = $this->bookingModel->create_booking($user_id, $room_id, $array, $status);
+        $id = (int) $res;
+        
+        $statusPayment = 'Pending';
+        $this->paymentModel->create_payment($id, $array,$statusPayment);
 
-            $data = $this->bookingModel->getBookingDetail($id);
-            $title = 'Booking Thành Công';
-            $content = 'Bạn đã đặt phòng thành công';
-            $this->paymentModel->create_notification($user_id, $title, $content );
-            $this->viewApp->requestView('result_booking.index', ['data' => $data]);
+        $data = $this->bookingModel->getBookingDetail($id);
+        $title = 'Booking Thành Công';
+        $content = 'Bạn đã đặt phòng thành công';
+        $this->paymentModel->create_notification($user_id, $title, $content );
+        $this->viewApp->requestView('result_booking.index', ['data' => $data]);
+        // if ($checkBooking['result']) {
+         
            
-        }else{
-            $data = [
-                'url' =>  'booking-list',
-                'message' => $checkBooking['message'],
-            ];
-            $this->viewApp->requestView('', ['data' =>$data ] );
-        }
+        // }else{
+        //     $data = [
+        //         'url' =>  'booking-list',
+        //         'message' => $checkBooking['message'],
+        //     ];
+        //     $this->viewApp->requestView('', ['data' =>$data ] );
+        // }
         
     }
    
