@@ -43,6 +43,31 @@ class Booking extends BaseModel
     
         return $bookings;
     }
+    public function check_out_date($room_id) {
+        try {
+            $query = "SELECT check_out 
+                      FROM booking 
+                      WHERE room_id = :room_id 
+                      AND check_out > NOW()
+                      ORDER BY check_out ASC 
+                      LIMIT 1";
+    
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':room_id', $room_id, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($result) {
+                return $result['check_out'];
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            error_log("Error checking out date: " . $e->getMessage());
+            return null;
+        }
+    }
     
     public function check_in($booking_id) {
         $query = "SELECT 

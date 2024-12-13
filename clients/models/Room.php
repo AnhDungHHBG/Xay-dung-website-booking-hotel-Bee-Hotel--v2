@@ -68,7 +68,7 @@ class Room extends BaseModel {
         $countResult = $countStmt->fetch(PDO::FETCH_ASSOC);
         return $countResult['total_rooms'];
     }
-    public function getRooms($limit) {
+    public function getRooms($limit, $check_in_date = null) {
         $query = "SELECT 
                     r.room_id,
                     rt.room_type_id,
@@ -88,28 +88,53 @@ class Room extends BaseModel {
                 LEFT JOIN 
                     room_feature rf ON r.room_id = rf.room_id
                 LEFT JOIN 
-                    feature f ON rf.feature_id = f.feature_id
-                WHERE 
-                    r.availability_status = 'Available'
-                GROUP BY 
-                    r.room_id 
-                ORDER BY 
-                    r.room_id ASC
-                LIMIT :limit";
-    
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    
-        if (!$stmt->execute()) {
-            $errorInfo = $stmt->errorInfo();
-            return [
-                'success' => false,
-                'message' => 'Có lỗi xảy ra khi lấy danh sách phòng.'
-            ];
+                    feature f ON rf.feature_id = f.feature_id";
+        
+        // Kiểm tra nếu có ngày check_in_date
+        if ($check_in_date !== null) {
+            // Nếu có check_in_date, lọc phòng trống hoặc phòng đang được đặt và có ngày check_out < check_in_date
+            $query .= " WHERE (r.availability_status = 'Available' OR r.room_id IN (
+                SELECT room_id 
+                FROM booking 
+                WHERE room_id = r.room_id
+                AND booking_id = (
+                    SELECT MAX(booking_id)
+                    FROM booking 
+                    WHERE room_id = r.room_id
+                )
+                AND check_out < :check_in_date
+            ))";
+        } else {
+            // Nếu không có check_in_date, chỉ lọc các phòng có trạng thái "Available"
+            $query .= " WHERE r.availability_status = 'Available'";
         }
     
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Thêm giới hạn số lượng kết quả
+        $query .= " GROUP BY r.room_id 
+                    ORDER BY r.room_id ASC
+                    LIMIT :limit";
     
+        // Chuẩn bị truy vấn
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        
+        // Nếu có ngày check_in_date, ràng buộc tham số ngày
+        if ($check_in_date !== null) {
+            $stmt->bindValue(':check_in_date', $check_in_date, PDO::PARAM_STR);
+        }
+        
+        // Thực thi câu truy vấn và trả về kết quả
+        if (!$stmt->execute()) {
+            $errorInfo = $stmt->errorInfo();
+            error_log('SQL Error: ' . print_r($errorInfo, true)); // Log error for debugging
+            return [
+                'success' => false,
+                'message' => 'Có lỗi xảy ra khi lấy danh sách phòng. Vui lòng thử lại sau.'
+            ];
+        }
+        
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
         if (empty($result)) {
             return [
                 'success' => true,
@@ -117,11 +142,14 @@ class Room extends BaseModel {
                 'data' => []
             ];
         }
-    
+        
         return $result;
     }
     
-    public function get_rooms_filter($room_type_id, $limit) {
+    
+    
+    public function get_rooms_filter($room_type_id, $limit, $check_in_date = null) {
+       
         $query = "SELECT 
                     r.room_id,
                     rt.room_type_id,
@@ -143,20 +171,52 @@ class Room extends BaseModel {
                 LEFT JOIN 
                     feature f ON rf.feature_id = f.feature_id
                 WHERE 
-                    r.availability_status = 'Available' AND rt.room_type_id = :room_type_id
-                GROUP BY 
-                    r.room_id 
-                ORDER BY 
-                    r.room_id ASC
-                LIMIT :limit";
+                    rt.room_type_id = :room_type_id";
+        
+        // Kiểm tra nếu có ngày check_in
+        if ($check_in_date !== null) {
+            // Lọc phòng trống hoặc phòng đang được đặt và có ngày check_out < check_in_date
+            $query .= " AND (r.availability_status = 'Available' OR r.room_id IN (
+                SELECT room_id 
+                FROM booking 
+                WHERE room_id = r.room_id
+                AND booking_id = (
+                    SELECT MAX(booking_id)
+                    FROM booking 
+                    WHERE room_id = r.room_id
+                )
+                AND check_out < :check_in_date
+            ))";
+
+        } else {
+            // Điều kiện phòng còn trống (available)
+            $query .= " AND r.availability_status = 'Available'";
+        }
     
+        // Thêm giới hạn số lượng kết quả
+        $query .= " GROUP BY r.room_id 
+                    ORDER BY r.room_id ASC
+                    LIMIT :limit";
+    
+        // Chuẩn bị truy vấn
         $stmt = $this->conn->prepare($query);
+        
+        // Ràng buộc các tham số vào câu truy vấn
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':room_type_id', $room_type_id, PDO::PARAM_INT);
     
+        // Nếu có ngày check_in, ràng buộc tham số ngày
+        if ($check_in_date !== null) {
+            $stmt->bindValue(':check_in_date', $check_in_date, PDO::PARAM_STR);
+        }
+    
+        // Thực thi câu truy vấn và trả về kết quả
         if ($stmt->execute()) {
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $data =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $data;
         } else {
+            // Xử lý lỗi
             $errorInfo = $stmt->errorInfo();
             error_log("SQL Error: " . $errorInfo[2]);
             return [
@@ -165,6 +225,7 @@ class Room extends BaseModel {
             ];
         }
     }
+     
     
     
     public function updateStatus($id, $status) {
@@ -268,6 +329,8 @@ class Room extends BaseModel {
             ];
         }
     }
+    
+    
 
     public function check_status($room_id, $status) {
         try {
@@ -276,7 +339,7 @@ class Room extends BaseModel {
             $stmt->bindValue(':room_id', $room_id);
             $stmt->execute();
     
-            // Kiểm tra nếu có phòng với room_id
+           
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($row['availability_status'] == $status) {

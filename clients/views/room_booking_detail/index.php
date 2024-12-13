@@ -1,7 +1,7 @@
 <?php
 $room = $data['room'];
 $amenity = $data['amenity'];
-
+$checkout_date = $data['check_out_date'] ?? null;
 $roomId = isset($room['room_id']) ? $room['room_id'] : 'Not Room';
 $roomName = isset($room['room_type']) ? $room['room_type'] : 'Room not named';
 $roomType = isset($room['type']) ? $room['type'] : 'Not specified';
@@ -221,6 +221,19 @@ function validateDates() {
     return true;
 }
 
+// Gán giá trị min cho input check-in date
+function setCheckinMinDate() {
+    const checkoutDateValue = '<?= $checkout_date ? date("Y-m-d", strtotime($checkout_date)) : null ?>';
+
+    if (checkoutDateValue) {
+        checkinDateInput.min = checkoutDateValue;
+        checkoutDateInput.min = checkoutDateValue;
+    } else {
+        checkinDateInput.min = formattedToday;
+        checkoutDateInput.min = formattedToday;
+    }
+}
+setCheckinMinDate();
 
 function calculateTotal() {
     const checkinDate = new Date(checkinDateInput.value);

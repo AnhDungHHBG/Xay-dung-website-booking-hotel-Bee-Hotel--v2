@@ -3,27 +3,59 @@ $rooms = $data['rooms'];
 $room_types = $data['room_types'];
 $total_rooms = $data['total_rooms'];
 $array_length = count($rooms);
+$checkin_date = isset($data['check_in_date']) ? $data['check_in_date'] : null;
 $isLoadMoreDisabled = $array_length < $total_rooms;
 ?>
 
 <div class="bg-gray-100 font-sans">
     <div class="container mx-auto p-6">
         <div class="flex justify-between items-center mb-6">
-            <div class="flex space-x-4 text-gray-600">
-                <a href="<?= $route->getLocateClient('room-list') ?>">
-                    <span
-                        class="font-medium hover:text-[#608BC1]   <?php echo empty($_GET['room_type_id']) ? 'underline  text-[#133E87]  underline-offset-4' : ''; ?>">All</span>
-                </a>
-                <?php foreach($room_types as $room_type): ?>
-                <a
-                    href="<?= $route->getLocateClient('filter-room', ['room_type_id' => $room_type['room_type_id'],'limit' => 10 ]) ?>">
-                    <span
-                        class=" font-medium cursor-pointer hover:text-[#608BC1] <?= isset($_GET['room_type_id']) && $_GET['room_type_id'] == $room_type['room_type_id'] ? 'underline text-[#133E87] underline-offset-4' : '' ?>">
-                        <?= htmlspecialchars($room_type['type_name']) ?>
-                    </span>
-                </a>
-                <div class="font-medium text-[#133E87]">|</div>
-                <?php endforeach; ?>
+            <div>
+                <div class="flex space-x-4 text-gray-600">
+                    <a href="<?= $route->getLocateClient('room-list') ?>">
+                        <span
+                            class="font-medium hover:text-[#608BC1]   <?php echo empty($_GET['room_type_id']) ? 'underline  text-[#133E87]  underline-offset-4' : ''; ?>">All</span>
+                    </a>
+                    <?php foreach($room_types as $room_type): ?>
+                    <a
+                        href="<?= $route->getLocateClient('filter-room', ['room_type_id' => $room_type['room_type_id'],'limit' => 10 ]) ?>">
+                        <span
+                            class=" font-medium cursor-pointer hover:text-[#608BC1] <?= isset($_GET['room_type_id']) && $_GET['room_type_id'] == $room_type['room_type_id'] ? 'underline text-[#133E87] underline-offset-4' : '' ?>">
+                            <?= htmlspecialchars($room_type['type_name']) ?>
+                        </span>
+                    </a>
+                    <div class="font-medium text-[#133E87]">|</div>
+                    <?php endforeach; ?>
+                </div>
+                <div>
+                    <?php
+                        $parameters = [
+                            'limit' => 10
+                        ];
+
+                        if (isset($_GET['room_type_id'])) {
+                            $parameters['room_type_id'] = $_GET['room_type_id'];
+                        }
+                    ?>
+                    <form action="<?= $route->getLocateClient(
+                      isset($_GET['room_type_id']) ? 'filter-room' : 'room-list', 
+                      $parameters
+                  
+                ) ?>" method="POST" class="mt-4">
+                        <div class="flex items-center">
+                            <label for="check_in_date" class="mr-2">Check in:</label>
+                            <input type="date" id="check_in_date" name="check_in_date"
+                                value="<?= isset($checkin_date) ? htmlspecialchars($checkin_date) : '' ?>"
+                                class="px-4 py-2 border rounded" />
+                            <input type="hidden" name="">
+                            <button type="submit"
+                                class="ml-2 px-4 py-2 bg-[#133E87] text-white rounded hover:bg-[#608BC1] transition-colors duration-300">
+                                Apply
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
             <?php if (!empty($rooms)){ ?>
             <div>
@@ -42,7 +74,7 @@ $isLoadMoreDisabled = $array_length < $total_rooms;
             if (isset($_GET['room_type_id'])) {
                 ?>
             <a
-                href="<?= $route->getLocateClient('filter-room', ['room_type_id' => $_GET['room_type_id'], 'limit' => $array_length + 10 ]) ?>">
+                href="<?= $route->getLocateClient('filter-room', ['room_type_id' => $_GET['room_type_id'], 'limit' => $array_length + 10, 'check_in_date' =>$checkin_date]) ?>">
                 <button
                     class="px-6 py-2 bg-[#133E87] text-white rounded hover:bg-[#608BC1] transition-colors duration-300">
                     Load More...
@@ -51,7 +83,8 @@ $isLoadMoreDisabled = $array_length < $total_rooms;
             <?php
             } else {
                 ?>
-            <a href="<?= $route->getLocateClient('room-list', ['limit' => $array_length + 10]) ?>">
+            <a
+                href="<?= $route->getLocateClient('room-list', ['limit' => $array_length + 10, 'check_in_date' =>$checkin_date]) ?>">
                 <button
                     class="px-6 py-2 bg-[#133E87] text-white rounded hover:bg-[#608BC1] transition-colors duration-300">
                     Load More...
@@ -73,3 +106,15 @@ $isLoadMoreDisabled = $array_length < $total_rooms;
     ?>
 
 </div>
+<script>
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+const yyyy = tomorrow.getFullYear();
+const mm = (tomorrow.getMonth() + 1).toString().padStart(2, '0');
+const dd = tomorrow.getDate().toString().padStart(2, '0');
+
+const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+document.getElementById('check_in_date').setAttribute('min', formattedDate);
+</script>

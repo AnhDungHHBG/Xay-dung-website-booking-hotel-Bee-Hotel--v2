@@ -1,4 +1,3 @@
-
 <?php 
 
 class BookingController extends BaseController
@@ -30,10 +29,11 @@ class BookingController extends BaseController
 
     public function booking_detail(){
         $room_id = $_GET['room_id'];
+        $check_booking = $this->bookingModel->check_out_date($room_id);
         $room = $this->roomModel->getRoomDetail($room_id);
         $amenity = $this -> amenityModel->get_all_amenity();
-        
         $data = [
+            'check_out_date'=> $check_booking,
             'room' => $room,
             'amenity' => $amenity
         ];
