@@ -19,110 +19,108 @@ $filteredRooms = array_filter($rooms, function ($room) use ($filter, $currentDat
 $rooms = $filteredRooms;
 ?>
 
-<div class="bg-gray-100">
-    <div class="container mx-auto py-10">
-        <h1 class="text-3xl font-bold text-center mb-6">List of check-in and checkout rooms today</h1>
-
-        <!-- Phần Lọc -->
-        <div class="bg-white shadow rounded-lg p-4 mb-6">
-            <form method="GET" id="filterForm">
-                <label class="flex items-center">
-                    <input type="radio" name="filter_type" value="both" class="mr-2"
-                        <?php echo $filter === 'both' ? 'checked' : ''; ?>>
-                    Check-In and Check-Out
-                </label>
-                <label class="flex items-center">
-                    <input type="radio" name="filter_type" value="check_in" class="mr-2"
-                        <?php echo $filter === 'check_in' ? 'checked' : ''; ?>>
-                    Check-in Today
-                </label>
-                <label class="flex items-center">
-                    <input type="radio" name="filter_type" value="check_out" class="mr-2"
-                        <?php echo $filter === 'check_out' ? 'checked' : ''; ?>>
-                    Check-out Today
-                </label>
+<div class="bg-gray-50 py-10">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-semibold text-center text-[#133E87] mb-8">List of Check-In and Check-Out Rooms Today
+        </h1>
+        <!-- Filter Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <form method="GET" id="filterForm" class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <label class="flex items-center text-[#133E87]">
+                        <input type="radio" name="filter_type" value="both" class="mr-2"
+                            <?php echo $filter === 'both' ? 'checked' : ''; ?>>
+                        Check-In and Check-Out
+                    </label>
+                    <label class="flex items-center text-[#133E87]">
+                        <input type="radio" name="filter_type" value="check_in" class="mr-2"
+                            <?php echo $filter === 'check_in' ? 'checked' : ''; ?>>
+                        Check-In Today
+                    </label>
+                    <label class="flex items-center text-[#133E87]">
+                        <input type="radio" name="filter_type" value="check_out" class="mr-2"
+                            <?php echo $filter === 'check_out' ? 'checked' : ''; ?>>
+                        Check-Out Today
+                    </label>
+                </div>
             </form>
         </div>
 
-        <!-- Bảng Hiển Thị Danh Sách Phòng -->
-        <div class="overflow-x-auto bg-white shadow rounded-lg p-6">
-            <table class="table-auto w-full border-collapse border border-gray-200">
+        <!-- Room List Table -->
+        <div class="overflow-x-auto bg-white shadow-lg rounded-lg p-6">
+            <table class="w-full table-auto border-collapse border border-gray-300">
                 <thead>
-                    <tr class="bg-gray-200 text-left">
-                        <th class="border border-gray-300 px-2 py-2">Room(ID)</th>
-                        <th class="border border-gray-300 px-4 py-2">Room Type</th>
+                    <tr class="bg-[#133E87] text-white">
+                        <th class="border border-gray-300 px-4 py-2">Room (ID)</th>
+                        <th class="border border-gray-300 px-4 py-2">User</th>
                         <th class="border border-gray-300 px-4 py-2">Capacity</th>
                         <th class="border border-gray-300 px-4 py-2">Price</th>
-                        <th class="border border-gray-300 px-4 py-2">Status</th>
+                        <th class="border border-gray-300 px-4 py-2">Payment Status</th>
                         <th class="border border-gray-300 px-4 py-2">Check-In</th>
                         <th class="border border-gray-300 px-4 py-2">Check-Out</th>
-                        <th class="border border-gray-300 px-4 py-2">User name</th>
-                        <th class="border border-gray-300 px-4 py-2">Email</th>
-                        <th class="border border-gray-300 px-4 py-2">Confirm Checkin</th>
-                        <th class="border border-gray-300 px-4 py-2">Confirm Checkout</th>
-                        <th class="border border-gray-300 px-4 py-2">Reset Room </th>
-
+                        <th class="border border-gray-300 px-4 py-2">Confirm Check-In</th>
+                        <th class="border border-gray-300 px-4 py-2">Confirm Check-Out</th>
+                        <th class="border border-gray-300 px-4 py-2">Reset Room</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (count($rooms) > 0): ?>
                     <?php foreach ($rooms as $room): ?>
                     <tr class="hover:bg-gray-100">
-                        <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($room['room_id']); ?>
+                        <td class="border border-gray-300 px-4 py-2">
+                            <a class="text-[#133E87] font-semibold hover:underline"
+                                href="<?= $route->getLocateAdmin('booking-detail', ['booking_id' => $room['booking_id']]) ?>">
+                                <?php echo htmlspecialchars($room['room_id']); ?> (Detail)
+                            </a>
                         </td>
-                        <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($room['type_name']); ?>
-                        </td>
+                        <td class="text-center font-medium">
+                            <?php echo $room['user_name'] ? htmlspecialchars($room['user_name']) : '---'; ?></td>
                         <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($room['capacity']); ?>
                             people</td>
                         <td class="border border-gray-300 px-4 py-2">$<?php echo number_format($room['price'], 2); ?>
                         </td>
                         <td class="border border-gray-300 px-4 py-2">
                             <span
-                                class="<?php echo $room['availability_status'] ? 'text-green-500' : 'text-red-500'; ?>">
-                                <?=  $room['availability_status'] ?>
+                                class="<?php echo $room['payment_status'] === 'Success' ? 'text-green-500' : 'text-red-500'; ?>">
+                                <?= htmlspecialchars($room['payment_status']) ?>
                             </span>
                         </td>
                         <td class="border border-gray-300 px-4 py-2">
-                            <?php echo $room['check_in'] ? htmlspecialchars($room['check_in']) : '---'; ?>
-                        </td>
+                            <?php echo $room['check_in'] ? htmlspecialchars($room['check_in']) : '---'; ?></td>
                         <td class="border border-gray-300 px-4 py-2">
-                            <?php echo $room['check_out'] ? htmlspecialchars($room['check_out']) : '---'; ?>
-                        </td>
-                        <td class="text-center font-medium">
-                            <?php echo $room['user_name'] ? htmlspecialchars($room['user_name']) : '---'; ?>
-                        </td>
-                        <td class="text-center font-medium">
-                            <?php echo $room['user_email'] ? htmlspecialchars($room['user_email']) : '---'; ?>
-                        </td>
+                            <?php echo $room['check_out'] ? htmlspecialchars($room['check_out']) : '---'; ?></td>
+
+                        <!-- Confirm Buttons -->
                         <td class="border border-gray-300 px-4 py-2">
                             <?php if ($room['booking_status'] === 'Pending') : ?>
                             <a
-                                href="<?= $route->getLocateAdmin('confirm-checkin', ['room_id' =>$room['room_id'],'user_id_booking' => $room['user_id']]) ?>">
-                                <button class="bg-blue-500 text-white px-4 py-2 rounded">Confirm checkin</button>
+                                href="<?= $route->getLocateAdmin('confirm-checkin', ['room_id' => $room['room_id'], 'user_id_booking' => $room['user_id']]) ?>">
+                                <button class="bg-[#133E87] text-white px-4 py-2 rounded-lg hover:bg-[#608BC1]">Confirm
+                                    Check-In</button>
                             </a>
                             <?php else : ?>
-                            <button class="bg-gray-500 text-white px-4 py-1 rounded" disabled>Confirm checkin</button>
+                            <button class="bg-gray-500 text-white px-4 py-1 rounded" disabled>Confirm Check-In</button>
                             <?php endif; ?>
                         </td>
                         <td class="border border-gray-300 px-4 py-2">
                             <?php if ($room['booking_status'] === 'Checked' && $room['payment_status'] === 'Success') : ?>
                             <a
                                 href="<?= $route->getLocateAdmin('confirm-checkout', ['booking_id' => $room['booking_id'], 'user_id_booking' => $room['user_id']]) ?>">
-
-                                <button class="bg-blue-500 text-white px-4 py-2 rounded">Confirm checkout</button>
+                                <button class="bg-[#133E87] text-white px-4 py-2 rounded-lg hover:bg-[#608BC1]">Confirm
+                                    Check-Out</button>
                             </a>
                             <?php else : ?>
-                            <button class="bg-gray-500 text-white px-4 py-2 rounded" disabled>Confirm checkout</button>
+                            <button class="bg-gray-500 text-white px-4 py-2 rounded" disabled>Confirm Check-Out</button>
                             <?php endif; ?>
                         </td>
                         <td class="border border-gray-300 px-4 py-2">
-                            <?php if ($room['booking_status'] === 'Checkout') :?>
-                            <a class="bg-blue-500 text-white px-4 py-2 rounded"
-                                href="<?= $route->getLocateAdmin('reset-room', ['room_id' => $room['room_id']])?>">
-                                Reset now
+                            <?php if ($room['booking_status'] === 'Checkout') : ?>
+                            <a class="bg-[#133E87] text-white px-4 py-2 rounded-lg hover:bg-[#608BC1]"
+                                href="<?= $route->getLocateAdmin('reset-room', ['room_id' => $room['room_id']]) ?>">
+                                Reset Now
                             </a>
                             <?php else : ?>
-                            <button class="bg-gray-500 text-white px-4 py-2 rounded" disabled> Reset now</button>
+                            <button class="bg-gray-500 text-white px-4 py-2 rounded" disabled>Reset Now</button>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -130,7 +128,7 @@ $rooms = $filteredRooms;
                     <?php else: ?>
                     <tr>
                         <td colspan="7" class="border border-gray-300 px-4 py-2 text-center text-gray-500">
-                            No room.
+                            No rooms available.
                         </td>
                     </tr>
                     <?php endif; ?>

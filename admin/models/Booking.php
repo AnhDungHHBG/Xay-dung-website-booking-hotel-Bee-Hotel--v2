@@ -28,6 +28,68 @@ class Booking extends BaseModel{
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['reserve_count'];
     }
+    public function get_booking_detail($booking_id) {
+        $sql = "SELECT 
+                    b.booking_id,
+                    b.user_id,
+                    u.name AS user_name,
+                    u.email AS user_email,
+                    u.phone AS user_phone,
+                    b.room_id,
+                    r.room_type_id,
+                    rt.type_name AS room_type_name,
+                    r.capacity,
+                    r.price AS room_price,
+                    b.check_in,
+                    b.check_out,
+                    b.status AS booking_status,
+                    b.total_price,
+                    b.number_of_guests,
+                    b.special_requests,
+                    p.payment_id,
+                    p.payment_date,
+                    p.amount AS payment_amount,
+                    p.payment_method,
+                    p.status AS payment_status,
+                    rh.history_id,
+                    rh.action AS history_action,
+                    rh.description AS history_description,
+                    rh.created_at AS history_created_at,
+                    GROUP_CONCAT(DISTINCT ri.image_url) AS room_images
+                FROM 
+                    booking b
+                LEFT JOIN 
+                    user u ON b.user_id = u.user_id
+                LEFT JOIN 
+                    room r ON b.room_id = r.room_id
+                LEFT JOIN 
+                    room_type rt ON r.room_type_id = rt.room_type_id
+                LEFT JOIN 
+                    payment p ON b.booking_id = p.booking_id
+                LEFT JOIN 
+                    booking_history rh ON b.booking_id = rh.booking_id
+                LEFT JOIN 
+                    room_image ri ON r.room_id = ri.room_id
+                WHERE 
+                    b.booking_id = :booking_id
+                GROUP BY 
+                    b.booking_id, b.user_id, b.room_id, r.room_type_id, rt.type_name,
+                    r.capacity, r.price, b.check_in, b.check_out, b.status, 
+                    b.total_price, b.number_of_guests, b.special_requests,
+                    p.payment_id, p.payment_date, p.amount, p.payment_method, 
+                    p.status, rh.history_id, rh.action, rh.description, rh.created_at";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':booking_id', $booking_id);
+        $stmt->execute();
+        $bookingDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($bookingDetails && isset($bookingDetails['room_images'])) {
+            $bookingDetails['room_images'] = explode(',', $bookingDetails['room_images']);
+        }
+    
+        return $bookingDetails;
+    }
     
     public function checkin_and_checkout() {
         $today = date('Y-m-d'); 

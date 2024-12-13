@@ -42,14 +42,14 @@ class BookingController extends BaseController
         $this->route->redirectAdmin('booking-list');
     }
 
-    //  managemnt booking
     public function checkin_checkout_today() {
-        $res = $this->bookingModel->checkin_and_checkout();
-        $data = $res;
-        // print_r($data);
-        // die();  
-
+        $data = $this->bookingModel->checkin_and_checkout();
         $this->viewApp->requestView('checkin-checkout.index', ['data' => $data]);
+    }
+    public function booking_detail(){
+        $booking_id = $_GET['booking_id'];
+        $data = $this->bookingModel->get_booking_detail($booking_id);
+        $this->viewApp->requestView('checkin-checkout.detail-booking', ['data' => $data]);
     }
   
     public function confirm_checkin(){

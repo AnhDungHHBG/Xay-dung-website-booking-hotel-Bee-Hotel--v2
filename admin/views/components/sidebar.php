@@ -5,142 +5,171 @@
     <ul class="mt-5">
         <!-- Dashboard -->
         <li class="mb-1 group">
-            <a href="<?= $route->getLocateAdmin('') ?>" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md">
+            <a href="<?= $route->getLocateAdmin('') ?>"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md">
                 <i class="fas fa-tachometer-alt mr-3 text-lg"></i>
                 <span class="text-sm">Dashboard</span>
             </a>
         </li>
         <li class="mb-1 group">
-            <a href="<?= $route->getLocateAdmin('checkin-checkout-today') ?>" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md">
+            <a href="<?= $route->getLocateAdmin('checkin-checkout-today') ?>"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md">
                 <i class="fas fa-tachometer-alt mr-3 text-lg"></i>
-                <span class="text-sm">Check in  & Check out today</span>
+                <span class="text-sm">Check in & Check out today</span>
             </a>
         </li>
-      
-     
+
+
 
         <!-- Quản lý Phòng -->
         <li class="mb-1 group">
-            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'roomManagement', this)">
+            <a href="#"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md"
+                onclick="toggleSubmenu(event, 'roomManagement', this)">
                 <i class="fas fa-bed mr-3 text-lg"></i>
                 <span class="text-sm">Quản lý Phòng</span>
                 <i class="fas fa-chevron-right ml-auto transition-transform"></i>
             </a>
             <ul id="roomManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('room-type-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('room-type-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Loại Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('room-type-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('room-type-add') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Loại Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('room-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('room-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('room-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('room-add') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Phòng
                     </a>
-                </li>   
+                </li>
             </ul>
         </li>
-        
+
         <!-- Quản lý Người Dùng -->
         <li class="mb-1 group">
-            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'userManagement', this)">
+            <a href="#"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md"
+                onclick="toggleSubmenu(event, 'userManagement', this)">
                 <i class="fas fa-users mr-3 text-lg"></i>
                 <span class="text-sm">Quản lý Người Dùng</span>
                 <i class="fas fa-chevron-right ml-auto transition-transform"></i>
             </a>
             <ul id="userManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('users-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('users-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Người Dùng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('create-user') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('create-user') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-user-plus mr-2"></i> Thêm Người Dùng
                     </a>
                 </li>
             </ul>
         </li>
-        
+
         <!-- Quản lý Đặt Phòng -->
         <li class="mb-1 group">
-            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'bookingManagement', this)">
+            <a href="#"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md"
+                onclick="toggleSubmenu(event, 'bookingManagement', this)">
                 <i class="fas fa-calendar-check mr-3 text-lg"></i>
                 <span class="text-sm">Quản lý Đặt Phòng</span>
                 <i class="fas fa-chevron-right ml-auto transition-transform"></i>
             </a>
-            <ul id="bookingManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <ul id="bookingManagement"
+                class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('booking-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('booking-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Đặt Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('booking-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('booking-add') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Đặt Phòng
                     </a>
                 </li>
             </ul>
         </li>
-        
+
         <!-- Quản lý Tiện Nghi -->
         <li class="mb-1 group">
-            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'amenityManagement', this)">
+            <a href="#"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md"
+                onclick="toggleSubmenu(event, 'amenityManagement', this)">
                 <i class="fas fa-concierge-bell mr-3 text-lg"></i>
                 <span class="text-sm">Quản lý Tiện Nghi</span>
                 <i class="fas fa-chevron-right ml-auto transition-transform"></i>
             </a>
-            <ul id="amenityManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <ul id="amenityManagement"
+                class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('amenity-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('amenity-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Tiện Nghi Khách sạn
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('amenity-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('amenity-add') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Tiện Nghi Khách Sạn
                     </a>
                 </li>
 
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('feature-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('feature-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Tiện Nghi Phòng
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('feature-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('feature-add') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Tiện Nghi Phòng
                     </a>
                 </li>
             </ul>
 
-            
+
         </li>
-        
+
         <!-- Quản lý Khuyến Mãi -->
         <li class="mb-1 group">
-            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'promotionManagement', this)">
+            <a href="#"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md"
+                onclick="toggleSubmenu(event, 'promotionManagement', this)">
                 <i class="fas fa-tags mr-3 text-lg"></i>
                 <span class="text-sm">Quản lý Khuyến Mãi</span>
                 <i class="fas fa-chevron-right ml-auto transition-transform"></i>
             </a>
-            <ul id="promotionManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <ul id="promotionManagement"
+                class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('promotion-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('promotion-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Khuyến Mãi
                     </a>
                 </li>
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('promotion-add') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('promotion-add') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-plus mr-2"></i> Thêm Khuyến Mãi
                     </a>
                 </li>
@@ -149,48 +178,59 @@
         <!-- Quản lý review -->
 
         <li class="mb-1 group">
-            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'reviewManagement', this)">
+            <a href="#"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md"
+                onclick="toggleSubmenu(event, 'reviewManagement', this)">
                 <i class="fas fa-tags mr-3 text-lg"></i>
                 <span class="text-sm">Quản lý Đánh giá</span>
                 <i class="fas fa-chevron-right ml-auto transition-transform"></i>
             </a>
             <ul id="reviewManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('review-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('review-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Đánh Giá
                 </li>
-                
+
             </ul>
         </li>
-          <!-- Quản lý support -->
+        <!-- Quản lý support -->
 
-          <li class="mb-1 group">
-            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'supportManagement', this)">
+        <li class="mb-1 group">
+            <a href="#"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md"
+                onclick="toggleSubmenu(event, 'supportManagement', this)">
                 <i class="fas fa-tags mr-3 text-lg"></i>
                 <span class="text-sm">Support</span>
                 <i class="fas fa-chevron-right ml-auto transition-transform"></i>
             </a>
-            <ul id="supportManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <ul id="supportManagement"
+                class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('support-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                    <a href="<?= $route->getLocateAdmin('support-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
                         <i class="fas fa-list mr-2"></i> Danh Sách Support
                 </li>
-                
+
             </ul>
         </li>
-         <!-- Quản lý thông báo -->
-         <li class="mb-1 group">
-            <a href="#" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md" onclick="toggleSubmenu(event, 'notificationManagement', this)">
+        <!-- Quản lý thông báo -->
+        <li class="mb-1 group">
+            <a href="#"
+                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md"
+                onclick="toggleSubmenu(event, 'notificationManagement', this)">
                 <i class="fas fa-tags mr-3 text-lg"></i>
-                <span class="text-sm">Thông báo</span>
+                <span class="text-sm">Notification</span>
                 <i class="fas fa-chevron-right ml-auto transition-transform"></i>
             </a>
-            <ul id="notificationManagement" class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <ul id="notificationManagement"
+                class="pl-7 mt-2 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                 <li class="mb-4">
-                    <a href="<?= $route->getLocateAdmin('notification-list') ?>" class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
-                        <i class="fas fa-list mr-2"></i> Danh sách thông báo 
+                    <a href="<?= $route->getLocateAdmin('notification-list') ?>"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525]">
+                        <i class="fas fa-list mr-2"></i> Notification List
                 </li>
-                
+
             </ul>
         </li>
     </ul>
@@ -198,17 +238,17 @@
 
 
 <script>
-    function toggleSubmenu(event, submenuId, element) {
-        event.preventDefault();
-        const submenu = document.getElementById(submenuId);
-        if (submenu) {
-            const isHidden = submenu.classList.contains('max-h-0');
-            submenu.classList.toggle('max-h-0', !isHidden);
-            submenu.classList.toggle('max-h-96', isHidden); 
-            const icon = element.querySelector('.fa-chevron-right');
-            if (icon) {
-                icon.classList.toggle('rotate-90', isHidden);
-            }
+function toggleSubmenu(event, submenuId, element) {
+    event.preventDefault();
+    const submenu = document.getElementById(submenuId);
+    if (submenu) {
+        const isHidden = submenu.classList.contains('max-h-0');
+        submenu.classList.toggle('max-h-0', !isHidden);
+        submenu.classList.toggle('max-h-96', isHidden);
+        const icon = element.querySelector('.fa-chevron-right');
+        if (icon) {
+            icon.classList.toggle('rotate-90', isHidden);
         }
     }
+}
 </script>

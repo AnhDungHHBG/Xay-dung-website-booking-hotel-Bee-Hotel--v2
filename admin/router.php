@@ -46,6 +46,7 @@ match ($route->getAct()) {
     'booking-add' => (new BookingController())->booking_add(),
     'booking-edit' => (new BookingController())->booking_edit(),
     'booking-delete' => (new BookingController())->booking_delete(),
+    'booking-detail' => (new BookingController())->booking_detail(),
 
     'booking-post-add' => (new BookingController())->booking_post_add(),
     'booking-post-edit' => (new BookingController())-> booking_post_edit(),
