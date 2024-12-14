@@ -1,5 +1,7 @@
 <?php
 $rooms = $data;
+// print_r($data);
+// die();
 $currentDate = date('Y-m-d');
 
 $filter = isset($_GET['filter_type']) ? $_GET['filter_type'] : '';
@@ -94,7 +96,7 @@ $rooms = $filteredRooms;
                         <td class="border border-gray-300 px-4 py-2">
                             <?php if ($room['booking_status'] === 'Pending') : ?>
                             <a
-                                href="<?= $route->getLocateAdmin('confirm-checkin', ['room_id' => $room['room_id'], 'user_id_booking' => $room['user_id']]) ?>">
+                                href="<?= $route->getLocateAdmin('confirm-checkin', ['room_id' => $room['room_id'], 'user_id_booking' => $room['user_id'] , 'booking_id' => $room['booking_id']]) ?>">
                                 <button class="bg-[#133E87] text-white px-4 py-2 rounded-lg hover:bg-[#608BC1]">Confirm
                                     Check-In</button>
                             </a>

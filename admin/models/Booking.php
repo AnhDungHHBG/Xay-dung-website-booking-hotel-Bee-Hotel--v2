@@ -159,8 +159,8 @@ class Booking extends BaseModel{
         try {
             $this->conn->beginTransaction();
         
-            $updateBookingQuery = "UPDATE booking 
-                                   SET status = :status 
+            $updateBookingQuery = "UPDATE booking
+                                   SET status = :status
                                    WHERE booking_id = :booking_id";
             $stmt = $this->conn->prepare($updateBookingQuery);
             $stmt->bindValue(':status', $status);

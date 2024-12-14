@@ -115,8 +115,7 @@ $booking = $data;
 
     </div>
     <div class="mt-8 text-center">
-        <a href="<?= $route->redirectClient('') ?>" class="inline-block bg-primary-blue text-white text-lg font-semibold py-3 px-6 rounded-md 
-                       hover:bg-second-blue transition duration-300">
+        <a href="<?= $route->redirectClient('') ?>" class="inline-block bg-primary-blue text-white text-lg font-semibold py-3 px-6 rounded-md hover:bg-second-blue transition duration-300">
             Back to Home
         </a>
     </div>

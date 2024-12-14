@@ -21,9 +21,11 @@
     <div class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <!-- Logo -->
+             <a href="<?= $route->getLocateClient('') ?>">
             <div class="">
                 <img class="w-[250px] h-[70px] object-cover" src="uploads/logo/logo.png" alt="">
             </div>
+            </a>
             <!-- Navbar -->
             <?php $viewApp->requestComponents('components.navbar');
             ?>

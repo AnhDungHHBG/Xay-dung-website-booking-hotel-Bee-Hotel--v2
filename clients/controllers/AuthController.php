@@ -25,6 +25,11 @@ class AuthController extends BaseController
             return ['error' => 'An error occurred: ' . $e->getMessage()];
         }
     }
+
+    public function forgotpassword(){
+        
+    }
+
     public function logout(){
         $this->auth->logout();
         $this->route->redirectClient('/');

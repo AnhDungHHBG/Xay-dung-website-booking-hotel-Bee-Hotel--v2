@@ -1,7 +1,7 @@
 <?php 
 
 
-define('BASE_URL'       , 'http://localhost/du-an-1/');
+define('BASE_URL'       , 'http://localhost/duan1/Xay-dung-website-booking-hotel-Bee-Hotel--v2/');
 
 define('DB_HOST'    , 'localhost');
 define('DB_PORT'    , 3306);

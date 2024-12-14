@@ -11,7 +11,7 @@
                     id="email" 
                     name="email" 
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500" 
-                    placeholder="Nhập email" 
+                    placeholder="Nhập email"
                     required>
             </div>
             <button 
