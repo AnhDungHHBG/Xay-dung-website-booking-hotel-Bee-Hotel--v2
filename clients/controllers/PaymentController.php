@@ -18,11 +18,55 @@ class PaymentController extends BaseController {
     }
 
     public function payment_vnpay() {
-        $data = $this->route->form;
-        print_r($data);
-       
-        $data = $_GET['total_payment'];
-        $this->viewApp->requestView('payment.index', ['data' => $data]);
+        $object = $this->route->form;
+        $data = (array) $object;
+        $user = $_SESSION['user'];
+        $username = $user['name'];
+        $tongtienthanhtoan = $data['amount'];
+        // -----------------
+            $vnp_TmnCode = "YNPS4G2J";
+            $vnp_HashSecret = "EY3MOUTLJ8RBH3LJV0ZKJRP7096OP4TF";
+            $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+            $vnp_Returnurl = 'http://localhost/du-an-1/clients/views/vnpay_result/index.php';
+
+            // Tạo dữ liệu gửi đến VNPAY
+            $vnp_Params = [
+                "vnp_Version" => "2.1.0",
+                "vnp_TmnCode" => $vnp_TmnCode,
+                "vnp_Amount" => $tongtienthanhtoan  * 100, 
+                "vnp_Command" => "pay",
+                "vnp_CreateDate" => date('YmdHis'),
+                "vnp_CurrCode" => "VND",
+                "vnp_IpAddr" => $_SERVER['REMOTE_ADDR'],
+                "vnp_Locale" => "vn",
+                "vnp_OrderInfo" => "Thanh toán đơn hàng từ khách $username",
+                "vnp_OrderType" => "other",
+                "vnp_ReturnUrl" => $vnp_Returnurl,
+                "vnp_TxnRef" => rand(100000, 999999), 
+            ];
+
+            ksort($vnp_Params);
+            $query = "";
+            $i = 0;
+            $hashdata = "";
+            foreach ($vnp_Params as $key => $value) {
+                if ($i == 1) {
+                    $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+                } else {
+                    $hashdata .= urlencode($key) . "=" . urlencode($value);
+                    $i = 1;
+                }
+                $query .= urlencode($key) . "=" . urlencode($value) . '&';
+            }
+            $query = rtrim($query, "&"); 
+
+            $vnp_SecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);
+
+            $vnp_Params['vnp_SecureHash'] = $vnp_SecureHash;
+
+            $vnp_Url = $vnp_Url . "?" . $query . "&vnp_SecureHash=" . $vnp_SecureHash;
+
+            header("Location: $vnp_Url");
     }
 
     public function payment_onsite() {
@@ -46,16 +90,6 @@ class PaymentController extends BaseController {
         $content = 'Bạn đã đặt phòng thành công';
         $this->paymentModel->create_notification($user_id, $title, $content );
         $this->viewApp->requestView('result_booking.index', ['data' => $data]);
-        // if ($checkBooking['result']) {
-         
-           
-        // }else{
-        //     $data = [
-        //         'url' =>  'booking-list',
-        //         'message' => $checkBooking['message'],
-        //     ];
-        //     $this->viewApp->requestView('', ['data' =>$data ] );
-        // }
         
     }
    
